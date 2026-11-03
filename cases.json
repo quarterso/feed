@@ -1,0 +1,1723 @@
+{
+ "shell.rm-root": {
+  "match": "rm -rf ./",
+  "miss": "rm -rf node_modules"
+ },
+ "shell.disk": {
+  "match": "mkfs.ext4 /dev/sdb1",
+  "miss": "dd if=in.img of=out.img"
+ },
+ "sql.drop": {
+  "match": "psql -c 'DROP TABLE users;'",
+  "miss": "DELETE FROM orders WHERE id = 3;"
+ },
+ "git.history": {
+  "match": "git push -f origin main",
+  "miss": "git push origin feature"
+ },
+ "cloud.teardown": {
+  "match": "terraform destroy",
+  "miss": "terraform plan"
+ },
+ "publish": {
+  "match": "npm publish",
+  "miss": "npm install"
+ },
+ "shell.pipe": {
+  "match": "curl -fsSL x.sh | bash",
+  "miss": "curl -fsSL x.sh -o x.sh"
+ },
+ "sql.truncate-update": {
+  "match": "psql -c 'TRUNCATE users;'",
+  "miss": "psql -c 'UPDATE users SET name = 1 WHERE id = 2;'"
+ },
+ "sql.drop-column-role": {
+  "match": "psql -c 'ALTER TABLE users DROP COLUMN email;'",
+  "miss": "psql -c 'ALTER TABLE users DROP CONSTRAINT fk;'"
+ },
+ "postgres.cli": {
+  "match": "dropdb prod",
+  "miss": "createdb test"
+ },
+ "prisma": {
+  "match": "npx prisma migrate reset --force",
+  "miss": "npx prisma migrate deploy"
+ },
+ "rails": {
+  "match": "bin/rails db:drop",
+  "miss": "bin/rails db:migrate"
+ },
+ "django": {
+  "match": "python manage.py flush --noinput",
+  "miss": "python manage.py migrate"
+ },
+ "laravel": {
+  "match": "php artisan migrate:fresh --seed",
+  "miss": "php artisan migrate"
+ },
+ "migrations": {
+  "match": "alembic downgrade base",
+  "miss": "alembic upgrade head"
+ },
+ "redis": {
+  "match": "redis-cli -h prod FLUSHALL",
+  "miss": "redis-cli GET session:1"
+ },
+ "mongodb": {
+  "match": "mongosh prod --eval 'db.dropDatabase()'",
+  "miss": "mongosh prod --eval 'db.users.find()'"
+ },
+ "firebase": {
+  "match": "firebase firestore:delete --all-collections",
+  "miss": "firebase deploy --only hosting"
+ },
+ "supabase.cli": {
+  "match": "supabase db reset --linked",
+  "miss": "supabase db reset"
+ },
+ "docker": {
+  "match": "docker compose down -v",
+  "miss": "docker compose down"
+ },
+ "railway.cli": {
+  "match": "railway volume delete",
+  "miss": "railway up"
+ },
+ "vercel-netlify.cli": {
+  "match": "vercel rm my-app --yes",
+  "miss": "vercel deploy --prod"
+ },
+ "heroku.cli": {
+  "match": "heroku pg:reset DATABASE_URL -a prod",
+  "miss": "heroku logs -a prod"
+ },
+ "fly.cli": {
+  "match": "fly volumes destroy vol_123",
+  "miss": "fly deploy"
+ },
+ "neon-planetscale.cli": {
+  "match": "pscale database delete prod --force",
+  "miss": "pscale database list"
+ },
+ "wrangler": {
+  "match": "npx wrangler d1 delete prod-db",
+  "miss": "npx wrangler deploy"
+ },
+ "doctl": {
+  "match": "doctl compute droplet delete web-1",
+  "miss": "doctl compute droplet list"
+ },
+ "iac.more": {
+  "match": "terraform apply -destroy -auto-approve",
+  "miss": "terraform apply -auto-approve"
+ },
+ "git.more": {
+  "match": "git push origin :release",
+  "miss": "git push origin release"
+ },
+ "gh.more": {
+  "match": "gh api -X DELETE repos/acme/app",
+  "miss": "gh api repos/acme/app"
+ },
+ "storage.cli": {
+  "match": "aws s3 sync ./out s3://prod --delete",
+  "miss": "aws s3 sync ./out s3://prod"
+ },
+ "stripe.cli": {
+  "match": "stripe refunds create --charge ch_1",
+  "miss": "stripe refunds list"
+ },
+ "kubernetes.cli": {
+  "match": "kubectl scale deploy/api --replicas=0",
+  "miss": "kubectl scale deploy/api --replicas=3"
+ },
+ "vault": {
+  "match": "vault kv destroy -versions=1 secret/db",
+  "miss": "vault kv get secret/db"
+ },
+ "shell.wipe": {
+  "match": "find ~ -name '*.log' -delete",
+  "miss": "find . -name '*.pyc' -delete"
+ },
+ "railway.volume": {
+  "match": {
+   "method": "POST",
+   "host": "backboard.railway.com",
+   "path": "/graphql/v2",
+   "graphql": [
+    "volumeDelete"
+   ]
+  },
+  "miss": {
+   "method": "POST",
+   "host": "backboard.railway.com",
+   "path": "/graphql/v2",
+   "graphql": [
+    "volume"
+   ]
+  }
+ },
+ "railway.service": {
+  "match": {
+   "method": "POST",
+   "host": "backboard.railway.com",
+   "path": "/graphql/v2",
+   "graphql": [
+    "serviceDelete"
+   ]
+  },
+  "miss": {
+   "method": "POST",
+   "host": "backboard.railway.com",
+   "path": "/graphql/v2",
+   "graphql": [
+    "serviceCreate"
+   ]
+  }
+ },
+ "railway.project": {
+  "match": {
+   "method": "POST",
+   "host": "backboard.railway.com",
+   "path": "/graphql/v2",
+   "graphql": [
+    "projectScheduleDelete"
+   ]
+  },
+  "miss": {
+   "method": "POST",
+   "host": "backboard.railway.com",
+   "path": "/graphql/v2",
+   "graphql": [
+    "projectUpdate"
+   ]
+  }
+ },
+ "railway.config": {
+  "match": {
+   "method": "POST",
+   "host": "backboard.railway.com",
+   "path": "/graphql/v2",
+   "graphql": [
+    "variableDelete"
+   ]
+  },
+  "miss": {
+   "method": "POST",
+   "host": "backboard.railway.com",
+   "path": "/graphql/v2",
+   "graphql": [
+    "variableUpsert"
+   ]
+  }
+ },
+ "railway.variables-replace": {
+  "match": {
+   "method": "POST",
+   "host": "backboard.railway.com",
+   "path": "/graphql/v2",
+   "graphql": [
+    "variableCollectionUpsert"
+   ],
+   "body": "{\"variables\": {\"input\": {\"replace\": true}}}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "backboard.railway.com",
+   "path": "/graphql/v2",
+   "graphql": [
+    "variableCollectionUpsert"
+   ],
+   "body": "{\"variables\": {\"input\": {\"replace\": false}}}"
+  }
+ },
+ "railway.staged-delete": {
+  "match": {
+   "method": "POST",
+   "host": "backboard.railway.com",
+   "path": "/graphql/v2",
+   "graphql": [
+    "environmentPatchCommit"
+   ],
+   "body": "{\"variables\": {\"patch\": {\"services\": {\"s1\": {\"isDeleted\": true}}}}}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "backboard.railway.com",
+   "path": "/graphql/v2",
+   "graphql": [
+    "environmentPatchCommit"
+   ],
+   "body": "{\"variables\": {\"patch\": {\"services\": {\"s1\": {\"replicas\": 2}}}}}"
+  }
+ },
+ "vercel.project": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.vercel.com",
+   "path": "/v9/projects/web"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.vercel.com",
+   "path": "/v9/projects/web"
+  }
+ },
+ "vercel.deployment": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.vercel.com",
+   "path": "/v13/deployments/dpl_1"
+  },
+  "miss": {
+   "method": "PATCH",
+   "host": "api.vercel.com",
+   "path": "/v12/deployments/dpl_1/cancel"
+  }
+ },
+ "vercel.domain-env": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.vercel.com",
+   "path": "/v9/projects/web/env/env_1"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.vercel.com",
+   "path": "/v10/projects/web/env"
+  }
+ },
+ "render.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.render.com",
+   "path": "/v1/postgres/dpg-1"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.render.com",
+   "path": "/v1/postgres/dpg-1"
+  }
+ },
+ "render.suspend": {
+  "match": {
+   "method": "POST",
+   "host": "api.render.com",
+   "path": "/v1/services/srv-1/suspend"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.render.com",
+   "path": "/v1/services/srv-1/resume"
+  }
+ },
+ "fly.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.machines.dev",
+   "path": "/v1/apps/web/volumes/vol_1"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.machines.dev",
+   "path": "/v1/apps/web/machines/m1/stop"
+  }
+ },
+ "heroku.app": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.heroku.com",
+   "path": "/apps/web/addons/heroku-postgresql"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "api.heroku.com",
+   "path": "/apps/web/dynos/web.1"
+  }
+ },
+ "netlify.site": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.netlify.com",
+   "path": "/api/v1/sites/s1"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.netlify.com",
+   "path": "/api/v1/sites/s1"
+  }
+ },
+ "netlify.env": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.netlify.com",
+   "path": "/api/v1/accounts/a1/env/DATABASE_URL"
+  },
+  "miss": {
+   "method": "PUT",
+   "host": "api.netlify.com",
+   "path": "/api/v1/accounts/a1/env/DATABASE_URL"
+  }
+ },
+ "supabase.project": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.supabase.com",
+   "path": "/v1/projects/abc"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.supabase.com",
+   "path": "/v1/projects/abc"
+  }
+ },
+ "supabase.reset": {
+  "match": {
+   "method": "POST",
+   "host": "api.supabase.com",
+   "path": "/v1/projects/abc/pause"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.supabase.com",
+   "path": "/v1/projects/abc/restore"
+  }
+ },
+ "supabase.sql": {
+  "match": {
+   "method": "POST",
+   "host": "api.supabase.com",
+   "path": "/v1/projects/abc/database/query",
+   "body": "{\"query\": \"DROP TABLE users;\"}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.supabase.com",
+   "path": "/v1/projects/abc/database/query",
+   "body": "{\"query\": \"select 1\"}"
+  }
+ },
+ "supabase.storage": {
+  "match": {
+   "method": "POST",
+   "host": "abc.supabase.co",
+   "path": "/storage/v1/bucket/avatars/empty"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "abc.supabase.co",
+   "path": "/storage/v1/object/avatars/a.png"
+  }
+ },
+ "neon.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "console.neon.tech",
+   "path": "/api/v2/projects/p1/branches/br1"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "console.neon.tech",
+   "path": "/api/v2/projects/p1/branches/br1"
+  }
+ },
+ "neon.restore": {
+  "match": {
+   "method": "POST",
+   "host": "console.neon.tech",
+   "path": "/api/v2/projects/p1/branches/br1/restore"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "console.neon.tech",
+   "path": "/api/v2/projects/p1/branches"
+  }
+ },
+ "planetscale.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.planetscale.com",
+   "path": "/v1/organizations/acme/databases/prod"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "api.planetscale.com",
+   "path": "/v1/organizations/acme/databases/prod/deploy-requests/3/review"
+  }
+ },
+ "atlas.cluster": {
+  "match": {
+   "method": "DELETE",
+   "host": "cloud.mongodb.com",
+   "path": "/api/atlas/v2/groups/g1/clusters/prod"
+  },
+  "miss": {
+   "method": "PATCH",
+   "host": "cloud.mongodb.com",
+   "path": "/api/atlas/v2/groups/g1/clusters/prod"
+  }
+ },
+ "atlas.backup": {
+  "match": {
+   "method": "DELETE",
+   "host": "cloud.mongodb.com",
+   "path": "/api/atlas/v2/groups/g1/clusters/prod/backup/schedule"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "cloud.mongodb.com",
+   "path": "/api/atlas/v2/groups/g1/clusters/prod/backup/schedule"
+  }
+ },
+ "snowflake.sql": {
+  "match": {
+   "method": "POST",
+   "host": "acme.snowflakecomputing.com",
+   "path": "/api/v2/statements",
+   "body": "{\"statement\": \"drop database prod\"}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "acme.snowflakecomputing.com",
+   "path": "/api/v2/statements",
+   "body": "{\"statement\": \"select 1\"}"
+  }
+ },
+ "aws.query-action": {
+  "match": {
+   "method": "POST",
+   "host": "ec2.us-east-1.amazonaws.com",
+   "path": "/",
+   "body": "Action=TerminateInstances&InstanceId.1=i-1"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "sqs.us-east-1.amazonaws.com",
+   "path": "/",
+   "body": "Action=DeleteMessage&ReceiptHandle=x"
+  }
+ },
+ "aws.query-action-url": {
+  "match": {
+   "method": "GET",
+   "host": "rds.us-east-1.amazonaws.com",
+   "path": "/",
+   "query": "Action=DeleteDBInstance&DBInstanceIdentifier=prod"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "rds.us-east-1.amazonaws.com",
+   "path": "/",
+   "query": "Action=DescribeDBInstances"
+  }
+ },
+ "aws.s3-bucket": {
+  "match": {
+   "method": "DELETE",
+   "host": "prod-data.s3.us-east-1.amazonaws.com",
+   "path": "/"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "prod-data.s3.us-east-1.amazonaws.com",
+   "path": "/reports/a.csv"
+  }
+ },
+ "aws.s3-bucket-path": {
+  "match": {
+   "method": "DELETE",
+   "host": "s3.us-east-1.amazonaws.com",
+   "path": "/prod-data"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "s3.us-east-1.amazonaws.com",
+   "path": "/prod-data/reports/a.csv"
+  }
+ },
+ "aws.s3-objects": {
+  "match": {
+   "method": "POST",
+   "host": "prod-data.s3.amazonaws.com",
+   "path": "/",
+   "query": "delete",
+   "body": "<Delete><Object><Key>a</Key></Object></Delete>"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "prod-data.s3.amazonaws.com",
+   "path": "/",
+   "query": "uploads"
+  }
+ },
+ "gcp.project": {
+  "match": {
+   "method": "DELETE",
+   "host": "cloudresourcemanager.googleapis.com",
+   "path": "/v3/projects/prod"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "cloudresourcemanager.googleapis.com",
+   "path": "/v3/projects/prod"
+  }
+ },
+ "gcp.sql": {
+  "match": {
+   "method": "DELETE",
+   "host": "sqladmin.googleapis.com",
+   "path": "/v1/projects/p/instances/prod"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "sqladmin.googleapis.com",
+   "path": "/v1/projects/p/instances/prod/restart"
+  }
+ },
+ "gcp.storage": {
+  "match": {
+   "method": "DELETE",
+   "host": "storage.googleapis.com",
+   "path": "/storage/v1/b/prod-data"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "storage.googleapis.com",
+   "path": "/storage/v1/b/prod-data/o/a.csv"
+  }
+ },
+ "gcp.compute": {
+  "match": {
+   "method": "DELETE",
+   "host": "compute.googleapis.com",
+   "path": "/compute/v1/projects/p/zones/us-east1-b/disks/data"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "compute.googleapis.com",
+   "path": "/compute/v1/projects/p/zones/us-east1-b/instances/web/stop"
+  }
+ },
+ "gcp.gke": {
+  "match": {
+   "method": "DELETE",
+   "host": "container.googleapis.com",
+   "path": "/v1/projects/p/locations/us-east1/clusters/prod"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "container.googleapis.com",
+   "path": "/v1/projects/p/locations/us-east1/clusters/prod"
+  }
+ },
+ "gcp.firestore": {
+  "match": {
+   "method": "POST",
+   "host": "firestore.googleapis.com",
+   "path": "/v1/projects/p/databases/(default):bulkDeleteDocuments"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "firestore.googleapis.com",
+   "path": "/v1/projects/p/databases/(default)/documents:runQuery"
+  }
+ },
+ "gcp.bigquery": {
+  "match": {
+   "method": "DELETE",
+   "host": "bigquery.googleapis.com",
+   "path": "/bigquery/v2/projects/p/datasets/events"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "bigquery.googleapis.com",
+   "path": "/bigquery/v2/projects/p/datasets/events"
+  }
+ },
+ "gcp.bigquery-sql": {
+  "match": {
+   "method": "POST",
+   "host": "bigquery.googleapis.com",
+   "path": "/bigquery/v2/projects/p/queries",
+   "body": "{\"query\": \"TRUNCATE TABLE ev.x\"}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "bigquery.googleapis.com",
+   "path": "/bigquery/v2/projects/p/queries",
+   "body": "{\"query\": \"select 1\"}"
+  }
+ },
+ "azure.resource-group": {
+  "match": {
+   "method": "DELETE",
+   "host": "management.azure.com",
+   "path": "/subscriptions/s1/resourceGroups/prod"
+  },
+  "miss": {
+   "method": "PUT",
+   "host": "management.azure.com",
+   "path": "/subscriptions/s1/resourceGroups/prod"
+  }
+ },
+ "azure.resource": {
+  "match": {
+   "method": "DELETE",
+   "host": "management.azure.com",
+   "path": "/subscriptions/s1/resourceGroups/prod/providers/Microsoft.Sql/servers/db1"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "management.azure.com",
+   "path": "/subscriptions/s1/resourceGroups/prod/providers/Microsoft.Sql/servers/db1"
+  }
+ },
+ "cloudflare.zone": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.cloudflare.com",
+   "path": "/client/v4/zones/z1/dns_records/r1"
+  },
+  "miss": {
+   "method": "PATCH",
+   "host": "api.cloudflare.com",
+   "path": "/client/v4/zones/z1/dns_records/r1"
+  }
+ },
+ "cloudflare.storage": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.cloudflare.com",
+   "path": "/client/v4/accounts/a1/d1/database/db1"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "api.cloudflare.com",
+   "path": "/client/v4/accounts/a1/storage/kv/namespaces/n1/values/k"
+  }
+ },
+ "cloudflare.d1-sql": {
+  "match": {
+   "method": "POST",
+   "host": "api.cloudflare.com",
+   "path": "/client/v4/accounts/a1/d1/database/db1/query",
+   "body": "{\"sql\": \"DELETE FROM users\"}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.cloudflare.com",
+   "path": "/client/v4/accounts/a1/d1/database/db1/query",
+   "body": "{\"sql\": \"DELETE FROM users WHERE id = ?\"}"
+  }
+ },
+ "cloudflare.purge": {
+  "match": {
+   "method": "POST",
+   "host": "api.cloudflare.com",
+   "path": "/client/v4/zones/z1/purge_cache",
+   "body": "{\"purge_everything\": true}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.cloudflare.com",
+   "path": "/client/v4/zones/z1/purge_cache",
+   "body": "{\"files\": [\"https://a/x.js\"]}"
+  }
+ },
+ "digitalocean.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.digitalocean.com",
+   "path": "/v2/droplets",
+   "query": "tag_name=web"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "api.digitalocean.com",
+   "path": "/v2/domains/acme.com/records/9"
+  }
+ },
+ "kubernetes.namespace": {
+  "match": {
+   "method": "DELETE",
+   "host": "k8s.internal",
+   "path": "/api/v1/namespaces/prod"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "k8s.internal",
+   "path": "/api/v1/namespaces/prod/pods/web-1"
+  }
+ },
+ "kubernetes.workloads": {
+  "match": {
+   "method": "DELETE",
+   "host": "k8s.internal",
+   "path": "/apis/apps/v1/namespaces/prod/statefulsets/db"
+  },
+  "miss": {
+   "method": "PATCH",
+   "host": "k8s.internal",
+   "path": "/apis/apps/v1/namespaces/prod/statefulsets/db"
+  }
+ },
+ "kubernetes.crd": {
+  "match": {
+   "method": "DELETE",
+   "host": "k8s.internal",
+   "path": "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/dbs.acme.io"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "k8s.internal",
+   "path": "/apis/apiextensions.k8s.io/v1/customresourcedefinitions/dbs.acme.io"
+  }
+ },
+ "terraform-cloud.destroy-run": {
+  "match": {
+   "method": "POST",
+   "host": "app.terraform.io",
+   "path": "/api/v2/runs",
+   "body": "{\"data\": {\"attributes\": {\"is-destroy\": true}}}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "app.terraform.io",
+   "path": "/api/v2/runs",
+   "body": "{\"data\": {\"attributes\": {\"is-destroy\": false}}}"
+  }
+ },
+ "terraform-cloud.workspace": {
+  "match": {
+   "method": "DELETE",
+   "host": "app.terraform.io",
+   "path": "/api/v2/organizations/acme/workspaces/prod"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "app.terraform.io",
+   "path": "/api/v2/workspaces/ws-1/relationships/tags"
+  }
+ },
+ "terraform-cloud.safe-delete": {
+  "match": {
+   "method": "POST",
+   "host": "app.terraform.io",
+   "path": "/api/v2/workspaces/ws-1/actions/safe-delete"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "app.terraform.io",
+   "path": "/api/v2/workspaces/ws-1/actions/lock"
+  }
+ },
+ "github.repo": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.github.com",
+   "path": "/repos/acme/app"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.github.com",
+   "path": "/repos/acme/app"
+  }
+ },
+ "github.force-ref": {
+  "match": {
+   "method": "PATCH",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/git/refs/heads/main",
+   "body": "{\"sha\": \"abc\", \"force\": true}"
+  },
+  "miss": {
+   "method": "PATCH",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/git/refs/heads/main",
+   "body": "{\"sha\": \"abc\"}"
+  }
+ },
+ "github.delete-ref": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/git/refs/heads/release"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/git/refs/heads/release"
+  }
+ },
+ "github.protection": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/branches/main/protection"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/branches/main/protection"
+  }
+ },
+ "github.secrets": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/actions/secrets/DEPLOY_KEY"
+  },
+  "miss": {
+   "method": "PUT",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/actions/secrets/DEPLOY_KEY"
+  }
+ },
+ "github.keys": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/keys/12"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/keys/12"
+  }
+ },
+ "github.members": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.github.com",
+   "path": "/orgs/acme/members/ana"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.github.com",
+   "path": "/orgs/acme/members/ana"
+  }
+ },
+ "github.transfer": {
+  "match": {
+   "method": "POST",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/transfer"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/forks"
+  }
+ },
+ "github.visibility": {
+  "match": {
+   "method": "PATCH",
+   "host": "api.github.com",
+   "path": "/repos/acme/app",
+   "body": "{\"visibility\": \"public\"}"
+  },
+  "miss": {
+   "method": "PATCH",
+   "host": "api.github.com",
+   "path": "/repos/acme/app",
+   "body": "{\"description\": \"public docs\"}"
+  }
+ },
+ "github.environment": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/environments/production"
+  },
+  "miss": {
+   "method": "PUT",
+   "host": "api.github.com",
+   "path": "/repos/acme/app/environments/production"
+  }
+ },
+ "github.graphql": {
+  "match": {
+   "method": "POST",
+   "host": "api.github.com",
+   "path": "/graphql",
+   "graphql": [
+    "deleteBranchProtectionRule"
+   ]
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.github.com",
+   "path": "/graphql",
+   "graphql": [
+    "createRef"
+   ]
+  }
+ },
+ "github.graphql-force": {
+  "match": {
+   "method": "POST",
+   "host": "api.github.com",
+   "path": "/graphql",
+   "graphql": [
+    "updateRef"
+   ],
+   "body": "{\"variables\": {\"input\": {\"force\": true}}}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.github.com",
+   "path": "/graphql",
+   "graphql": [
+    "updateRef"
+   ],
+   "body": "{\"variables\": {\"input\": {\"oid\": \"a\"}}}"
+  }
+ },
+ "gitlab.project": {
+  "match": {
+   "method": "DELETE",
+   "host": "gitlab.com",
+   "path": "/api/v4/projects/acme/app"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "gitlab.com",
+   "path": "/api/v4/projects/acme/app/issues/4"
+  }
+ },
+ "gitlab.branches": {
+  "match": {
+   "method": "DELETE",
+   "host": "gitlab.com",
+   "path": "/api/v4/projects/12/protected_branches/main"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "gitlab.com",
+   "path": "/api/v4/projects/12/protected_branches/main"
+  }
+ },
+ "gitlab.variables": {
+  "match": {
+   "method": "DELETE",
+   "host": "gitlab.com",
+   "path": "/api/v4/projects/12/variables/DEPLOY_TOKEN"
+  },
+  "miss": {
+   "method": "PUT",
+   "host": "gitlab.com",
+   "path": "/api/v4/projects/12/variables/DEPLOY_TOKEN"
+  }
+ },
+ "gitlab.members": {
+  "match": {
+   "method": "DELETE",
+   "host": "gitlab.com",
+   "path": "/api/v4/groups/acme/members/7"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "gitlab.com",
+   "path": "/api/v4/groups/acme/members/7"
+  }
+ },
+ "gitlab.visibility": {
+  "match": {
+   "method": "PUT",
+   "host": "gitlab.com",
+   "path": "/api/v4/projects/12",
+   "body": "{\"visibility\": \"public\"}"
+  },
+  "miss": {
+   "method": "PUT",
+   "host": "gitlab.com",
+   "path": "/api/v4/projects/12",
+   "body": "{\"visibility\": \"private\"}"
+  }
+ },
+ "stripe.refund": {
+  "match": {
+   "method": "POST",
+   "host": "api.stripe.com",
+   "path": "/v1/refunds"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.stripe.com",
+   "path": "/v1/refunds"
+  }
+ },
+ "stripe.payout": {
+  "match": {
+   "method": "POST",
+   "host": "api.stripe.com",
+   "path": "/v1/payouts"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.stripe.com",
+   "path": "/v1/payouts"
+  }
+ },
+ "stripe.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.stripe.com",
+   "path": "/v1/customers/cus_1"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "api.stripe.com",
+   "path": "/v1/customers/cus_1/discount"
+  }
+ },
+ "stripe.cancel": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.stripe.com",
+   "path": "/v1/subscriptions/sub_1"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.stripe.com",
+   "path": "/v1/subscriptions/sub_1"
+  }
+ },
+ "stripe.void": {
+  "match": {
+   "method": "POST",
+   "host": "api.stripe.com",
+   "path": "/v1/invoices/in_1/void"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.stripe.com",
+   "path": "/v1/invoices/in_1/pay"
+  }
+ },
+ "shopify.delete": {
+  "match": {
+   "method": "POST",
+   "host": "acme.myshopify.com",
+   "path": "/admin/api/2026-10/graphql.json",
+   "graphql": [
+    "productDelete"
+   ]
+  },
+  "miss": {
+   "method": "POST",
+   "host": "acme.myshopify.com",
+   "path": "/admin/api/2026-10/graphql.json",
+   "graphql": [
+    "productUpdate"
+   ]
+  }
+ },
+ "shopify.refund": {
+  "match": {
+   "method": "POST",
+   "host": "acme.myshopify.com",
+   "path": "/admin/api/2026-10/graphql.json",
+   "graphql": [
+    "refundCreate"
+   ]
+  },
+  "miss": {
+   "method": "POST",
+   "host": "acme.myshopify.com",
+   "path": "/admin/api/2026-10/graphql.json",
+   "graphql": [
+    "orderUpdate"
+   ]
+  }
+ },
+ "shopify.bulk": {
+  "match": {
+   "method": "POST",
+   "host": "acme.myshopify.com",
+   "path": "/admin/api/2026-10/graphql.json",
+   "graphql": [
+    "bulkOperationRunMutation"
+   ],
+   "body": "{\"variables\": {\"mutation\": \"mutation call($input: ProductDeleteInput!) { productDelete(input: $input) { deletedProductId } }\"}}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "acme.myshopify.com",
+   "path": "/admin/api/2026-10/graphql.json",
+   "graphql": [
+    "bulkOperationRunMutation"
+   ],
+   "body": "{\"variables\": {\"mutation\": \"mutation call($input: ProductInput!) { productUpdate(input: $input) { product { id } } }\"}}"
+  }
+ },
+ "shopify.rest": {
+  "match": {
+   "method": "DELETE",
+   "host": "acme.myshopify.com",
+   "path": "/admin/api/2026-10/products/12.json"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "acme.myshopify.com",
+   "path": "/admin/api/2026-10/products.json"
+  }
+ },
+ "twilio.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.twilio.com",
+   "path": "/2010-04-01/Accounts/AC1/IncomingPhoneNumbers/PN1.json"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.twilio.com",
+   "path": "/2010-04-01/Accounts/AC1/IncomingPhoneNumbers/PN1.json"
+  }
+ },
+ "twilio.close": {
+  "match": {
+   "method": "POST",
+   "host": "api.twilio.com",
+   "path": "/2010-04-01/Accounts/AC2.json",
+   "body": "Status=closed"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.twilio.com",
+   "path": "/2010-04-01/Accounts/AC2.json",
+   "body": "FriendlyName=closed%20beta"
+  }
+ },
+ "sendgrid.contacts": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.sendgrid.com",
+   "path": "/v3/marketing/contacts",
+   "query": "delete_all_contacts=true"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "api.sendgrid.com",
+   "path": "/v3/marketing/contacts",
+   "query": "ids=c1"
+  }
+ },
+ "sendgrid.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.sendgrid.com",
+   "path": "/v3/api_keys/k1"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.sendgrid.com",
+   "path": "/v3/api_keys/k1"
+  }
+ },
+ "sendgrid.send": {
+  "match": {
+   "method": "PUT",
+   "host": "api.sendgrid.com",
+   "path": "/v3/marketing/singlesends/s1/schedule"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "api.sendgrid.com",
+   "path": "/v3/marketing/singlesends/s1/schedule"
+  }
+ },
+ "slack.channel": {
+  "match": {
+   "method": "POST",
+   "host": "slack.com",
+   "path": "/api/conversations.archive"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "slack.com",
+   "path": "/api/conversations.history"
+  }
+ },
+ "slack.user": {
+  "match": {
+   "method": "POST",
+   "host": "slack.com",
+   "path": "/api/admin.users.remove"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "slack.com",
+   "path": "/api/users.info"
+  }
+ },
+ "slack.files": {
+  "match": {
+   "method": "POST",
+   "host": "slack.com",
+   "path": "/api/files.delete"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "slack.com",
+   "path": "/api/files.info"
+  }
+ },
+ "linear.delete": {
+  "match": {
+   "method": "POST",
+   "host": "api.linear.app",
+   "path": "/graphql",
+   "graphql": [
+    "teamDelete"
+   ]
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.linear.app",
+   "path": "/graphql",
+   "graphql": [
+    "issueArchive"
+   ]
+  }
+ },
+ "linear.org": {
+  "match": {
+   "method": "POST",
+   "host": "api.linear.app",
+   "path": "/graphql",
+   "graphql": [
+    "userSuspend"
+   ]
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.linear.app",
+   "path": "/graphql",
+   "graphql": [
+    "userUpdate"
+   ]
+  }
+ },
+ "jira.project": {
+  "match": {
+   "method": "DELETE",
+   "host": "acme.atlassian.net",
+   "path": "/rest/api/3/project/OPS"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "acme.atlassian.net",
+   "path": "/rest/api/3/project/OPS"
+  }
+ },
+ "jira.project-async": {
+  "match": {
+   "method": "POST",
+   "host": "acme.atlassian.net",
+   "path": "/rest/api/3/project/OPS/delete"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "acme.atlassian.net",
+   "path": "/rest/api/3/project/OPS/archive"
+  }
+ },
+ "jira.issue": {
+  "match": {
+   "method": "DELETE",
+   "host": "acme.atlassian.net",
+   "path": "/rest/api/3/issue/OPS-1"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "acme.atlassian.net",
+   "path": "/rest/api/3/issue/OPS-1/comment/9"
+  }
+ },
+ "jira.bulk-delete": {
+  "match": {
+   "method": "POST",
+   "host": "acme.atlassian.net",
+   "path": "/rest/api/3/bulk/issues/delete"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "acme.atlassian.net",
+   "path": "/rest/api/3/bulk/issues/move"
+  }
+ },
+ "jira.user": {
+  "match": {
+   "method": "DELETE",
+   "host": "acme.atlassian.net",
+   "path": "/rest/api/3/user",
+   "query": "accountId=5b10"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "acme.atlassian.net",
+   "path": "/rest/api/3/user",
+   "query": "accountId=5b10"
+  }
+ },
+ "confluence.space": {
+  "match": {
+   "method": "DELETE",
+   "host": "acme.atlassian.net",
+   "path": "/wiki/rest/api/space/ENG"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "acme.atlassian.net",
+   "path": "/wiki/rest/api/space/ENG"
+  }
+ },
+ "confluence.purge": {
+  "match": {
+   "method": "DELETE",
+   "host": "acme.atlassian.net",
+   "path": "/wiki/api/v2/pages/123",
+   "query": "purge=true"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "acme.atlassian.net",
+   "path": "/wiki/api/v2/pages/123"
+  }
+ },
+ "notion.trash": {
+  "match": {
+   "method": "PATCH",
+   "host": "api.notion.com",
+   "path": "/v1/pages/p1",
+   "body": "{\"in_trash\": true}"
+  },
+  "miss": {
+   "method": "PATCH",
+   "host": "api.notion.com",
+   "path": "/v1/pages/p1",
+   "body": "{\"properties\": {\"Done\": {\"checkbox\": true}}}"
+  }
+ },
+ "google.drive-delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "www.googleapis.com",
+   "path": "/drive/v3/files/f1"
+  },
+  "miss": {
+   "method": "PATCH",
+   "host": "www.googleapis.com",
+   "path": "/drive/v3/files/f1"
+  }
+ },
+ "google.drive-public": {
+  "match": {
+   "method": "POST",
+   "host": "www.googleapis.com",
+   "path": "/drive/v3/files/f1/permissions",
+   "body": "{\"role\": \"reader\", \"type\": \"anyone\"}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "www.googleapis.com",
+   "path": "/drive/v3/files/f1/permissions",
+   "body": "{\"role\": \"reader\", \"type\": \"user\", \"emailAddress\": \"ana@acme.com\"}"
+  }
+ },
+ "google.gmail-delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "gmail.googleapis.com",
+   "path": "/gmail/v1/users/me/threads/t1"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "gmail.googleapis.com",
+   "path": "/gmail/v1/users/me/labels/L1"
+  }
+ },
+ "google.gmail-batch-delete": {
+  "match": {
+   "method": "POST",
+   "host": "gmail.googleapis.com",
+   "path": "/gmail/v1/users/me/messages/batchDelete"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "gmail.googleapis.com",
+   "path": "/gmail/v1/users/me/messages/batchModify"
+  }
+ },
+ "google.gmail-forward": {
+  "match": {
+   "method": "PUT",
+   "host": "gmail.googleapis.com",
+   "path": "/gmail/v1/users/me/settings/autoForwarding"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "gmail.googleapis.com",
+   "path": "/gmail/v1/users/me/settings/autoForwarding"
+  }
+ },
+ "google.gmail-filter": {
+  "match": {
+   "method": "POST",
+   "host": "gmail.googleapis.com",
+   "path": "/gmail/v1/users/me/settings/filters",
+   "body": "{\"action\": {\"forward\": \"x@evil.example\"}}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "gmail.googleapis.com",
+   "path": "/gmail/v1/users/me/settings/filters",
+   "body": "{\"action\": {\"addLabelIds\": [\"L1\"]}}"
+  }
+ },
+ "google.admin": {
+  "match": {
+   "method": "DELETE",
+   "host": "admin.googleapis.com",
+   "path": "/admin/directory/v1/users/ana@acme.com"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "admin.googleapis.com",
+   "path": "/admin/directory/v1/users"
+  }
+ },
+ "salesforce.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "acme.my.salesforce.com",
+   "path": "/services/data/v62.0/sobjects/Account/001"
+  },
+  "miss": {
+   "method": "PATCH",
+   "host": "acme.my.salesforce.com",
+   "path": "/services/data/v62.0/sobjects/Account/001"
+  }
+ },
+ "salesforce.bulk-delete": {
+  "match": {
+   "method": "POST",
+   "host": "acme.my.salesforce.com",
+   "path": "/services/data/v62.0/jobs/ingest",
+   "body": "{\"object\": \"Contact\", \"operation\": \"hardDelete\"}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "acme.my.salesforce.com",
+   "path": "/services/data/v62.0/jobs/ingest",
+   "body": "{\"object\": \"Contact\", \"operation\": \"insert\"}"
+  }
+ },
+ "hubspot.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.hubapi.com",
+   "path": "/crm/v3/objects/deals/9"
+  },
+  "miss": {
+   "method": "PATCH",
+   "host": "api.hubapi.com",
+   "path": "/crm/v3/objects/deals/9"
+  }
+ },
+ "hubspot.bulk-delete": {
+  "match": {
+   "method": "POST",
+   "host": "api.hubapi.com",
+   "path": "/crm/v3/objects/contacts/gdpr-delete"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.hubapi.com",
+   "path": "/crm/v3/objects/contacts/search"
+  }
+ },
+ "datadog.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.datadoghq.com",
+   "path": "/api/v1/monitor/42"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.datadoghq.com",
+   "path": "/api/v1/monitor/42"
+  }
+ },
+ "datadog.mute": {
+  "match": {
+   "method": "POST",
+   "host": "api.datadoghq.com",
+   "path": "/api/v2/downtime"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.datadoghq.com",
+   "path": "/api/v1/monitor"
+  }
+ },
+ "pagerduty.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.pagerduty.com",
+   "path": "/schedules/P1"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.pagerduty.com",
+   "path": "/schedules/P1"
+  }
+ },
+ "pagerduty.bulk-resolve": {
+  "match": {
+   "method": "PUT",
+   "host": "api.pagerduty.com",
+   "path": "/incidents"
+  },
+  "miss": {
+   "method": "PUT",
+   "host": "api.pagerduty.com",
+   "path": "/incidents/Q1"
+  }
+ },
+ "pagerduty.maintenance": {
+  "match": {
+   "method": "POST",
+   "host": "api.pagerduty.com",
+   "path": "/maintenance_windows"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "api.pagerduty.com",
+   "path": "/incidents"
+  }
+ },
+ "pinecone.index": {
+  "match": {
+   "method": "DELETE",
+   "host": "api.pinecone.io",
+   "path": "/indexes/docs"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "api.pinecone.io",
+   "path": "/indexes/docs"
+  }
+ },
+ "pinecone.vectors": {
+  "match": {
+   "method": "POST",
+   "host": "docs-1.svc.pinecone.io",
+   "path": "/vectors/delete",
+   "body": "{\"deleteAll\": true, \"namespace\": \"a\"}"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "docs-1.svc.pinecone.io",
+   "path": "/vectors/delete",
+   "body": "{\"ids\": [\"v1\"]}"
+  }
+ },
+ "algolia.index": {
+  "match": {
+   "method": "DELETE",
+   "host": "app1.algolia.net",
+   "path": "/1/indexes/products"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "app1.algolia.net",
+   "path": "/1/indexes/products/obj1"
+  }
+ },
+ "algolia.clear": {
+  "match": {
+   "method": "POST",
+   "host": "app1.algolia.net",
+   "path": "/1/indexes/products/clear"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "app1-dsn.algolia.net",
+   "path": "/1/indexes/products/query"
+  }
+ },
+ "auth0.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "acme.us.auth0.com",
+   "path": "/api/v2/users/auth0|1"
+  },
+  "miss": {
+   "method": "PATCH",
+   "host": "acme.us.auth0.com",
+   "path": "/api/v2/users/auth0|1"
+  }
+ },
+ "okta.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "acme.okta.com",
+   "path": "/api/v1/users/00u1"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "acme.okta.com",
+   "path": "/api/v1/users/00u1/sessions"
+  }
+ },
+ "okta.deactivate": {
+  "match": {
+   "method": "POST",
+   "host": "acme.okta.com",
+   "path": "/api/v1/users/00u1/lifecycle/deactivate"
+  },
+  "miss": {
+   "method": "POST",
+   "host": "acme.okta.com",
+   "path": "/api/v1/users/00u1/lifecycle/activate"
+  }
+ },
+ "sentry.delete": {
+  "match": {
+   "method": "DELETE",
+   "host": "sentry.io",
+   "path": "/api/0/projects/acme/web/"
+  },
+  "miss": {
+   "method": "PUT",
+   "host": "sentry.io",
+   "path": "/api/0/projects/acme/web/"
+  }
+ },
+ "elasticsearch.index": {
+  "match": {
+   "method": "DELETE",
+   "host": "acme.es.us-east-1.aws.elastic-cloud.com",
+   "path": "/logs-2026"
+  },
+  "miss": {
+   "method": "DELETE",
+   "host": "acme.es.us-east-1.aws.elastic-cloud.com",
+   "path": "/logs-2026/_doc/1"
+  }
+ },
+ "elasticsearch.bulk": {
+  "match": {
+   "method": "DELETE",
+   "host": "es.internal",
+   "path": "/_snapshot/backups/nightly-1"
+  },
+  "miss": {
+   "method": "GET",
+   "host": "es.internal",
+   "path": "/_snapshot/backups/nightly-1"
+  }
+ }
+}

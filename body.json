@@ -1,6 +1,6 @@
 {
- "version": 1,
- "issued": "2026-11-02",
+ "version": 2,
+ "issued": "2026-11-03",
  "prices": {},
  "rules": [
   {
@@ -44,6 +44,2010 @@
    "action": "approve",
    "command": "\\b(curl|wget)\\s[^|;&]*\\|\\s*(sudo\\s+)?(ba|z)?sh\\b",
    "why": "runs a downloaded script straight in a shell"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\btruncate\\s+(?!table\\b)[\\w.\\x22]+\\s*(;|$|'|\\x22)|\\bupdate\\s+[\\w.\\x22]+\\s+set\\b(?![^;]*\\bwhere\\b)[^;]*;",
+   "why": "empties a table, or changes every row of one"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\balter\\s+table\\s+[\\w.\\x22]+\\s+drop\\s+(column\\s+)?(?!(constraint|index|default|not)\\b)[\\w\\x22]+|\\bdrop\\s+(user|role|owned\\s+by)\\s",
+   "why": "drops a column, a user or a role"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\b(dropdb|dropuser)\\s|\\bmysqladmin\\s[^;&|]*\\bdrop\\s|\\bpg_dropcluster\\s",
+   "why": "drops a database or a user from the command line"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bprisma\\s+(migrate\\s+reset\\b|db\\s+push\\b[^;&|]*--(force-reset|accept-data-loss)\\b)",
+   "why": "resets the database, deleting its data"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\b(rails|rake)\\s+db:(drop|reset|purge|schema:load|structure:load|migrate:reset)\\b",
+   "why": "drops or reloads the database, deleting its data"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bmanage\\.py\\s+(flush|reset_db)\\b",
+   "why": "deletes every row in the database"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bartisan\\s+(migrate:(fresh|reset|refresh)|db:wipe)\\b",
+   "why": "drops every table and rebuilds the database"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\balembic\\s+downgrade\\s+base\\b|\\bknex\\s+migrate:rollback\\b[^;&|]*--all\\b|\\bsequelize(-cli)?\\s+db:drop\\b",
+   "why": "rolls back every migration or drops the database"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\b(redis|valkey)-cli\\b[^;&|]*\\bflush(all|db)\\b",
+   "why": "deletes every key in Redis"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bmongosh?\\b[^|;&]*(\\.dropDatabase\\(|\\.drop\\(\\)|\\.deleteMany\\(\\s*\\{\\s*\\}\\s*\\))|\\batlas\\s+(clusters|projects)\\s+delete\\b",
+   "why": "drops a MongoDB database or collection, or deletes an Atlas cluster"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bfirebase\\s+(firestore:delete|database:remove|functions:delete|hosting:disable)\\b",
+   "why": "deletes Firestore or Realtime Database data, functions or hosting"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bsupabase\\s+(db\\s+reset\\b[^;&|]*--(linked|db-url)\\b|projects\\s+delete\\b|branches\\s+delete\\b)",
+   "why": "resets a remote Supabase database or deletes a project or branch"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bdocker\\s+(system\\s+prune\\b[^;&|]*(\\s-\\w*a\\w*|\\s--all|\\s--volumes)\\b|volume\\s+(rm|prune)\\b)|\\bdocker[\\s-]compose\\s[^;&|]*\\bdown\\b[^;&|]*(\\s-v\\b|--volumes\\b)",
+   "why": "deletes Docker volumes or every unused image"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\brailway\\s+(delete|down|(volume|service|bucket|environment|variables?)\\s+(delete|rm|remove))\\b",
+   "why": "deletes a Railway project, service, volume or deployment"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bvercel\\s+(remove|rm|(project|domains|env)\\s+(rm|remove))\\b|\\bnetlify\\s+sites:delete\\b",
+   "why": "deletes a Vercel project, deployment, domain or variable, or a Netlify site"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bheroku\\s+(apps:destroy|destroy|pg:reset|addons:destroy)\\b",
+   "why": "destroys a Heroku app or add-on, or resets its database"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bfly(ctl)?\\s+(apps\\s+destroy|destroy|volumes?\\s+(destroy|delete|rm)|machines?\\s+(destroy|rm))\\b",
+   "why": "destroys a Fly app, volume or machine"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bneonctl\\s+(projects|branches|databases)\\s+delete\\b|\\bpscale\\s+(database|branch|backup)\\s+delete\\b",
+   "why": "deletes a Neon or PlanetScale database, branch or backup"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bwrangler\\s+(delete|r2\\s+bucket\\s+delete|d1\\s+delete|kv\\s+namespace\\s+delete|queues\\s+delete)\\b",
+   "why": "deletes a Worker, R2 bucket, D1 database, KV namespace or queue"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bdoctl\\s+(\\S+\\s+){1,3}(delete|rm)\\b",
+   "why": "deletes a DigitalOcean resource"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bterraform\\s+apply\\b[^;&|]*\\s-destroy\\b|\\bterraform\\s+(state\\s+rm|workspace\\s+delete)\\b|\\btofu\\s+destroy\\b|\\bpulumi\\s+stack\\s+(rm|remove|delete)\\b",
+   "why": "destroys infrastructure or deletes its state"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bgit\\s+(filter-branch|filter-repo)\\b|\\bgit\\s+update-ref\\s+-d\\b|\\bgit\\s+stash\\s+clear\\b|\\bgit\\s+push\\s[^;&|]*\\s(:[\\w./-]+|\\+[\\w./:-]+)(\\s|$)",
+   "why": "rewrites history, deletes a remote branch or drops stashed work"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bgh\\s+(secret\\s+delete|release\\s+delete|repo\\s+archive)\\b|\\bgh\\s+repo\\s+edit\\b[^;&|]*--visibility[\\s=]+public|\\bgh\\s+api\\b[^;&|]*(-X|--method)[\\s=]*DELETE\\b|\\bglab\\s+repo\\s+delete\\b",
+   "why": "deletes a secret, release or repository, or makes a repository public"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\baws\\s+s3\\s+sync\\b[^;&|]*--delete\\b|\\bgsutil\\s+(-m\\s+)?(rm\\s+-\\w*r|rb)\\b|\\bgcloud\\s+storage\\s+rm\\b|\\brclone\\s+(purge|delete)\\b",
+   "why": "deletes files in cloud storage in bulk"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bstripe\\s+((refunds|payouts|transfers)\\s+create|(customers|products|coupons)\\s+delete|subscriptions\\s+cancel)\\b",
+   "why": "moves money or deletes Stripe customers, products or subscriptions"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\boc\\s+delete\\b|\\bkubectl\\s+drain\\b|\\bkubectl\\s+scale\\b[^;&|]*--replicas[=\\s]+0\\b",
+   "why": "deletes OpenShift resources, drains a node or scales a workload to zero"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bvault\\s+(kv\\s+(destroy|metadata\\s+delete)|secrets\\s+disable)\\b",
+   "why": "destroys secrets in Vault for good"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bfind\\s+(/|~|\\$HOME)\\s[^;&|]*-delete\\b|\\b(shred|wipefs)\\s",
+   "why": "deletes files across a whole disk or home directory, or wipes a disk"
+  }
+ ],
+ "about": [
+  {
+   "rule": 1,
+   "id": "shell.rm-root",
+   "service": "Shell",
+   "source": "https://www.gnu.org/software/coreutils/manual/html_node/rm-invocation.html"
+  },
+  {
+   "rule": 2,
+   "id": "shell.disk",
+   "service": "Shell",
+   "source": "https://man7.org/linux/man-pages/man8/mkfs.8.html"
+  },
+  {
+   "rule": 3,
+   "id": "sql.drop",
+   "service": "SQL",
+   "source": "https://www.postgresql.org/docs/current/sql-droptable.html"
+  },
+  {
+   "rule": 4,
+   "id": "git.history",
+   "service": "Git",
+   "source": "https://git-scm.com/docs/git-push"
+  },
+  {
+   "rule": 5,
+   "id": "cloud.teardown",
+   "service": "Cloud CLIs",
+   "source": "https://developer.hashicorp.com/terraform/cli/commands/destroy"
+  },
+  {
+   "rule": 6,
+   "id": "publish",
+   "service": "Package registries",
+   "source": "https://docs.npmjs.com/cli/commands/npm-publish"
+  },
+  {
+   "rule": 7,
+   "id": "shell.pipe",
+   "service": "Shell"
+  },
+  {
+   "rule": 8,
+   "id": "sql.truncate-update",
+   "service": "SQL",
+   "source": "https://www.postgresql.org/docs/current/sql-truncate.html"
+  },
+  {
+   "rule": 9,
+   "id": "sql.drop-column-role",
+   "service": "SQL",
+   "source": "https://www.postgresql.org/docs/current/sql-altertable.html"
+  },
+  {
+   "rule": 10,
+   "id": "postgres.cli",
+   "service": "PostgreSQL and MySQL",
+   "source": "https://www.postgresql.org/docs/current/app-dropdb.html"
+  },
+  {
+   "rule": 11,
+   "id": "prisma",
+   "service": "Prisma",
+   "source": "https://www.prisma.io/docs/orm/reference/prisma-cli-reference"
+  },
+  {
+   "rule": 12,
+   "id": "rails",
+   "service": "Rails",
+   "source": "https://guides.rubyonrails.org/active_record_migrations.html"
+  },
+  {
+   "rule": 13,
+   "id": "django",
+   "service": "Django",
+   "source": "https://docs.djangoproject.com/en/stable/ref/django-admin/#flush"
+  },
+  {
+   "rule": 14,
+   "id": "laravel",
+   "service": "Laravel",
+   "source": "https://laravel.com/docs/migrations"
+  },
+  {
+   "rule": 15,
+   "id": "migrations",
+   "service": "Migration tools",
+   "source": "https://alembic.sqlalchemy.org/en/latest/tutorial.html"
+  },
+  {
+   "rule": 16,
+   "id": "redis",
+   "service": "Redis",
+   "source": "https://redis.io/docs/latest/commands/flushall/"
+  },
+  {
+   "rule": 17,
+   "id": "mongodb",
+   "service": "MongoDB",
+   "source": "https://www.mongodb.com/docs/atlas/cli/current/command/atlas-clusters-delete/"
+  },
+  {
+   "rule": 18,
+   "id": "firebase",
+   "service": "Firebase",
+   "source": "https://firebase.google.com/docs/cli"
+  },
+  {
+   "rule": 19,
+   "id": "supabase.cli",
+   "service": "Supabase",
+   "source": "https://supabase.com/docs/reference/cli/supabase-db-reset"
+  },
+  {
+   "rule": 20,
+   "id": "docker",
+   "service": "Docker",
+   "source": "https://docs.docker.com/reference/cli/docker/system/prune/"
+  },
+  {
+   "rule": 21,
+   "id": "railway.cli",
+   "service": "Railway",
+   "source": "https://docs.railway.com/reference/cli-api"
+  },
+  {
+   "rule": 22,
+   "id": "vercel-netlify.cli",
+   "service": "Vercel and Netlify",
+   "source": "https://vercel.com/docs/cli/remove"
+  },
+  {
+   "rule": 23,
+   "id": "heroku.cli",
+   "service": "Heroku",
+   "source": "https://devcenter.heroku.com/articles/heroku-cli-commands"
+  },
+  {
+   "rule": 24,
+   "id": "fly.cli",
+   "service": "Fly.io",
+   "source": "https://fly.io/docs/flyctl/volumes-destroy/"
+  },
+  {
+   "rule": 25,
+   "id": "neon-planetscale.cli",
+   "service": "Neon and PlanetScale",
+   "source": "https://neon.com/docs/reference/cli-projects"
+  },
+  {
+   "rule": 26,
+   "id": "wrangler",
+   "service": "Cloudflare",
+   "source": "https://developers.cloudflare.com/workers/wrangler/commands/"
+  },
+  {
+   "rule": 27,
+   "id": "doctl",
+   "service": "DigitalOcean",
+   "source": "https://docs.digitalocean.com/reference/doctl/reference/compute/droplet/delete/"
+  },
+  {
+   "rule": 28,
+   "id": "iac.more",
+   "service": "Terraform, OpenTofu and Pulumi",
+   "source": "https://developer.hashicorp.com/terraform/cli/commands/apply"
+  },
+  {
+   "rule": 29,
+   "id": "git.more",
+   "service": "Git",
+   "source": "https://git-scm.com/docs/git-push"
+  },
+  {
+   "rule": 30,
+   "id": "gh.more",
+   "service": "GitHub CLI",
+   "source": "https://cli.github.com/manual/gh_secret_delete"
+  },
+  {
+   "rule": 31,
+   "id": "storage.cli",
+   "service": "Cloud storage CLIs",
+   "source": "https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/sync.html"
+  },
+  {
+   "rule": 32,
+   "id": "stripe.cli",
+   "service": "Stripe",
+   "source": "https://docs.stripe.com/cli/resources"
+  },
+  {
+   "rule": 33,
+   "id": "kubernetes.cli",
+   "service": "Kubernetes",
+   "source": "https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/"
+  },
+  {
+   "rule": 34,
+   "id": "vault",
+   "service": "HashiCorp Vault",
+   "source": "https://developer.hashicorp.com/vault/docs/commands/kv/destroy"
+  },
+  {
+   "rule": 35,
+   "id": "shell.wipe",
+   "service": "Shell",
+   "source": "https://www.gnu.org/software/findutils/manual/html_mono/find.html"
+  }
+ ],
+ "http": [
+  {
+   "id": "railway.volume",
+   "service": "Railway",
+   "host": "backboard.railway.*",
+   "method": [
+    "POST"
+   ],
+   "path": "^/graphql/v2$",
+   "graphql": [
+    "volumeDelete",
+    "volumeInstanceBackupDelete",
+    "volumeInstanceBackupScheduleUpdate",
+    "volumeInstanceBackupRestore"
+   ],
+   "action": "approve",
+   "why": "deletes a Railway volume or its backups, or changes or restores backups",
+   "source": "https://github.com/railwayapp/cli/blob/master/src/gql/schema.json"
+  },
+  {
+   "id": "railway.service",
+   "service": "Railway",
+   "host": "backboard.railway.*",
+   "method": [
+    "POST"
+   ],
+   "path": "^/graphql/v2$",
+   "graphql": [
+    "serviceDelete",
+    "environmentDelete",
+    "deploymentRemove"
+   ],
+   "action": "approve",
+   "why": "deletes a Railway service, environment or deployment",
+   "source": "https://github.com/railwayapp/cli/blob/master/src/gql/schema.json"
+  },
+  {
+   "id": "railway.project",
+   "service": "Railway",
+   "host": "backboard.railway.*",
+   "method": [
+    "POST"
+   ],
+   "path": "^/graphql/v2$",
+   "graphql": [
+    "projectDelete",
+    "projectScheduleDelete",
+    "projectScheduleDeleteForce",
+    "workspaceDelete"
+   ],
+   "action": "approve",
+   "why": "deletes a Railway project or workspace",
+   "source": "https://github.com/railwayapp/cli/blob/master/src/gql/schema.json"
+  },
+  {
+   "id": "railway.config",
+   "service": "Railway",
+   "host": "backboard.railway.*",
+   "method": [
+    "POST"
+   ],
+   "path": "^/graphql/v2$",
+   "graphql": [
+    "customDomainDelete",
+    "variableDelete",
+    "pluginDelete"
+   ],
+   "action": "approve",
+   "why": "deletes a Railway domain, variable or plugin",
+   "source": "https://github.com/railwayapp/cli/blob/master/src/gql/schema.json"
+  },
+  {
+   "id": "railway.variables-replace",
+   "service": "Railway",
+   "host": "backboard.railway.*",
+   "method": [
+    "POST"
+   ],
+   "path": "^/graphql/v2$",
+   "graphql": [
+    "variableCollectionUpsert"
+   ],
+   "body": "\\breplace\\W{0,3}:\\s*true\\b",
+   "action": "approve",
+   "why": "replaces every Railway variable in a service",
+   "source": "https://github.com/railwayapp/cli/blob/master/src/gql/schema.json"
+  },
+  {
+   "id": "railway.staged-delete",
+   "service": "Railway",
+   "host": "backboard.railway.*",
+   "method": [
+    "POST"
+   ],
+   "path": "^/graphql/v2$",
+   "graphql": [
+    "environmentPatchCommit",
+    "environmentStageChanges"
+   ],
+   "body": "\\bisDeleted\\W{0,3}:\\s*true\\b",
+   "action": "approve",
+   "why": "commits a Railway environment change that deletes a service, volume or bucket",
+   "source": "https://github.com/railwayapp/cli/blob/master/src/gql/schema.json"
+  },
+  {
+   "id": "vercel.project",
+   "service": "Vercel",
+   "host": "api.vercel.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v\\d+/projects/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Vercel project",
+   "source": "https://vercel.com/docs/rest-api/projects/delete-a-project"
+  },
+  {
+   "id": "vercel.deployment",
+   "service": "Vercel",
+   "host": "api.vercel.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v\\d+/deployments(/[^/]+)?$",
+   "action": "approve",
+   "why": "deletes a Vercel deployment",
+   "source": "https://vercel.com/docs/rest-api/deployments/delete-a-deployment"
+  },
+  {
+   "id": "vercel.domain-env",
+   "service": "Vercel",
+   "host": "api.vercel.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v\\d+/(domains/[^/]+|projects/[^/]+/env/[^/]+)$",
+   "action": "approve",
+   "why": "removes a Vercel domain or environment variable",
+   "source": "https://vercel.com/docs/rest-api/projects/remove-an-environment-variable"
+  },
+  {
+   "id": "render.delete",
+   "service": "Render",
+   "host": "api.render.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v1/(services|postgres|key-value|redis|disks|env-groups)/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Render service, database, key value store, disk or environment group",
+   "source": "https://api-docs.render.com/reference/delete-postgres"
+  },
+  {
+   "id": "render.suspend",
+   "service": "Render",
+   "host": "api.render.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/v1/(services|postgres)/[^/]+/suspend$",
+   "action": "approve",
+   "why": "suspends a Render service or database",
+   "source": "https://api-docs.render.com/reference/suspend-service"
+  },
+  {
+   "id": "fly.delete",
+   "service": "Fly.io",
+   "host": "api.machines.dev",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v1/apps/[^/]+(/(machines|volumes)/[^/]+)?$",
+   "action": "approve",
+   "why": "deletes a Fly app, machine or volume",
+   "source": "https://docs.fly.io/machines/api/volumes-resource"
+  },
+  {
+   "id": "heroku.app",
+   "service": "Heroku",
+   "host": "api.heroku.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/(apps/[^/]+(/addons/[^/]+)?|spaces/[^/]+|pipelines/[^/]+|teams/[^/]+)$",
+   "action": "approve",
+   "why": "deletes a Heroku app, add-on (such as its database), space, pipeline or team",
+   "source": "https://devcenter.heroku.com/articles/platform-api-reference"
+  },
+  {
+   "id": "netlify.site",
+   "service": "Netlify",
+   "host": "api.netlify.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/v1/(sites/[^/]+(/database(/.*)?)?|(sites/[^/]+/)?deploys/[^/]+|dns_zones/[^/]+)$",
+   "action": "approve",
+   "why": "deletes a Netlify site, deploy, database or DNS zone",
+   "source": "https://open-api.netlify.com"
+  },
+  {
+   "id": "netlify.env",
+   "service": "Netlify",
+   "host": "api.netlify.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/v1/accounts/[^/]+/env/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Netlify environment variable",
+   "source": "https://open-api.netlify.com"
+  },
+  {
+   "id": "supabase.project",
+   "service": "Supabase",
+   "host": "api.supabase.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v1/(projects/[^/]+(/branches)?|branches/[^/]+)$",
+   "action": "approve",
+   "why": "deletes a Supabase project or branch, or turns branching off",
+   "source": "https://supabase.com/docs/reference/api"
+  },
+  {
+   "id": "supabase.reset",
+   "service": "Supabase",
+   "host": "api.supabase.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/v1/(projects/[^/]+/(pause|database/backups/restore[\\w-]*)|branches/[^/]+/reset)$",
+   "action": "approve",
+   "why": "pauses a Supabase project, resets a branch or restores a backup over the database",
+   "source": "https://supabase.com/docs/reference/api"
+  },
+  {
+   "id": "supabase.sql",
+   "service": "Supabase",
+   "host": "api.supabase.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/v1/projects/[^/]+/database/query$",
+   "body": "\\b(drop\\s+(database|schema|table|warehouse)\\s|truncate\\s+(table\\s+)?[\\w.\\x22]+)|\\bdelete\\s+from\\s+[\\w.\\x22]+\\s*(;|\\\\?\\x22|$)",
+   "action": "approve",
+   "why": "runs SQL that drops or empties a table or deletes every row",
+   "source": "https://supabase.com/docs/reference/api"
+  },
+  {
+   "id": "supabase.storage",
+   "service": "Supabase",
+   "host": "*.supabase.co",
+   "method": [
+    "DELETE",
+    "POST"
+   ],
+   "path": "^/storage/v1/bucket/[^/]+(/empty)?$",
+   "action": "approve",
+   "why": "deletes or empties a Supabase storage bucket",
+   "source": "https://supabase.com/docs/reference/javascript/storage-deletebucket"
+  },
+  {
+   "id": "neon.delete",
+   "service": "Neon",
+   "host": "console.neon.tech",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/v2/projects/[^/]+(/branches/[^/]+(/databases/[^/]+)?|/snapshots/[^/]+)?$",
+   "action": "approve",
+   "why": "deletes a Neon project, branch, database or snapshot",
+   "source": "https://api-docs.neon.tech/reference"
+  },
+  {
+   "id": "neon.restore",
+   "service": "Neon",
+   "host": "console.neon.tech",
+   "method": [
+    "POST"
+   ],
+   "path": "^/api/v2/projects/[^/]+/(branches|snapshots)/[^/]+/restore$",
+   "action": "approve",
+   "why": "restores a Neon branch over its current data",
+   "source": "https://api-docs.neon.tech/reference"
+  },
+  {
+   "id": "planetscale.delete",
+   "service": "PlanetScale",
+   "host": "api.planetscale.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v1/organizations/[^/]+/databases/[^/]+(/branches/[^/]+(/backups/[^/]+)?)?$",
+   "action": "approve",
+   "why": "deletes a PlanetScale database, branch or backup",
+   "source": "https://planetscale.com/docs/api/reference/delete_database"
+  },
+  {
+   "id": "atlas.cluster",
+   "service": "MongoDB Atlas",
+   "host": "cloud.mongodb.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/atlas/v2/(groups/[^/]+(/(clusters|flexClusters)/[^/]+)?|orgs/[^/]+)$",
+   "action": "approve",
+   "why": "deletes an Atlas cluster, project or organization",
+   "source": "https://www.mongodb.com/docs/api/doc/atlas-admin-api-v2/"
+  },
+  {
+   "id": "atlas.backup",
+   "service": "MongoDB Atlas",
+   "host": "cloud.mongodb.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/atlas/v2/groups/[^/]+/clusters/[^/]+/backup/(snapshots(/shardedCluster)?/[^/]+|schedule)$",
+   "action": "approve",
+   "why": "deletes an Atlas backup snapshot or backup schedule",
+   "source": "https://www.mongodb.com/docs/api/doc/atlas-admin-api-v2/"
+  },
+  {
+   "id": "snowflake.sql",
+   "service": "Snowflake",
+   "host": "*.snowflakecomputing.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/api/v2/statements/?$",
+   "body": "\\b(drop\\s+(database|schema|table|warehouse)\\s|truncate\\s+(table\\s+)?[\\w.\\x22]+)|\\bdelete\\s+from\\s+[\\w.\\x22]+\\s*(;|\\\\?\\x22|$)",
+   "action": "approve",
+   "why": "runs SQL that drops or empties a table, schema, database or warehouse",
+   "source": "https://docs.snowflake.com/en/developer-guide/sql-api/reference"
+  },
+  {
+   "id": "aws.query-action",
+   "service": "AWS",
+   "host": "*.amazonaws.com",
+   "method": [
+    "POST",
+    "GET"
+   ],
+   "path": "^/?$",
+   "body": "(^|&)Action=(Terminate\\w*|Delete(DB\\w+|Volume|Snapshot|Vpc|Subnet|Stack|User|Role|AccessKey|LoadBalancer|SecurityGroup|KeyPair|Queue|Topic|CacheCluster|ReplicationGroup|HostedZone|NatGateway|LaunchTemplate)|DeregisterImage)(&|$)",
+   "action": "approve",
+   "why": "terminates instances or deletes databases, volumes, snapshots, stacks or IAM identities",
+   "source": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html"
+  },
+  {
+   "id": "aws.query-action-url",
+   "service": "AWS",
+   "host": "*.amazonaws.com",
+   "method": [
+    "POST",
+    "GET"
+   ],
+   "path": "^/?$",
+   "query": "(^|&)Action=(Terminate\\w*|Delete(DB\\w+|Volume|Snapshot|Vpc|Subnet|Stack|User|Role|AccessKey|LoadBalancer|SecurityGroup|KeyPair|Queue|Topic|CacheCluster|ReplicationGroup|HostedZone|NatGateway|LaunchTemplate)|DeregisterImage)(&|$)",
+   "action": "approve",
+   "why": "terminates instances or deletes databases, volumes, snapshots, stacks or IAM identities",
+   "source": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-requests.html"
+  },
+  {
+   "id": "aws.s3-bucket",
+   "service": "AWS",
+   "host": [
+    "*.s3.amazonaws.com",
+    "*.s3.*.amazonaws.com",
+    "*.s3-*.amazonaws.com"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/?$",
+   "action": "approve",
+   "why": "deletes an S3 bucket",
+   "source": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html"
+  },
+  {
+   "id": "aws.s3-bucket-path",
+   "service": "AWS",
+   "host": [
+    "s3.amazonaws.com",
+    "s3.*.amazonaws.com",
+    "s3-*.amazonaws.com"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/[^/]+/?$",
+   "action": "approve",
+   "why": "deletes an S3 bucket",
+   "source": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html"
+  },
+  {
+   "id": "aws.s3-objects",
+   "service": "AWS",
+   "host": [
+    "*.amazonaws.com"
+   ],
+   "method": [
+    "POST"
+   ],
+   "path": "^/[^/]*/?$",
+   "query": "(^|&)delete(=|&|$)",
+   "action": "approve",
+   "why": "deletes many S3 objects at once",
+   "source": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjects.html"
+  },
+  {
+   "id": "gcp.project",
+   "service": "Google Cloud",
+   "host": "cloudresourcemanager.googleapis.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v[13]/projects/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Google Cloud project",
+   "source": "https://cloud.google.com/resource-manager/reference/rest/v3/projects/delete"
+  },
+  {
+   "id": "gcp.sql",
+   "service": "Google Cloud",
+   "host": "sqladmin.googleapis.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^(/sql)?/v1(beta4)?/projects/[^/]+/instances/[^/]+(/(databases|backupRuns)/[^/]+)?$",
+   "action": "approve",
+   "why": "deletes a Cloud SQL instance, database or backup",
+   "source": "https://cloud.google.com/sql/docs/postgres/admin-api/rest/v1/instances/delete"
+  },
+  {
+   "id": "gcp.storage",
+   "service": "Google Cloud",
+   "host": [
+    "storage.googleapis.com",
+    "www.googleapis.com"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/storage/v1/b/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Cloud Storage bucket",
+   "source": "https://cloud.google.com/storage/docs/json_api/v1/buckets/delete"
+  },
+  {
+   "id": "gcp.compute",
+   "service": "Google Cloud",
+   "host": [
+    "compute.googleapis.com",
+    "www.googleapis.com"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/compute/(v1|beta)/projects/[^/]+/((zones|regions)/[^/]+/(instances|disks|instanceGroupManagers)|global/(snapshots|images|networks))/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Compute Engine instance, disk, snapshot, image or network",
+   "source": "https://cloud.google.com/compute/docs/reference/rest/v1/disks/delete"
+  },
+  {
+   "id": "gcp.gke",
+   "service": "Google Cloud",
+   "host": "container.googleapis.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v1(beta1)?/projects/[^/]+/(locations|zones)/[^/]+/clusters/[^/]+$",
+   "action": "approve",
+   "why": "deletes a GKE cluster",
+   "source": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters/delete"
+  },
+  {
+   "id": "gcp.firestore",
+   "service": "Google Cloud",
+   "host": "firestore.googleapis.com",
+   "method": [
+    "DELETE",
+    "POST"
+   ],
+   "path": "^/v1/projects/[^/]+/databases/[^/:]+(:bulkDeleteDocuments)?$",
+   "action": "approve",
+   "why": "deletes a Firestore database or bulk-deletes its documents",
+   "source": "https://cloud.google.com/firestore/docs/reference/rest/v1/projects.databases/delete"
+  },
+  {
+   "id": "gcp.bigquery",
+   "service": "Google Cloud",
+   "host": "bigquery.googleapis.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/bigquery/v2/projects/[^/]+/datasets/[^/]+(/tables/[^/]+)?$",
+   "action": "approve",
+   "why": "deletes a BigQuery dataset or table",
+   "source": "https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete"
+  },
+  {
+   "id": "gcp.bigquery-sql",
+   "service": "Google Cloud",
+   "host": "bigquery.googleapis.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/bigquery/v2/projects/[^/]+/(queries|jobs)$",
+   "body": "\\b(drop\\s+(database|schema|table|warehouse)\\s|truncate\\s+(table\\s+)?[\\w.\\x22]+)|\\bdelete\\s+from\\s+[\\w.\\x22]+\\s*(;|\\\\?\\x22|$)",
+   "action": "approve",
+   "why": "runs SQL that drops or empties a table or deletes every row",
+   "source": "https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query"
+  },
+  {
+   "id": "azure.resource-group",
+   "service": "Azure",
+   "host": "management.azure.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/subscriptions/[^/]+/resourcegroups/[^/]+$",
+   "action": "approve",
+   "why": "deletes an Azure resource group and everything in it",
+   "source": "https://learn.microsoft.com/en-us/rest/api/resources/resource-groups/delete"
+  },
+  {
+   "id": "azure.resource",
+   "service": "Azure",
+   "host": "management.azure.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/subscriptions/[^/]+/resourcegroups/[^/]+/providers/.+$",
+   "action": "approve",
+   "why": "deletes an Azure resource",
+   "source": "https://learn.microsoft.com/en-us/rest/api/resources/resources/delete"
+  },
+  {
+   "id": "cloudflare.zone",
+   "service": "Cloudflare",
+   "host": "api.cloudflare.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/client/v4/zones/[^/]+(/dns_records/[^/]+)?$",
+   "action": "approve",
+   "why": "deletes a Cloudflare zone or DNS record",
+   "source": "https://developers.cloudflare.com/api/resources/zones/methods/delete/"
+  },
+  {
+   "id": "cloudflare.storage",
+   "service": "Cloudflare",
+   "host": "api.cloudflare.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/client/v4/accounts/[^/]+/(workers/scripts|r2/buckets|d1/database|storage/kv/namespaces)/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Worker, R2 bucket, D1 database or KV namespace",
+   "source": "https://developers.cloudflare.com/api/resources/d1/subresources/database/methods/delete/"
+  },
+  {
+   "id": "cloudflare.d1-sql",
+   "service": "Cloudflare",
+   "host": "api.cloudflare.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/client/v4/accounts/[^/]+/d1/database/[^/]+/(query|raw)$",
+   "body": "\\b(drop\\s+(database|schema|table|warehouse)\\s|truncate\\s+(table\\s+)?[\\w.\\x22]+)|\\bdelete\\s+from\\s+[\\w.\\x22]+\\s*(;|\\\\?\\x22|$)",
+   "action": "approve",
+   "why": "runs SQL on D1 that drops or empties a table or deletes every row",
+   "source": "https://developers.cloudflare.com/api/resources/d1/subresources/database/methods/query/"
+  },
+  {
+   "id": "cloudflare.purge",
+   "service": "Cloudflare",
+   "host": "api.cloudflare.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/client/v4/zones/[^/]+/purge_cache$",
+   "body": "\\x22purge_everything\\x22\\s*:\\s*true",
+   "action": "approve",
+   "why": "purges a zone's whole cache",
+   "source": "https://developers.cloudflare.com/api/resources/cache/methods/purge/"
+  },
+  {
+   "id": "digitalocean.delete",
+   "service": "DigitalOcean",
+   "host": "api.digitalocean.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v2/((droplets|databases|volumes|apps|projects|snapshots|domains|images)(/[^/]+)?|kubernetes/clusters/[^/]+|databases/[^/]+/dbs/[^/]+|(droplets|kubernetes/clusters)/[^/]+/destroy_with_associated_resources(/.*)?)$",
+   "action": "approve",
+   "why": "deletes DigitalOcean droplets, databases, volumes, apps, clusters, snapshots or domains",
+   "source": "https://docs.digitalocean.com/reference/api/digitalocean/"
+  },
+  {
+   "id": "kubernetes.namespace",
+   "service": "Kubernetes",
+   "host": [
+    "*"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/v1/(namespaces/[^/]+|persistentvolumes(/[^/]+)?|namespaces/[^/]+/persistentvolumeclaims(/[^/]+)?)$",
+   "action": "approve",
+   "why": "deletes a Kubernetes namespace or persistent volume (and its data)",
+   "source": "https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/namespace-v1/"
+  },
+  {
+   "id": "kubernetes.workloads",
+   "service": "Kubernetes",
+   "host": [
+    "*"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/apis/apps/v1/namespaces/[^/]+/(deployments|statefulsets|daemonsets)(/[^/]+)?$|^/api/v1/namespaces/[^/]+/(pods|services|secrets|configmaps)$",
+   "action": "approve",
+   "why": "deletes a Kubernetes workload, or every pod, service, secret or config map in a namespace",
+   "source": "https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/stateful-set-v1/"
+  },
+  {
+   "id": "kubernetes.crd",
+   "service": "Kubernetes",
+   "host": [
+    "*"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/apis/apiextensions\\.k8s\\.io/v1/customresourcedefinitions(/[^/]+)?$",
+   "action": "approve",
+   "why": "deletes a custom resource definition and every resource of that kind",
+   "source": "https://kubernetes.io/docs/reference/kubernetes-api/extend-resources/custom-resource-definition-v1/"
+  },
+  {
+   "id": "terraform-cloud.destroy-run",
+   "service": "Terraform Cloud",
+   "host": "app.terraform.io",
+   "method": [
+    "POST"
+   ],
+   "path": "^/api/v2/runs$",
+   "body": "\\x22is-destroy\\x22\\s*:\\s*true",
+   "action": "approve",
+   "why": "starts a destroy run",
+   "source": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/run"
+  },
+  {
+   "id": "terraform-cloud.workspace",
+   "service": "Terraform Cloud",
+   "host": "app.terraform.io",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/v2/(workspaces/[^/]+|organizations/[^/]+(/workspaces/[^/]+)?)$",
+   "action": "approve",
+   "why": "deletes a Terraform Cloud workspace or organization",
+   "source": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/workspaces"
+  },
+  {
+   "id": "terraform-cloud.safe-delete",
+   "service": "Terraform Cloud",
+   "host": "app.terraform.io",
+   "method": [
+    "POST"
+   ],
+   "path": "^/api/v2/(workspaces/[^/]+|organizations/[^/]+/workspaces/[^/]+)/actions/safe-delete$",
+   "action": "approve",
+   "why": "deletes a Terraform Cloud workspace that manages no resources",
+   "source": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/workspaces"
+  },
+  {
+   "id": "github.repo",
+   "service": "GitHub",
+   "host": "api.github.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/(repos/[^/]+/[^/]+|orgs/[^/]+)$",
+   "action": "approve",
+   "why": "deletes a GitHub repository or organization",
+   "source": "https://docs.github.com/rest/repos/repos#delete-a-repository"
+  },
+  {
+   "id": "github.force-ref",
+   "service": "GitHub",
+   "host": "api.github.com",
+   "method": [
+    "PATCH"
+   ],
+   "path": "^/repos/[^/]+/[^/]+/git/refs/.+$",
+   "body": "\\x22force\\x22\\s*:\\s*true",
+   "action": "approve",
+   "why": "force-moves a branch or tag, which can drop commits",
+   "source": "https://docs.github.com/rest/git/refs#update-a-reference"
+  },
+  {
+   "id": "github.delete-ref",
+   "service": "GitHub",
+   "host": "api.github.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/repos/[^/]+/[^/]+/git/refs/.+$",
+   "action": "approve",
+   "why": "deletes a branch or tag",
+   "source": "https://docs.github.com/rest/git/refs#delete-a-reference"
+  },
+  {
+   "id": "github.protection",
+   "service": "GitHub",
+   "host": "api.github.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/repos/[^/]+/[^/]+/branches/.+/protection(/.*)?$|^/(repos/[^/]+/[^/]+|orgs/[^/]+)/rulesets/\\d+$",
+   "action": "approve",
+   "why": "removes branch protection or a ruleset",
+   "source": "https://docs.github.com/rest/branches/branch-protection"
+  },
+  {
+   "id": "github.secrets",
+   "service": "GitHub",
+   "host": "api.github.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/((repos/[^/]+/[^/]+|orgs/[^/]+)/(actions|dependabot|codespaces|agents)/secrets/[^/]+|repos/[^/]+/[^/]+/environments/[^/]+/secrets/[^/]+|user/codespaces/secrets/[^/]+)$",
+   "action": "approve",
+   "why": "deletes a GitHub secret",
+   "source": "https://docs.github.com/rest/actions/secrets"
+  },
+  {
+   "id": "github.keys",
+   "service": "GitHub",
+   "host": "api.github.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/(repos/[^/]+/[^/]+/keys|user/(gpg_)?keys)/\\d+$",
+   "action": "approve",
+   "why": "deletes a deploy key or SSH key",
+   "source": "https://docs.github.com/rest/deploy-keys"
+  },
+  {
+   "id": "github.members",
+   "service": "GitHub",
+   "host": "api.github.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/(orgs/[^/]+/(members|memberships|outside_collaborators)/[^/]+|orgs/[^/]+/teams/[^/]+/memberships/[^/]+|repos/[^/]+/[^/]+/collaborators/[^/]+)$",
+   "action": "approve",
+   "why": "removes a person from an organization, team or repository",
+   "source": "https://docs.github.com/rest/orgs/members"
+  },
+  {
+   "id": "github.transfer",
+   "service": "GitHub",
+   "host": "api.github.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/repos/[^/]+/[^/]+/transfer$",
+   "action": "approve",
+   "why": "transfers a repository to another owner",
+   "source": "https://docs.github.com/rest/repos/repos#transfer-a-repository"
+  },
+  {
+   "id": "github.visibility",
+   "service": "GitHub",
+   "host": "api.github.com",
+   "method": [
+    "PATCH"
+   ],
+   "path": "^/repos/[^/]+/[^/]+$",
+   "body": "\\x22visibility\\x22\\s*:\\s*\\x22public\\x22|\\x22private\\x22\\s*:\\s*false",
+   "action": "approve",
+   "why": "makes a repository public",
+   "source": "https://docs.github.com/rest/repos/repos#update-a-repository"
+  },
+  {
+   "id": "github.environment",
+   "service": "GitHub",
+   "host": "api.github.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/repos/[^/]+/[^/]+/environments/[^/]+$",
+   "action": "approve",
+   "why": "deletes a deployment environment and its secrets",
+   "source": "https://docs.github.com/rest/deployments/environments"
+  },
+  {
+   "id": "github.graphql",
+   "service": "GitHub",
+   "host": "api.github.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/graphql$",
+   "graphql": [
+    "deleteRef",
+    "deleteBranchProtectionRule",
+    "deleteRepositoryRuleset",
+    "deleteEnvironment",
+    "archiveRepository"
+   ],
+   "action": "approve",
+   "why": "deletes a branch, branch protection, ruleset or environment, or archives a repository",
+   "source": "https://docs.github.com/graphql/reference/mutations"
+  },
+  {
+   "id": "github.graphql-force",
+   "service": "GitHub",
+   "host": "api.github.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/graphql$",
+   "graphql": [
+    "updateRef",
+    "updateRefs"
+   ],
+   "body": "\\bforce\\W{0,3}:\\s*true\\b",
+   "action": "approve",
+   "why": "force-moves a branch or tag, which can drop commits",
+   "source": "https://docs.github.com/graphql/reference/mutations"
+  },
+  {
+   "id": "gitlab.project",
+   "service": "GitLab",
+   "host": "gitlab.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/v4/(projects|groups)/(?!.*/(members|variables|repository|protected_branches|hooks|issues|merge_requests|pipelines|jobs|deploy_keys|labels|milestones|environments|badges|share|fork|push_rule|access_requests|registry|packages|releases|snippets|wikis|boards|runners|integrations|services|deployments|uploads|avatar|pages|triggers|clusters)(/|$))[^/]+(/[^/]+)*$",
+   "action": "approve",
+   "why": "deletes a GitLab project or group",
+   "source": "https://docs.gitlab.com/api/projects/"
+  },
+  {
+   "id": "gitlab.branches",
+   "service": "GitLab",
+   "host": "gitlab.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/v4/projects/.+/(protected_branches/[^/]+|repository/(branches/.+|merged_branches))$",
+   "action": "approve",
+   "why": "deletes a branch or removes branch protection",
+   "source": "https://docs.gitlab.com/api/protected_branches/"
+  },
+  {
+   "id": "gitlab.variables",
+   "service": "GitLab",
+   "host": "gitlab.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/v4/(projects|groups)/.+/variables/[^/]+$",
+   "action": "approve",
+   "why": "deletes a CI/CD variable",
+   "source": "https://docs.gitlab.com/api/project_level_variables/"
+  },
+  {
+   "id": "gitlab.members",
+   "service": "GitLab",
+   "host": "gitlab.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/v4/((projects|groups)/.+/members/\\d+|users/\\d+)$",
+   "action": "approve",
+   "why": "removes a member, or deletes a user",
+   "source": "https://docs.gitlab.com/api/members/"
+  },
+  {
+   "id": "gitlab.visibility",
+   "service": "GitLab",
+   "host": "gitlab.com",
+   "method": [
+    "PUT"
+   ],
+   "path": "^/api/v4/projects/[^/]+(/[^/]+)*$",
+   "body": "visibility\\x22?\\s*[:=]\\s*\\x22?public\\b",
+   "action": "approve",
+   "why": "makes a project public",
+   "source": "https://docs.gitlab.com/api/projects/#edit-a-project"
+  },
+  {
+   "id": "stripe.refund",
+   "service": "Stripe",
+   "host": "api.stripe.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/v1/(refunds|charges/[^/]+/refunds?)$",
+   "action": "approve",
+   "why": "refunds a payment",
+   "source": "https://docs.stripe.com/api/refunds/create"
+  },
+  {
+   "id": "stripe.payout",
+   "service": "Stripe",
+   "host": "api.stripe.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/v1/(payouts|transfers)$",
+   "action": "approve",
+   "why": "sends a payout or a transfer",
+   "source": "https://docs.stripe.com/api/payouts/create"
+  },
+  {
+   "id": "stripe.delete",
+   "service": "Stripe",
+   "host": "api.stripe.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v1/(customers|products|accounts|coupons|webhook_endpoints)/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Stripe customer, product, connected account, coupon or webhook",
+   "source": "https://docs.stripe.com/api/customers/delete"
+  },
+  {
+   "id": "stripe.cancel",
+   "service": "Stripe",
+   "host": "api.stripe.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v1/subscriptions/[^/]+$",
+   "action": "approve",
+   "why": "cancels a subscription",
+   "source": "https://docs.stripe.com/api/subscriptions/cancel"
+  },
+  {
+   "id": "stripe.void",
+   "service": "Stripe",
+   "host": "api.stripe.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/v1/(invoices/[^/]+/void|credit_notes)$",
+   "action": "approve",
+   "why": "voids an invoice or issues a credit note",
+   "source": "https://docs.stripe.com/api/invoices/void"
+  },
+  {
+   "id": "shopify.delete",
+   "service": "Shopify",
+   "host": "*.myshopify.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/admin/api/[^/]+/graphql\\.json$",
+   "graphql": [
+    "productDelete",
+    "customerDelete",
+    "orderDelete",
+    "collectionDelete",
+    "themeDelete"
+   ],
+   "action": "approve",
+   "why": "deletes a product, customer, order, collection or theme",
+   "source": "https://shopify.dev/docs/api/admin-graphql/latest/mutations/orderDelete"
+  },
+  {
+   "id": "shopify.refund",
+   "service": "Shopify",
+   "host": "*.myshopify.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/admin/api/[^/]+/graphql\\.json$",
+   "graphql": [
+    "refundCreate",
+    "orderCancel"
+   ],
+   "action": "approve",
+   "why": "refunds or cancels an order",
+   "source": "https://shopify.dev/docs/api/admin-graphql/latest/mutations/refundCreate"
+  },
+  {
+   "id": "shopify.bulk",
+   "service": "Shopify",
+   "host": "*.myshopify.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/admin/api/[^/]+/graphql\\.json$",
+   "graphql": [
+    "bulkOperationRunMutation"
+   ],
+   "body": "\\b(productDelete|customerDelete|orderDelete|collectionDelete|refundCreate|orderCancel)\\b",
+   "action": "approve",
+   "why": "runs a bulk operation that deletes, refunds or cancels",
+   "source": "https://shopify.dev/docs/api/admin-graphql/latest/mutations/bulkOperationRunMutation"
+  },
+  {
+   "id": "shopify.rest",
+   "service": "Shopify",
+   "host": "*.myshopify.com",
+   "method": [
+    "DELETE",
+    "POST"
+   ],
+   "path": "^/admin/(api/[^/]+/)?((products|customers|orders|custom_collections|smart_collections|themes)/\\d+|orders/\\d+/(refunds|cancel))\\.json$",
+   "action": "approve",
+   "why": "deletes a product, customer, order, collection or theme, or refunds or cancels an order",
+   "source": "https://shopify.dev/docs/api/admin-rest"
+  },
+  {
+   "id": "twilio.delete",
+   "service": "Twilio",
+   "host": "api.twilio.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/2010-04-01/Accounts/[^/]+/(IncomingPhoneNumbers|Keys|Recordings)/[^/]+\\.json$",
+   "action": "approve",
+   "why": "releases a phone number, or deletes an API key or recording",
+   "source": "https://www.twilio.com/docs/usage/api"
+  },
+  {
+   "id": "twilio.close",
+   "service": "Twilio",
+   "host": "api.twilio.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/2010-04-01/Accounts/[^/]+\\.json$",
+   "body": "(^|&)Status=(closed|suspended)(&|$)",
+   "action": "approve",
+   "why": "closes a Twilio account",
+   "source": "https://www.twilio.com/docs/iam/api/account#update-an-account-resource"
+  },
+  {
+   "id": "sendgrid.contacts",
+   "service": "SendGrid",
+   "host": "api.sendgrid.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v3/marketing/contacts$",
+   "query": "(^|&)delete_all_contacts=true",
+   "action": "approve",
+   "why": "deletes every contact",
+   "source": "https://www.twilio.com/docs/sendgrid/api-reference/contacts/delete-contacts"
+  },
+  {
+   "id": "sendgrid.delete",
+   "service": "SendGrid",
+   "host": "api.sendgrid.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/v3/(api_keys/[^/]+|marketing/lists/[^/]+|asm/suppressions/global/[^/]+)$",
+   "action": "approve",
+   "why": "deletes an API key or contact list, or lets mail reach someone who unsubscribed",
+   "source": "https://www.twilio.com/docs/sendgrid/api-reference"
+  },
+  {
+   "id": "sendgrid.send",
+   "service": "SendGrid",
+   "host": "api.sendgrid.com",
+   "method": [
+    "PUT"
+   ],
+   "path": "^/v3/marketing/singlesends/[^/]+/schedule$",
+   "action": "approve",
+   "why": "schedules a marketing email to a whole list",
+   "source": "https://www.twilio.com/docs/sendgrid/api-reference/single-sends/schedule-single-send"
+  },
+  {
+   "id": "slack.channel",
+   "service": "Slack",
+   "host": "slack.com",
+   "method": [
+    "*"
+   ],
+   "path": "^/api/(admin\\.conversations\\.(delete|archive)|conversations\\.archive)$",
+   "action": "approve",
+   "why": "archives or deletes a Slack channel",
+   "source": "https://docs.slack.dev/reference/methods/admin.conversations.delete"
+  },
+  {
+   "id": "slack.user",
+   "service": "Slack",
+   "host": [
+    "slack.com",
+    "api.slack.com"
+   ],
+   "method": [
+    "*"
+   ],
+   "path": "^/api/(admin\\.users\\.remove|conversations\\.kick)$|^/scim/v[12]/Users/[^/]+$",
+   "action": "approve",
+   "why": "removes a person from a channel or the workspace",
+   "source": "https://docs.slack.dev/reference/methods/admin.users.remove"
+  },
+  {
+   "id": "slack.files",
+   "service": "Slack",
+   "host": "slack.com",
+   "method": [
+    "*"
+   ],
+   "path": "^/api/files\\.delete$",
+   "action": "approve",
+   "why": "deletes a Slack file",
+   "source": "https://docs.slack.dev/reference/methods/files.delete"
+  },
+  {
+   "id": "linear.delete",
+   "service": "Linear",
+   "host": "api.linear.app",
+   "method": [
+    "POST"
+   ],
+   "path": "^/graphql$",
+   "graphql": [
+    "issueDelete",
+    "projectDelete",
+    "teamDelete",
+    "documentDelete",
+    "initiativeDelete",
+    "fileUploadDangerouslyDelete"
+   ],
+   "action": "approve",
+   "why": "deletes a Linear issue, project, team, document, initiative or file",
+   "source": "https://github.com/linear/linear/blob/master/packages/sdk/src/schema.graphql"
+  },
+  {
+   "id": "linear.org",
+   "service": "Linear",
+   "host": "api.linear.app",
+   "method": [
+    "POST"
+   ],
+   "path": "^/graphql$",
+   "graphql": [
+    "organizationDelete",
+    "userSuspend",
+    "integrationDelete",
+    "webhookDelete"
+   ],
+   "action": "approve",
+   "why": "suspends a user, removes an integration or webhook, or deletes the organization",
+   "source": "https://github.com/linear/linear/blob/master/packages/sdk/src/schema.graphql"
+  },
+  {
+   "id": "jira.project",
+   "service": "Jira",
+   "host": "*.atlassian.net",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/rest/api/[23]/project/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Jira project",
+   "source": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/"
+  },
+  {
+   "id": "jira.project-async",
+   "service": "Jira",
+   "host": "*.atlassian.net",
+   "method": [
+    "POST"
+   ],
+   "path": "^/rest/api/[23]/project/[^/]+/delete$",
+   "action": "approve",
+   "why": "deletes a Jira project",
+   "source": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/"
+  },
+  {
+   "id": "jira.issue",
+   "service": "Jira",
+   "host": "*.atlassian.net",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/rest/api/[23]/issue/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Jira issue",
+   "source": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/"
+  },
+  {
+   "id": "jira.bulk-delete",
+   "service": "Jira",
+   "host": "*.atlassian.net",
+   "method": [
+    "POST"
+   ],
+   "path": "^/rest/api/3/bulk/issues/delete$",
+   "action": "approve",
+   "why": "deletes up to 1,000 Jira issues at once",
+   "source": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-bulk-operations/"
+  },
+  {
+   "id": "jira.user",
+   "service": "Jira",
+   "host": "*.atlassian.net",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/rest/api/[23]/user$",
+   "action": "approve",
+   "why": "deletes a Jira user",
+   "source": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-users/"
+  },
+  {
+   "id": "confluence.space",
+   "service": "Confluence",
+   "host": "*.atlassian.net",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/wiki/rest/api/space/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Confluence space",
+   "source": "https://developer.atlassian.com/cloud/confluence/rest/v1/api-group-space/"
+  },
+  {
+   "id": "confluence.purge",
+   "service": "Confluence",
+   "host": "*.atlassian.net",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/wiki/api/v2/(pages|blogposts)/[^/]+$",
+   "query": "(^|&)purge=true",
+   "action": "approve",
+   "why": "deletes a Confluence page for good",
+   "source": "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/"
+  },
+  {
+   "id": "notion.trash",
+   "service": "Notion",
+   "host": "api.notion.com",
+   "method": [
+    "PATCH"
+   ],
+   "path": "^/v1/(pages|databases|data_sources)/[^/]+$",
+   "body": "\\x22(in_trash|archived)\\x22\\s*:\\s*true",
+   "action": "approve",
+   "why": "moves a Notion page or database to the trash",
+   "source": "https://developers.notion.com/reference/patch-page"
+  },
+  {
+   "id": "google.drive-delete",
+   "service": "Google Workspace",
+   "host": [
+    "www.googleapis.com",
+    "content.googleapis.com"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/drive/v[23]/files/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Drive file for good, skipping the trash, or empties the trash",
+   "source": "https://developers.google.com/workspace/drive/api/reference/rest/v3/files/delete"
+  },
+  {
+   "id": "google.drive-public",
+   "service": "Google Workspace",
+   "host": [
+    "www.googleapis.com",
+    "content.googleapis.com"
+   ],
+   "method": [
+    "POST"
+   ],
+   "path": "^/drive/v3/files/[^/]+/permissions$",
+   "body": "\\x22type\\x22\\s*:\\s*\\x22anyone\\x22",
+   "action": "approve",
+   "why": "shares a Drive file with anyone who has the link",
+   "source": "https://developers.google.com/workspace/drive/api/reference/rest/v3/permissions/create"
+  },
+  {
+   "id": "google.gmail-delete",
+   "service": "Google Workspace",
+   "host": "gmail.googleapis.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/gmail/v1/users/[^/]+/(messages|threads)/[^/]+$",
+   "action": "approve",
+   "why": "deletes email for good, skipping the trash",
+   "source": "https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.messages/delete"
+  },
+  {
+   "id": "google.gmail-batch-delete",
+   "service": "Google Workspace",
+   "host": "gmail.googleapis.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/gmail/v1/users/[^/]+/messages/batchDelete$",
+   "action": "approve",
+   "why": "deletes many emails for good, skipping the trash",
+   "source": "https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.messages/batchDelete"
+  },
+  {
+   "id": "google.gmail-forward",
+   "service": "Google Workspace",
+   "host": "gmail.googleapis.com",
+   "method": [
+    "POST",
+    "PUT"
+   ],
+   "path": "^/gmail/v1/users/[^/]+/settings/(forwardingAddresses|autoForwarding)$",
+   "action": "approve",
+   "why": "forwards a mailbox to another address",
+   "source": "https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.settings/updateAutoForwarding"
+  },
+  {
+   "id": "google.gmail-filter",
+   "service": "Google Workspace",
+   "host": "gmail.googleapis.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/gmail/v1/users/[^/]+/settings/filters$",
+   "body": "\\x22forward\\x22\\s*:",
+   "action": "approve",
+   "why": "adds a Gmail filter that forwards mail",
+   "source": "https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.settings.filters/create"
+  },
+  {
+   "id": "google.admin",
+   "service": "Google Workspace",
+   "host": "admin.googleapis.com",
+   "method": [
+    "DELETE",
+    "POST"
+   ],
+   "path": "^/admin/directory/v1/((users|groups)/[^/]+|users/[^/]+/makeAdmin)$",
+   "action": "approve",
+   "why": "deletes a Workspace user or group, or makes someone an admin",
+   "source": "https://developers.google.com/workspace/admin/directory/reference/rest/v1/users/delete"
+  },
+  {
+   "id": "salesforce.delete",
+   "service": "Salesforce",
+   "host": [
+    "*.my.salesforce.com",
+    "*.salesforce.com"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/services/data/v[\\d.]+/(sobjects/[^/]+/[^/]+|composite/sobjects)$",
+   "action": "approve",
+   "why": "deletes Salesforce records",
+   "source": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_delete_record.htm"
+  },
+  {
+   "id": "salesforce.bulk-delete",
+   "service": "Salesforce",
+   "host": [
+    "*.my.salesforce.com",
+    "*.salesforce.com"
+   ],
+   "method": [
+    "POST"
+   ],
+   "path": "^/services/data/v[\\d.]+/jobs/ingest/?$",
+   "body": "\\x22operation\\x22\\s*:\\s*\\x22(delete|hardDelete)\\x22",
+   "action": "approve",
+   "why": "starts a bulk job that deletes records",
+   "source": "https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/create_job.htm"
+  },
+  {
+   "id": "hubspot.delete",
+   "service": "HubSpot",
+   "host": "api.hubapi.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/crm/v3/objects/[^/]+/[^/]+$",
+   "action": "approve",
+   "why": "deletes a CRM record",
+   "source": "https://developers.hubspot.com/docs/api/crm/understanding-the-crm"
+  },
+  {
+   "id": "hubspot.bulk-delete",
+   "service": "HubSpot",
+   "host": "api.hubapi.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/crm/v3/objects/[^/]+/(batch/archive|gdpr-delete)$",
+   "action": "approve",
+   "why": "deletes CRM records in bulk, or erases a contact for good",
+   "source": "https://developers.hubspot.com/docs/api/crm/understanding-the-crm"
+  },
+  {
+   "id": "datadog.delete",
+   "service": "Datadog",
+   "host": [
+    "api.datadoghq.com",
+    "api.*.datadoghq.com",
+    "api.datadoghq.eu",
+    "api.ddog-gov.com"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/(v1/(monitor|dashboard)/[^/]+|v2/(api_keys|application_keys)/[^/]+)$",
+   "action": "approve",
+   "why": "deletes a monitor, dashboard or key",
+   "source": "https://docs.datadoghq.com/api/latest/monitors/"
+  },
+  {
+   "id": "datadog.mute",
+   "service": "Datadog",
+   "host": [
+    "api.datadoghq.com",
+    "api.*.datadoghq.com",
+    "api.datadoghq.eu",
+    "api.ddog-gov.com"
+   ],
+   "method": [
+    "POST"
+   ],
+   "path": "^/api/(v2/downtime|v1/monitor/[^/]+/mute)$",
+   "action": "approve",
+   "why": "mutes alerts",
+   "source": "https://docs.datadoghq.com/api/latest/downtimes/"
+  },
+  {
+   "id": "pagerduty.delete",
+   "service": "PagerDuty",
+   "host": "api.pagerduty.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/(services|escalation_policies|schedules|users)/[^/]+$",
+   "action": "approve",
+   "why": "deletes a service, escalation policy, schedule or user",
+   "source": "https://developer.pagerduty.com/api-reference/"
+  },
+  {
+   "id": "pagerduty.bulk-resolve",
+   "service": "PagerDuty",
+   "host": "api.pagerduty.com",
+   "method": [
+    "PUT"
+   ],
+   "path": "^/incidents$",
+   "action": "approve",
+   "why": "changes many incidents at once, such as resolving them all",
+   "source": "https://developer.pagerduty.com/api-reference/"
+  },
+  {
+   "id": "pagerduty.maintenance",
+   "service": "PagerDuty",
+   "host": "api.pagerduty.com",
+   "method": [
+    "POST"
+   ],
+   "path": "^/maintenance_windows$",
+   "action": "approve",
+   "why": "starts a maintenance window, which silences alerts",
+   "source": "https://developer.pagerduty.com/api-reference/"
+  },
+  {
+   "id": "pinecone.index",
+   "service": "Pinecone",
+   "host": "api.pinecone.io",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/(indexes|collections)/[^/]+$",
+   "action": "approve",
+   "why": "deletes a Pinecone index or collection",
+   "source": "https://docs.pinecone.io/reference/api/latest/control-plane/delete_index"
+  },
+  {
+   "id": "pinecone.vectors",
+   "service": "Pinecone",
+   "host": "*.pinecone.io",
+   "method": [
+    "POST"
+   ],
+   "path": "^/vectors/delete$",
+   "body": "\\x22deleteAll\\x22\\s*:\\s*true",
+   "action": "approve",
+   "why": "deletes every vector in a namespace",
+   "source": "https://docs.pinecone.io/reference/api/latest/data-plane/delete"
+  },
+  {
+   "id": "algolia.index",
+   "service": "Algolia",
+   "host": [
+    "*.algolia.net",
+    "*.algolianet.com"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/1/indexes/[^/]+$",
+   "action": "approve",
+   "why": "deletes an Algolia index",
+   "source": "https://www.algolia.com/doc/rest-api/search/"
+  },
+  {
+   "id": "algolia.clear",
+   "service": "Algolia",
+   "host": [
+    "*.algolia.net",
+    "*.algolianet.com"
+   ],
+   "method": [
+    "POST"
+   ],
+   "path": "^/1/indexes/[^/]+/(clear|deleteByQuery)$",
+   "action": "approve",
+   "why": "empties an Algolia index, or deletes records by query",
+   "source": "https://www.algolia.com/doc/rest-api/search/"
+  },
+  {
+   "id": "auth0.delete",
+   "service": "Auth0",
+   "host": "*.auth0.com",
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/v2/(users|clients|connections)/[^/]+$",
+   "action": "approve",
+   "why": "deletes an Auth0 user, application or connection",
+   "source": "https://auth0.com/docs/api/management/v2"
+  },
+  {
+   "id": "okta.delete",
+   "service": "Okta",
+   "host": [
+    "*.okta.com",
+    "*.oktapreview.com",
+    "*.okta-emea.com"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/v1/(users|groups|apps)/[^/]+$",
+   "action": "approve",
+   "why": "deactivates or deletes an Okta user, or deletes a group or app",
+   "source": "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/"
+  },
+  {
+   "id": "okta.deactivate",
+   "service": "Okta",
+   "host": [
+    "*.okta.com",
+    "*.oktapreview.com",
+    "*.okta-emea.com"
+   ],
+   "method": [
+    "POST"
+   ],
+   "path": "^/api/v1/users/[^/]+/lifecycle/deactivate$",
+   "action": "approve",
+   "why": "deactivates an Okta user",
+   "source": "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserLifecycle/"
+  },
+  {
+   "id": "sentry.delete",
+   "service": "Sentry",
+   "host": [
+    "sentry.io",
+    "*.sentry.io"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/api/0/(projects/[^/]+/[^/]+|organizations/[^/]+)/?$",
+   "action": "approve",
+   "why": "deletes a Sentry project or organization",
+   "source": "https://docs.sentry.io/api/projects/delete-a-project/"
+  },
+  {
+   "id": "elasticsearch.index",
+   "service": "Elasticsearch",
+   "host": [
+    "*.elastic-cloud.com",
+    "*.cloud.es.io",
+    "*.es.amazonaws.com",
+    "*.aws.found.io"
+   ],
+   "method": [
+    "DELETE"
+   ],
+   "path": "^/((?!_)[^/]+|_all)/?$",
+   "action": "approve",
+   "why": "deletes an index",
+   "source": "https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-delete"
+  },
+  {
+   "id": "elasticsearch.bulk",
+   "service": "Elasticsearch",
+   "host": [
+    "*"
+   ],
+   "method": [
+    "DELETE",
+    "POST"
+   ],
+   "path": "^/[^/]+/_delete_by_query$|^/_snapshot/[^/]+/[^/]+$|^/_data_stream/[^/]+$",
+   "action": "approve",
+   "why": "deletes documents by query, a snapshot or a data stream",
+   "source": "https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-delete-by-query"
   }
  ]
 }

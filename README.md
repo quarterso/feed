@@ -1,10 +1,11 @@
 # Quarter feed
 
-Prices and tool rules that Quarter signs and every Quarter gateway can pull once a day.
+Prices and rules that Quarter signs and every Quarter gateway can pull once a day. The rules ask a person before an agent runs a destructive command or makes a destructive API call: 35 for shell commands and 121 for the HTTP APIs of 40 services. `COVERAGE.md` lists them.
 
 - `body.json` is the feed as written. `feed.json` is the same body, signed. Gateways read only `feed.json`.
 - A feed rule can only ask a person before a tool call runs. It never refuses one, and the customer's own rules and prices always come first.
 - `FORMAT.md` is the open format, for anyone to implement.
+- `cases.json` holds, for every rule, one call it must catch and one close call it must let through. `python3 -m unittest` checks them.
 - A gateway takes a feed only if it verifies against the key it was given and is newer than the one it holds.
 
 ## Quarter guard, for Claude Code
@@ -29,6 +30,6 @@ Verify key: not published yet.
 
 ## To publish a new version
 
-1. Edit `body.json` and raise `version` by one, and copy the rules into `BUILT_IN` in `guard.py` (`test_guard.py` checks they match).
+1. Edit `body.json` and raise `version` by one, and copy the tool rules into `BUILT_IN` in `guard.py` (`test_guard.py` checks they match). Give each new rule an `id` and a `source`, and its two calls in `cases.json`. Update `COVERAGE.md`.
 2. Run `./sign.sh`. It asks for the feed signing key and never stores it.
 3. Commit `body.json` and `feed.json` together, and push.
