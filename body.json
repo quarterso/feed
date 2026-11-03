@@ -3,12 +3,47 @@
  "issued": "2026-11-02",
  "prices": {},
  "rules": [
-  {"tool": "*", "action": "approve", "command": "\\brm\\s+-\\w*(rf|fr)\\w*\\s+(/\\*?|~/?|\\$HOME/?|\\*|\\.\\.?/?)(\\s|;|&|$)"},
-  {"tool": "*", "action": "approve", "command": "\\bmkfs(\\.\\w+)?\\s|\\bdd\\s[^;&|]*\\bof=/dev/"},
-  {"tool": "*", "action": "approve", "command": "\\b(drop\\s+(database|schema|table)|truncate\\s+table)\\s|\\bdelete\\s+from\\s+[\\w.]+\\s*(;|$)"},
-  {"tool": "*", "action": "approve", "command": "\\bgit\\s+push\\b[^;&|]*(--force\\b|\\s-f\\b|--mirror\\b|--delete\\b)|\\bgit\\s+reset\\s+--hard\\b|\\bgit\\s+clean\\s+-\\w*f"},
-  {"tool": "*", "action": "approve", "command": "\\b(terraform|pulumi|cdk)\\s+destroy\\b|\\bkubectl\\s+delete\\b|\\bhelm\\s+(uninstall|delete)\\b|\\baws\\s+\\S+\\s+(delete|terminate)-|\\baws\\s+s3\\s+(rm|rb)\\b|\\b(gcloud|az)\\s[^;&|]*\\sdelete\\b"},
-  {"tool": "*", "action": "approve", "command": "\\b(npm|pnpm|yarn)\\s+publish\\b|\\btwine\\s+upload\\b|\\bcargo\\s+publish\\b|\\bdocker\\s+push\\b|\\bgh\\s+(release\\s+create|repo\\s+delete)\\b"},
-  {"tool": "*", "action": "approve", "command": "\\b(curl|wget)\\s[^|;&]*\\|\\s*(sudo\\s+)?(ba|z)?sh\\b"}
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\brm\\s+-\\w*(rf|fr)\\w*\\s+(/\\*?|~/?|\\$HOME/?|\\*|\\.\\.?/?)(\\s|;|&|$)",
+   "why": "deletes a root, home or working directory"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bmkfs(\\.\\w+)?\\s|\\bdd\\s[^;&|]*\\bof=/dev/",
+   "why": "formats or overwrites a disk"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\b(drop\\s+(database|schema|table)|truncate\\s+table)\\s|\\bdelete\\s+from\\s+[\\w.]+\\s*(;|$)",
+   "why": "drops or empties a database table, or deletes every row"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\bgit\\s+push\\b[^;&|]*(--force\\b|\\s-f\\b|--mirror\\b|--delete\\b)|\\bgit\\s+reset\\s+--hard\\b|\\bgit\\s+clean\\s+-\\w*f",
+   "why": "rewrites or deletes git history, or throws away uncommitted work"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\b(terraform|pulumi|cdk)\\s+destroy\\b|\\bkubectl\\s+delete\\b|\\bhelm\\s+(uninstall|delete)\\b|\\baws\\s+\\S+\\s+(delete|terminate)-|\\baws\\s+s3\\s+(rm|rb)\\b|\\b(gcloud|az)\\s[^;&|]*\\sdelete\\b",
+   "why": "tears down cloud resources"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\b(npm|pnpm|yarn)\\s+publish\\b|\\btwine\\s+upload\\b|\\bcargo\\s+publish\\b|\\bdocker\\s+push\\b|\\bgh\\s+(release\\s+create|repo\\s+delete)\\b",
+   "why": "publishes a package, image or release, or deletes a repository"
+  },
+  {
+   "tool": "*",
+   "action": "approve",
+   "command": "\\b(curl|wget)\\s[^|;&]*\\|\\s*(sudo\\s+)?(ba|z)?sh\\b",
+   "why": "runs a downloaded script straight in a shell"
+  }
  ]
 }
