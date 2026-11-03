@@ -60,4 +60,4 @@ A reader that cannot read the body of a call that a `graphql` rule would otherwi
 2. The reader's own settings come first. Feed prices fill in models the reader has not priced; feed rules come after the reader's own rules, so a reader's own rule that allows a call stands.
 3. Keep the last good feed, so a reader that starts offline still has it.
 4. Record which feed version was in force, so a later review can show it.
-5. Ignore body fields you do not know. Skip an HTTP rule with a field you do not know, since that field may narrow what it matches. A reader that sees only tool calls, such as `guard.py`, ignores `http`.
+5. Ignore body fields you do not know. Skip an HTTP rule with a field you do not know, since that field may narrow what it matches. A reader that sees only tool calls ignores `http`.
