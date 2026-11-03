@@ -4,7 +4,14 @@ Feed version 2, issued 2026-11-03. 121 rules for HTTP APIs across 40 services, a
 
 Each rule asks a person before the call runs. No rule refuses a call, and your own rules always come first. Each rule names the public API documentation it is drawn from (`source` in `body.json`), and has a test with one call it must catch and one close call it must let through (`cases.json`).
 
-HTTP rules apply in a Quarter gateway, to agents that reach APIs through it. Shell rules apply there too, and in `guard.py` for Claude Code.
+HTTP rules apply in a Quarter gateway, to agents that reach APIs through it. Shell rules apply there too, and in `guard.py` for Claude Code and Cursor.
+
+`guard.py` also applies the HTTP rules to API calls an agent makes itself:
+
+- From the shell, with `curl`, `wget`, HTTPie (`http`, `https`, `xh`) or `gh api`. It reads the method, URL, query and body the way each tool sends them, including GraphQL queries sent with `gh api graphql`.
+- Through an MCP tool whose input names a full URL and an HTTP method, such as a generic fetch tool.
+
+It does not see calls made from inside a program, such as a Python script or a Node app. It does not see a URL or body held in a shell variable. When a call goes to a GraphQL endpoint that a rule covers and the guard cannot read the query, it asks, as `FORMAT.md` says.
 
 ## HTTP APIs
 

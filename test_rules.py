@@ -1,39 +1,18 @@
 """Every rule in body.json against its two cases in cases.json: a call it must match, and a
-near miss it must not. HTTP rules are checked with the reference reading of FORMAT.md below."""
+near miss it must not. HTTP rules are checked with the reference reading of FORMAT.md,
+guard.http_matches, which guard.py also uses on the calls it reads."""
 
 import json
 import re
 import unittest
-from fnmatch import fnmatchcase
 from pathlib import Path
 
 import guard
+from guard import HTTP_FIELDS, globs, http_matches
 
 HERE = Path(__file__).parent
 BODY = json.loads((HERE / "body.json").read_text())
 CASES = json.loads((HERE / "cases.json").read_text())
-HTTP_FIELDS = {"id", "service", "host", "method", "path", "graphql", "body", "query", "action", "why", "source"}
-
-
-def globs(value) -> list[str]:
-    return [value] if isinstance(value, str) else value
-
-
-def http_matches(rule: dict, call: dict) -> bool:
-    """FORMAT.md, HTTP rule: every field the rule has must match the call."""
-    def glob(text, patterns):
-        return any(fnmatchcase(text.lower(), p.lower()) for p in globs(patterns))
-
-    def search(field, text):
-        return field not in rule or re.search(rule[field], text, re.IGNORECASE) is not None
-
-    fields = call.get("graphql") or []
-    return (glob(call["host"], rule["host"])
-            and ("*" in globs(rule["method"]) or call["method"] in globs(rule["method"]))
-            and search("path", call["path"])
-            and search("query", call.get("query", ""))
-            and search("body", call.get("body", ""))
-            and ("graphql" not in rule or any(glob(f, rule["graphql"]) for f in fields)))
 
 
 class Rulebook(unittest.TestCase):
