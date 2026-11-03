@@ -56,3 +56,9 @@ Verify key: `ed25519-pub:37115bdfec3099c6a0391470c618d5a12466d10a7148b97451ea87d
 1. Edit `body.json` and raise `version` by one, and copy the tool rules and the HTTP rules into `BUILT_IN` in `guard.py`, leaving out each HTTP rule's `service`, `source` and `action`. Copy the `ask` ratings into `BUILT_IN["mcp"]` with only `server`, `names`, `tool`, `rating`, `why` and `input` (`test_guard.py` checks they match). Give each new rule an `id` and a `source`, and it and each new `ask` rating its two calls in `cases.json`. Update `COVERAGE.md` and `RATINGS.md`.
 2. Run `./sign.sh`. On a Mac it keeps the key in the Keychain and makes it on the first run; elsewhere it asks for the key. It never prints or stores the key in a file.
 3. Commit `body.json` and `feed.json` together, and push.
+
+## Licence
+
+The code (`guard.py`, `sign.sh` and the tests) is under the MIT licence in `LICENSE`.
+
+The data (`body.json`, `feed.json`, `cases.json`, and the rules and ratings copied into `guard.py`) is under Creative Commons Attribution 4.0 in `LICENSE-DATA`. You may ship it in your own gateway or product, paid or free. Credit "Quarter feed, quarterfi.com" where you list your sources.
