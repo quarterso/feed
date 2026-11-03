@@ -46,7 +46,7 @@ QUARTER_FEED=https://quarterso.github.io/feed/feed.json
 QUARTER_FEED_KEY=ed25519-pub:<the key below>
 ```
 
-Verify key: not published yet.
+Verify key: `ed25519-pub:37115bdfec3099c6a0391470c618d5a12466d10a7148b97451ea87d624183b20`. guard.py has it built in.
 
 ## To publish a new version
 

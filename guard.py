@@ -23,7 +23,7 @@ from fnmatch import fnmatchcase
 from pathlib import Path
 
 FEED = os.environ.get("QUARTER_FEED", "https://quarterso.github.io/feed/feed.json")
-FEED_KEY = os.environ.get("QUARTER_FEED_KEY", "")  # ed25519-pub:..., once the feed is signed
+FEED_KEY = os.environ.get("QUARTER_FEED_KEY", "ed25519-pub:37115bdfec3099c6a0391470c618d5a12466d10a7148b97451ea87d624183b20")  # Quarter's public feed key
 CACHE = Path(os.environ.get("XDG_CACHE_HOME", Path.home() / ".cache")) / "quarter-guard" / "feed.json"
 DAY = 86_400
 

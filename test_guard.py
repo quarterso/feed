@@ -8,7 +8,10 @@ import urllib.parse
 from pathlib import Path
 from unittest import mock
 
-import guard
+import os
+
+os.environ["QUARTER_FEED_KEY"] = ""  # tests stay offline; the published key is checked below
+import guard  # noqa: E402
 
 HERE = Path(__file__).parent
 BODY = json.loads((HERE / "body.json").read_text())
@@ -357,6 +360,15 @@ class Hosts(unittest.TestCase):
         quiet = {**call, "tool_input": json.dumps({"url": "https://api.vercel.com/v9/projects/p", "method": "GET"})}
         self.assertEqual(run("--host", "cursor", stdin=json.dumps(quiet)).stdout, "")
         self.assertEqual(run("--host", "cursor", stdin=json.dumps({**call, "tool_input": "not json"})).stdout, "")
+
+
+class PublishedKey(unittest.TestCase):
+    def test_built_in_key_verifies_the_signed_feed(self):
+        source = (HERE / "guard.py").read_text()
+        key = source.split('os.environ.get("QUARTER_FEED_KEY", "', 1)[1].split('"', 1)[0]
+        self.assertEqual(key, (HERE / "verify-key.txt").read_text().strip())
+        signed = json.loads((HERE / "feed.json").read_text())
+        self.assertEqual(guard.verified(signed, key), BODY)
 
 
 if __name__ == "__main__":
