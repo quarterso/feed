@@ -1,5 +1,5 @@
 {
- "version": 2,
+ "version": 3,
  "issued": "2026-11-03",
  "prices": {},
  "rules": [
@@ -2048,6 +2048,3443 @@
    "action": "approve",
    "why": "deletes documents by query, a snapshot or a data stream",
    "source": "https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-delete-by-query"
+  }
+ ],
+ "mcp": [
+  {
+   "server": "filesystem",
+   "service": "MCP reference filesystem server",
+   "package": [
+    "@modelcontextprotocol/server-filesystem"
+   ],
+   "names": [
+    "filesystem",
+    "*filesystem*",
+    "fs"
+   ],
+   "source": "https://github.com/modelcontextprotocol/servers/blob/main/src/filesystem/README.md",
+   "tools": [
+    {
+     "tool": "write_file",
+     "rating": "watch",
+     "why": "creates or overwrites a file inside the allowed folders"
+    },
+    {
+     "tool": "edit_file",
+     "rating": "watch",
+     "why": "changes a file inside the allowed folders"
+    },
+    {
+     "tool": "move_file",
+     "rating": "watch",
+     "why": "moves or renames a file or folder"
+    },
+    {
+     "tool": "create_directory",
+     "rating": "watch",
+     "why": "creates a folder"
+    }
+   ]
+  },
+  {
+   "server": "git",
+   "service": "MCP reference git server",
+   "package": [
+    "mcp-server-git"
+   ],
+   "names": [
+    "git",
+    "*mcp-server-git*",
+    "*mcp_server_git*"
+   ],
+   "source": "https://github.com/modelcontextprotocol/servers/blob/main/src/git/README.md",
+   "tools": [
+    {
+     "tool": "git_commit",
+     "rating": "watch",
+     "why": "records a commit in the local repository"
+    },
+    {
+     "tool": "git_add",
+     "rating": "watch",
+     "why": "stages files"
+    },
+    {
+     "tool": "git_reset",
+     "rating": "watch",
+     "why": "unstages staged changes; despite the name it keeps the work"
+    },
+    {
+     "tool": "git_create_branch",
+     "rating": "watch",
+     "why": "creates a local branch"
+    },
+    {
+     "tool": "git_checkout",
+     "rating": "watch",
+     "why": "switches branches"
+    }
+   ]
+  },
+  {
+   "server": "github",
+   "service": "GitHub",
+   "package": [
+    "github/github-mcp-server",
+    "https://api.githubcopilot.com/mcp/"
+   ],
+   "names": [
+    "github",
+    "*github*"
+   ],
+   "source": "https://github.com/github/github-mcp-server/blob/main/README.md",
+   "tools": [
+    {
+     "tool": "delete_repository",
+     "rating": "ask",
+     "why": "deletes a GitHub repository with its issues, pull requests and wiki"
+    },
+    {
+     "tool": "delete_file",
+     "rating": "watch",
+     "why": "deletes a file in a commit, which can be reverted"
+    },
+    {
+     "tool": "merge_pull_request",
+     "rating": "watch",
+     "why": "merges a pull request, which can be reverted"
+    },
+    {
+     "tool": "push_files",
+     "rating": "watch",
+     "why": "pushes a commit to a branch"
+    },
+    {
+     "tool": "create_or_update_file",
+     "rating": "watch",
+     "why": "commits a file to a branch"
+    },
+    {
+     "tool": "create_branch",
+     "rating": "watch",
+     "why": "creates a branch"
+    },
+    {
+     "tool": "create_repository",
+     "rating": "watch",
+     "why": "creates a repository"
+    },
+    {
+     "tool": "fork_repository",
+     "rating": "watch",
+     "why": "forks a repository"
+    },
+    {
+     "tool": "create_gist",
+     "rating": "watch",
+     "why": "creates a gist, public if asked"
+    },
+    {
+     "tool": "update_gist",
+     "rating": "watch",
+     "why": "changes a gist"
+    },
+    {
+     "tool": "actions_run_trigger",
+     "rating": "watch",
+     "why": "runs, reruns or cancels a workflow, or deletes a run's logs"
+    },
+    {
+     "tool": "create_pull_request",
+     "rating": "watch",
+     "why": "opens a pull request"
+    },
+    {
+     "tool": "create_pull_request_with_copilot",
+     "rating": "watch",
+     "why": "has the Copilot coding agent open a pull request"
+    },
+    {
+     "tool": "update_pull_request",
+     "rating": "watch",
+     "why": "edits a pull request"
+    },
+    {
+     "tool": "update_pull_request_branch",
+     "rating": "watch",
+     "why": "updates a pull request branch from its base"
+    },
+    {
+     "tool": "pull_request_review_write",
+     "rating": "watch",
+     "why": "creates, submits or deletes a pull request review"
+    },
+    {
+     "tool": "add_comment_to_pending_review",
+     "rating": "watch",
+     "why": "adds a review comment"
+    },
+    {
+     "tool": "add_reply_to_pull_request_comment",
+     "rating": "watch",
+     "why": "replies to a review comment"
+    },
+    {
+     "tool": "add_issue_comment",
+     "rating": "watch",
+     "why": "comments on an issue or pull request"
+    },
+    {
+     "tool": "update_issue_comment",
+     "rating": "watch",
+     "why": "edits an issue comment"
+    },
+    {
+     "tool": "issue_write",
+     "rating": "watch",
+     "why": "creates or updates an issue"
+    },
+    {
+     "tool": "sub_issue_write",
+     "rating": "watch",
+     "why": "adds, removes or reorders sub-issues"
+    },
+    {
+     "tool": "label_write",
+     "rating": "watch",
+     "why": "creates, updates or deletes a label"
+    },
+    {
+     "tool": "discussion_comment_write",
+     "rating": "watch",
+     "why": "adds, edits or deletes a discussion comment"
+    },
+    {
+     "tool": "projects_write",
+     "rating": "watch",
+     "why": "changes a GitHub Project"
+    },
+    {
+     "tool": "create_repository_ruleset",
+     "rating": "watch",
+     "why": "adds a branch protection ruleset"
+    },
+    {
+     "tool": "custom_properties_write",
+     "rating": "watch",
+     "why": "sets custom properties on a repository or organization"
+    },
+    {
+     "tool": "assign_copilot_to_issue",
+     "rating": "watch",
+     "why": "assigns Copilot to an issue"
+    },
+    {
+     "tool": "assign_copilot_to_issue_with_intent",
+     "rating": "watch",
+     "why": "assigns Copilot to an issue"
+    },
+    {
+     "tool": "request_copilot_review",
+     "rating": "watch",
+     "why": "asks Copilot to review a pull request"
+    },
+    {
+     "tool": "dismiss_notification",
+     "rating": "watch",
+     "why": "marks a notification read or done"
+    },
+    {
+     "tool": "mark_all_notifications_read",
+     "rating": "watch",
+     "why": "marks every notification read"
+    },
+    {
+     "tool": "manage_notification_subscription",
+     "rating": "watch",
+     "why": "changes a notification subscription"
+    },
+    {
+     "tool": "manage_repository_notification_subscription",
+     "rating": "watch",
+     "why": "changes a repository's notification subscription"
+    },
+    {
+     "tool": "star_repository",
+     "rating": "watch",
+     "why": "stars a repository"
+    },
+    {
+     "tool": "unstar_repository",
+     "rating": "watch",
+     "why": "unstars a repository"
+    }
+   ]
+  },
+  {
+   "server": "stripe",
+   "service": "Stripe",
+   "package": [
+    "https://mcp.stripe.com",
+    "@stripe/mcp"
+   ],
+   "names": [
+    "stripe",
+    "*stripe*"
+   ],
+   "source": "https://docs.stripe.com/mcp#tools",
+   "tools": [
+    {
+     "tool": "send_money",
+     "rating": "ask",
+     "why": "sends money from a Treasury account to a recipient"
+    },
+    {
+     "tool": "transfer_money",
+     "rating": "ask",
+     "why": "moves money between Stripe balances"
+    },
+    {
+     "tool": "convert_currency",
+     "rating": "ask",
+     "why": "converts funds between currencies"
+    },
+    {
+     "tool": "stripe_api_write",
+     "rating": "ask",
+     "why": "runs any Stripe write, including refunds, cancellations and deletes"
+    },
+    {
+     "tool": "setup_recipient",
+     "rating": "watch",
+     "why": "sets up a recipient for Treasury payments"
+    },
+    {
+     "tool": "atlas_company_formation",
+     "rating": "watch",
+     "why": "prepares an Atlas company application; you pay and submit in the Dashboard"
+    },
+    {
+     "tool": "send_stripe_feedback",
+     "rating": "watch",
+     "why": "sends feedback to Stripe"
+    }
+   ]
+  },
+  {
+   "server": "supabase",
+   "service": "Supabase",
+   "package": [
+    "@supabase/mcp-server-supabase",
+    "https://mcp.supabase.com/mcp"
+   ],
+   "names": [
+    "supabase",
+    "*supabase*"
+   ],
+   "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/branching-tools.ts",
+   "tools": [
+    {
+     "tool": "delete_branch",
+     "rating": "ask",
+     "why": "deletes a development branch and its data"
+    },
+    {
+     "tool": "reset_branch",
+     "rating": "ask",
+     "why": "resets a branch's migrations; untracked data and schema changes are lost"
+    },
+    {
+     "tool": "merge_branch",
+     "rating": "ask",
+     "why": "applies a branch's migrations and Edge Functions to production"
+    },
+    {
+     "tool": "pause_project",
+     "rating": "ask",
+     "why": "pauses a project, taking its database and APIs offline",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/account-tools.ts"
+    },
+    {
+     "tool": "rebase_branch",
+     "rating": "watch",
+     "why": "runs newer production migrations on a branch"
+    },
+    {
+     "tool": "create_branch",
+     "rating": "watch",
+     "why": "creates a branch, which can add to the bill"
+    },
+    {
+     "tool": "create_project",
+     "rating": "watch",
+     "why": "creates a project, which can add to the bill",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/account-tools.ts"
+    },
+    {
+     "tool": "confirm_cost",
+     "rating": "watch",
+     "why": "confirms a quoted cost before creating a project or branch",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/account-tools.ts"
+    },
+    {
+     "tool": "restore_project",
+     "rating": "watch",
+     "why": "restores a paused project",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/account-tools.ts"
+    },
+    {
+     "tool": "apply_migration",
+     "rating": "watch",
+     "why": "runs a SQL migration; the shell SQL rules still catch drops",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/database-operation-tools.ts"
+    },
+    {
+     "tool": "execute_sql",
+     "rating": "watch",
+     "why": "runs SQL; the shell SQL rules still catch drops",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/database-operation-tools.ts"
+    },
+    {
+     "tool": "deploy_edge_function",
+     "rating": "watch",
+     "why": "deploys a new version of an Edge Function",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/edge-function-tools.ts"
+    },
+    {
+     "tool": "create_edge_function_secret",
+     "rating": "watch",
+     "why": "sets an Edge Function secret",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/secret-tools.ts"
+    },
+    {
+     "tool": "update_storage_config",
+     "rating": "watch",
+     "why": "changes the project's storage settings",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/storage-tools.ts"
+    },
+    {
+     "tool": "create_notebook",
+     "rating": "watch",
+     "why": "creates a notebook",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/notebook-tools.ts"
+    },
+    {
+     "tool": "run_notebook",
+     "rating": "watch",
+     "why": "runs a notebook's SQL",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/notebook-tools.ts"
+    },
+    {
+     "tool": "delete_notebook",
+     "rating": "watch",
+     "why": "deletes a notebook",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/notebook-tools.ts"
+    },
+    {
+     "tool": "submit_feedback",
+     "rating": "watch",
+     "why": "sends feedback to Supabase",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/feedback-tools.ts"
+    },
+    {
+     "tool": "delete_feedback",
+     "rating": "watch",
+     "why": "deletes feedback you sent",
+     "source": "https://github.com/supabase-community/supabase-mcp/blob/main/packages/mcp-server-supabase/src/tools/feedback-tools.ts"
+    }
+   ]
+  },
+  {
+   "server": "cloudflare-api",
+   "service": "Cloudflare API (code mode)",
+   "package": [
+    "https://mcp.cloudflare.com/mcp",
+    "cloudflare/mcp"
+   ],
+   "names": [
+    "cloudflare*",
+    "*cloudflare*"
+   ],
+   "source": "https://github.com/cloudflare/mcp/blob/main/README.md",
+   "tools": [
+    {
+     "tool": "execute",
+     "rating": "ask",
+     "why": "runs code that sends a DELETE to the Cloudflare API",
+     "input": "method\\W{0,8}delete\\b"
+    }
+   ]
+  },
+  {
+   "server": "cloudflare-bindings",
+   "service": "Cloudflare Workers Bindings (deprecated)",
+   "package": [
+    "cloudflare/mcp-server-cloudflare",
+    "https://bindings.mcp.cloudflare.com/mcp"
+   ],
+   "names": [
+    "cloudflare*",
+    "*cloudflare*",
+    "*bindings*"
+   ],
+   "source": "https://github.com/cloudflare/mcp-server-cloudflare/blob/main/apps/workers-bindings/README.md",
+   "tools": [
+    {
+     "tool": "d1_database_delete",
+     "rating": "ask",
+     "why": "deletes a D1 database and its data"
+    },
+    {
+     "tool": "r2_bucket_delete",
+     "rating": "ask",
+     "why": "deletes an R2 bucket"
+    },
+    {
+     "tool": "kv_namespace_delete",
+     "rating": "ask",
+     "why": "deletes a KV namespace and its keys"
+    },
+    {
+     "tool": "hyperdrive_config_delete",
+     "rating": "ask",
+     "why": "deletes a Hyperdrive configuration"
+    },
+    {
+     "tool": "d1_database_query",
+     "rating": "watch",
+     "why": "runs SQL on D1; the shell SQL rules still catch drops"
+    },
+    {
+     "tool": "d1_database_create",
+     "rating": "watch",
+     "why": "creates a D1 database"
+    },
+    {
+     "tool": "r2_bucket_create",
+     "rating": "watch",
+     "why": "creates an R2 bucket"
+    },
+    {
+     "tool": "kv_namespace_create",
+     "rating": "watch",
+     "why": "creates a KV namespace"
+    },
+    {
+     "tool": "kv_namespace_update",
+     "rating": "watch",
+     "why": "renames a KV namespace"
+    },
+    {
+     "tool": "hyperdrive_config_create",
+     "rating": "watch",
+     "why": "creates a Hyperdrive configuration"
+    },
+    {
+     "tool": "hyperdrive_config_edit",
+     "rating": "watch",
+     "why": "changes a Hyperdrive configuration"
+    }
+   ]
+  },
+  {
+   "server": "notion",
+   "service": "Notion (hosted)",
+   "package": [
+    "https://mcp.notion.com/mcp"
+   ],
+   "names": [
+    "notion",
+    "*notion*"
+   ],
+   "source": "https://developers.notion.com/guides/mcp/tools-calendars-reference",
+   "tools": [
+    {
+     "tool": "notion-calendar-cancel-events",
+     "rating": "ask",
+     "why": "cancels calendar events, which may notify every guest"
+    },
+    {
+     "tool": "notion-calendar-create-events",
+     "rating": "watch",
+     "why": "creates calendar events, which may notify guests"
+    },
+    {
+     "tool": "notion-calendar-update-events",
+     "rating": "watch",
+     "why": "changes calendar events, which may notify guests"
+    },
+    {
+     "tool": "notion-delete-pages",
+     "rating": "watch",
+     "why": "moves pages to Trash, where they can be restored",
+     "source": "https://developers.notion.com/guides/mcp/tools-pages"
+    },
+    {
+     "tool": "notion-create-pages",
+     "rating": "watch",
+     "why": "creates pages",
+     "source": "https://developers.notion.com/guides/mcp/tools-pages"
+    },
+    {
+     "tool": "notion-update-page",
+     "rating": "watch",
+     "why": "changes a page",
+     "source": "https://developers.notion.com/guides/mcp/tools-pages"
+    },
+    {
+     "tool": "notion-move-pages",
+     "rating": "watch",
+     "why": "moves pages",
+     "source": "https://developers.notion.com/guides/mcp/tools-pages"
+    },
+    {
+     "tool": "notion-duplicate-page",
+     "rating": "watch",
+     "why": "copies a page",
+     "source": "https://developers.notion.com/guides/mcp/tools-pages"
+    },
+    {
+     "tool": "notion-delete-databases",
+     "rating": "watch",
+     "why": "moves databases and their entries to Trash",
+     "source": "https://developers.notion.com/guides/mcp/tools-databases"
+    },
+    {
+     "tool": "notion-create-database",
+     "rating": "watch",
+     "why": "creates a database",
+     "source": "https://developers.notion.com/guides/mcp/tools-databases"
+    },
+    {
+     "tool": "notion-update-data-source",
+     "rating": "watch",
+     "why": "changes a database",
+     "source": "https://developers.notion.com/guides/mcp/tools-databases"
+    },
+    {
+     "tool": "notion-create-view",
+     "rating": "watch",
+     "why": "creates a view",
+     "source": "https://developers.notion.com/guides/mcp/tools-databases"
+    },
+    {
+     "tool": "notion-update-view",
+     "rating": "watch",
+     "why": "changes a view",
+     "source": "https://developers.notion.com/guides/mcp/tools-databases"
+    },
+    {
+     "tool": "notion-restore-version",
+     "rating": "watch",
+     "why": "puts a page back to an earlier version",
+     "source": "https://developers.notion.com/guides/mcp/tools-comments"
+    },
+    {
+     "tool": "notion-restore-pages",
+     "rating": "watch",
+     "why": "recovers pages from Trash",
+     "source": "https://developers.notion.com/guides/mcp/tools-comments"
+    },
+    {
+     "tool": "notion-create-comment",
+     "rating": "watch",
+     "why": "adds a comment",
+     "source": "https://developers.notion.com/guides/mcp/tools-comments"
+    },
+    {
+     "tool": "notion-update-comment",
+     "rating": "watch",
+     "why": "edits a comment",
+     "source": "https://developers.notion.com/guides/mcp/tools-comments"
+    },
+    {
+     "tool": "notion-delete-comment",
+     "rating": "watch",
+     "why": "deletes a comment",
+     "source": "https://developers.notion.com/guides/mcp/tools-comments"
+    },
+    {
+     "tool": "notion-set-comment-reaction",
+     "rating": "watch",
+     "why": "reacts to a comment",
+     "source": "https://developers.notion.com/guides/mcp/tools-comments"
+    },
+    {
+     "tool": "notion-set-discussion-resolved",
+     "rating": "watch",
+     "why": "resolves a discussion",
+     "source": "https://developers.notion.com/guides/mcp/tools-comments"
+    },
+    {
+     "tool": "notion-create-suggested-edit",
+     "rating": "watch",
+     "why": "suggests an edit",
+     "source": "https://developers.notion.com/guides/mcp/tools-comments"
+    },
+    {
+     "tool": "notion-resolve-suggested-edit",
+     "rating": "watch",
+     "why": "accepts or rejects a suggested edit",
+     "source": "https://developers.notion.com/guides/mcp/tools-comments"
+    },
+    {
+     "tool": "notion-create-file-upload",
+     "rating": "watch",
+     "why": "uploads a file",
+     "source": "https://developers.notion.com/guides/mcp/tools-files"
+    },
+    {
+     "tool": "notion-create-attachment",
+     "rating": "watch",
+     "why": "attaches a file",
+     "source": "https://developers.notion.com/guides/mcp/tools-files"
+    },
+    {
+     "tool": "notion-create-folder",
+     "rating": "watch",
+     "why": "creates a folder",
+     "source": "https://developers.notion.com/guides/mcp/tools-files"
+    },
+    {
+     "tool": "notion-update-folder",
+     "rating": "watch",
+     "why": "changes a folder",
+     "source": "https://developers.notion.com/guides/mcp/tools-files"
+    },
+    {
+     "tool": "notion-spawn-session",
+     "rating": "watch",
+     "why": "starts a Custom Agent session",
+     "source": "https://developers.notion.com/guides/mcp/tools-skills-agents"
+    },
+    {
+     "tool": "notion-send-message-to-session",
+     "rating": "watch",
+     "why": "sends a message to a Custom Agent",
+     "source": "https://developers.notion.com/guides/mcp/tools-skills-agents"
+    },
+    {
+     "tool": "notion-stop-session",
+     "rating": "watch",
+     "why": "stops a Custom Agent session",
+     "source": "https://developers.notion.com/guides/mcp/tools-skills-agents"
+    },
+    {
+     "tool": "notion-upload-skill",
+     "rating": "watch",
+     "why": "saves a Skill",
+     "source": "https://developers.notion.com/guides/mcp/tools-skills-agents"
+    },
+    {
+     "tool": "notion-convert-page-to-skill",
+     "rating": "watch",
+     "why": "turns a page into a Skill",
+     "source": "https://developers.notion.com/guides/mcp/tools-skills-agents"
+    },
+    {
+     "tool": "notion-update-enabled-skills",
+     "rating": "watch",
+     "why": "changes which Skills are on",
+     "source": "https://developers.notion.com/guides/mcp/tools-skills-agents"
+    }
+   ]
+  },
+  {
+   "server": "notion-local",
+   "service": "Notion (local, API-derived)",
+   "package": [
+    "@notionhq/notion-mcp-server"
+   ],
+   "names": [
+    "notion",
+    "*notion*"
+   ],
+   "source": "https://github.com/makenotion/notion-mcp-server/blob/main/scripts/notion-openapi.json",
+   "tools": [
+    {
+     "tool": "API-delete-a-block",
+     "rating": "watch",
+     "why": "moves a block to Trash"
+    },
+    {
+     "tool": "API-update-a-block",
+     "rating": "watch",
+     "why": "changes a block"
+    },
+    {
+     "tool": "API-patch-block-children",
+     "rating": "watch",
+     "why": "adds content to a page"
+    },
+    {
+     "tool": "API-patch-page",
+     "rating": "watch",
+     "why": "changes page properties, or moves the page to Trash"
+    },
+    {
+     "tool": "API-post-page",
+     "rating": "watch",
+     "why": "creates a page"
+    },
+    {
+     "tool": "API-update-page-markdown",
+     "rating": "watch",
+     "why": "replaces a page's content"
+    },
+    {
+     "tool": "API-move-page",
+     "rating": "watch",
+     "why": "moves a page"
+    },
+    {
+     "tool": "API-create-a-comment",
+     "rating": "watch",
+     "why": "adds a comment"
+    },
+    {
+     "tool": "API-create-a-data-source",
+     "rating": "watch",
+     "why": "creates a database"
+    },
+    {
+     "tool": "API-update-a-data-source",
+     "rating": "watch",
+     "why": "changes a database"
+    }
+   ]
+  },
+  {
+   "server": "sentry",
+   "service": "Sentry",
+   "package": [
+    "@sentry/mcp-server",
+    "https://mcp.sentry.dev/mcp"
+   ],
+   "names": [
+    "sentry",
+    "*sentry*"
+   ],
+   "source": "https://github.com/getsentry/sentry-mcp/blob/main/packages/mcp-core/src/tools/catalog/index.ts",
+   "tools": [
+    {
+     "tool": "delete_alert_rule",
+     "rating": "ask",
+     "why": "deletes an alert for good, with its notifications for every connected project"
+    },
+    {
+     "tool": "delete_metric_monitor",
+     "rating": "ask",
+     "why": "deletes a metric monitor for good, with its incident history"
+    },
+    {
+     "tool": "delete_uptime_monitor",
+     "rating": "ask",
+     "why": "deletes an uptime monitor for good"
+    },
+    {
+     "tool": "delete_monitor_environment",
+     "rating": "ask",
+     "why": "deletes a cron monitor's environment"
+    },
+    {
+     "tool": "execute_sentry_tool",
+     "rating": "ask",
+     "why": "runs one of Sentry's delete tools",
+     "input": "\\bdelete_(alert_rule|metric_monitor|uptime_monitor|monitor_environment)\\b",
+     "source": "https://github.com/getsentry/sentry-mcp/blob/main/packages/mcp-core/src/tools/special/execute-tool.ts"
+    },
+    {
+     "tool": "update_alert_rule",
+     "rating": "watch",
+     "why": "changes or turns off a monitor or alert"
+    },
+    {
+     "tool": "update_metric_monitor",
+     "rating": "watch",
+     "why": "changes or turns off a monitor or alert"
+    },
+    {
+     "tool": "update_uptime_monitor",
+     "rating": "watch",
+     "why": "changes or turns off a monitor or alert"
+    },
+    {
+     "tool": "create_alert_rule",
+     "rating": "watch",
+     "why": "creates a monitor or alert"
+    },
+    {
+     "tool": "create_metric_monitor",
+     "rating": "watch",
+     "why": "creates a monitor or alert"
+    },
+    {
+     "tool": "create_uptime_monitor",
+     "rating": "watch",
+     "why": "creates a monitor or alert"
+    },
+    {
+     "tool": "update_issue",
+     "rating": "watch",
+     "why": "resolves, ignores or reassigns an issue"
+    },
+    {
+     "tool": "update_project",
+     "rating": "watch",
+     "why": "changes project settings"
+    },
+    {
+     "tool": "update_dsn",
+     "rating": "watch",
+     "why": "changes a client key, and can turn it off so events stop arriving"
+    },
+    {
+     "tool": "create_dsn",
+     "rating": "watch",
+     "why": "creates a client key"
+    },
+    {
+     "tool": "create_project",
+     "rating": "watch",
+     "why": "creates a project"
+    },
+    {
+     "tool": "create_team",
+     "rating": "watch",
+     "why": "creates a team"
+    },
+    {
+     "tool": "add_team_to_project",
+     "rating": "watch",
+     "why": "gives a team access to a project"
+    },
+    {
+     "tool": "remove_team_from_project",
+     "rating": "watch",
+     "why": "takes a team's access to a project away"
+    },
+    {
+     "tool": "link_issue",
+     "rating": "watch",
+     "why": "links an issue to an external tracker"
+    },
+    {
+     "tool": "unlink_issue",
+     "rating": "watch",
+     "why": "removes that link"
+    },
+    {
+     "tool": "add_issue_note",
+     "rating": "watch",
+     "why": "adds a note to an issue"
+    },
+    {
+     "tool": "analyze_issue_with_seer",
+     "rating": "watch",
+     "why": "starts a Seer analysis, which can use paid quota"
+    },
+    {
+     "tool": "onboarding_status_update",
+     "rating": "watch",
+     "why": "records onboarding progress"
+    },
+    {
+     "tool": "submit_feedback_to_sentry_team",
+     "rating": "watch",
+     "why": "sends feedback to Sentry"
+    }
+   ]
+  },
+  {
+   "server": "neon",
+   "service": "Neon",
+   "package": [
+    "neondatabase/mcp-server-neon",
+    "https://mcp.neon.tech/mcp"
+   ],
+   "names": [
+    "neon",
+    "*neon*"
+   ],
+   "source": "https://github.com/neondatabase/mcp-server-neon/blob/main/mcp/tools/generated/names.ts",
+   "tools": [
+    {
+     "tool": "delete_project",
+     "rating": "ask",
+     "why": "deletes a Neon project with all its branches and data"
+    },
+    {
+     "tool": "delete_branch",
+     "rating": "ask",
+     "why": "deletes a branch and its data"
+    },
+    {
+     "tool": "reset_from_parent",
+     "rating": "ask",
+     "why": "resets a branch to its parent, discarding its changes"
+    },
+    {
+     "tool": "delete_postgres_database",
+     "rating": "ask",
+     "why": "deletes a database"
+    },
+    {
+     "tool": "delete_postgres_role",
+     "rating": "ask",
+     "why": "deletes a database role"
+    },
+    {
+     "tool": "reset_postgres_role_password",
+     "rating": "ask",
+     "why": "resets a role's password, which breaks apps using the old one"
+    },
+    {
+     "tool": "delete_postgres_endpoint",
+     "rating": "ask",
+     "why": "deletes a compute endpoint"
+    },
+    {
+     "tool": "suspend_postgres_endpoint",
+     "rating": "ask",
+     "why": "suspends a compute endpoint, taking it offline"
+    },
+    {
+     "tool": "delete_snapshot",
+     "rating": "ask",
+     "why": "deletes a snapshot"
+    },
+    {
+     "tool": "restore_snapshot",
+     "rating": "ask",
+     "why": "restores a snapshot onto a branch"
+    },
+    {
+     "tool": "finalize_branch_restore",
+     "rating": "ask",
+     "why": "finishes a branch restore"
+    },
+    {
+     "tool": "disable_auth",
+     "rating": "ask",
+     "why": "turns Neon Auth off for a branch"
+    },
+    {
+     "tool": "delete_auth_user",
+     "rating": "ask",
+     "why": "deletes a Neon Auth user"
+    },
+    {
+     "tool": "delete_auth_oauth_client",
+     "rating": "ask",
+     "why": "deletes an OAuth client"
+    },
+    {
+     "tool": "rotate_auth_oauth_client_secret",
+     "rating": "ask",
+     "why": "rotates an OAuth client secret, which breaks apps using the old one"
+    },
+    {
+     "tool": "delete_data_api",
+     "rating": "ask",
+     "why": "deletes the Data API for a database"
+    },
+    {
+     "tool": "delete_function",
+     "rating": "ask",
+     "why": "deletes a function"
+    },
+    {
+     "tool": "revoke_credential",
+     "rating": "ask",
+     "why": "revokes a credential"
+    },
+    {
+     "tool": "rotate_credential",
+     "rating": "ask",
+     "why": "rotates a credential, which breaks apps using the old one"
+    },
+    {
+     "tool": "delete_storage_bucket",
+     "rating": "ask",
+     "why": "deletes a storage bucket"
+    },
+    {
+     "tool": "delete_storage_object",
+     "rating": "ask",
+     "why": "deletes a stored object"
+    },
+    {
+     "tool": "delete_storage_objects_by_prefix",
+     "rating": "ask",
+     "why": "deletes every stored object under a prefix"
+    },
+    {
+     "tool": "rotate_realtime_secret",
+     "rating": "ask",
+     "why": "rotates the realtime secret, which breaks clients using the old one"
+    },
+    {
+     "tool": "run_sql",
+     "rating": "watch",
+     "why": "runs SQL; the shell SQL rules still catch drops",
+     "source": "https://github.com/neondatabase/mcp-server-neon/blob/main/mcp/tools/definitions.ts"
+    },
+    {
+     "tool": "run_sql_transaction",
+     "rating": "watch",
+     "why": "runs SQL in one transaction; the shell SQL rules still catch drops",
+     "source": "https://github.com/neondatabase/mcp-server-neon/blob/main/mcp/tools/definitions.ts"
+    },
+    {
+     "tool": "prepare_database_migration",
+     "rating": "watch",
+     "why": "tries a migration on a temporary branch",
+     "source": "https://github.com/neondatabase/mcp-server-neon/blob/main/mcp/tools/definitions.ts"
+    },
+    {
+     "tool": "complete_database_migration",
+     "rating": "watch",
+     "why": "applies a prepared migration to the main branch",
+     "source": "https://github.com/neondatabase/mcp-server-neon/blob/main/mcp/tools/definitions.ts"
+    },
+    {
+     "tool": "prepare_query_tuning",
+     "rating": "watch",
+     "why": "tries index changes on a temporary branch",
+     "source": "https://github.com/neondatabase/mcp-server-neon/blob/main/mcp/tools/definitions.ts"
+    },
+    {
+     "tool": "complete_query_tuning",
+     "rating": "watch",
+     "why": "applies tuning changes",
+     "source": "https://github.com/neondatabase/mcp-server-neon/blob/main/mcp/tools/definitions.ts"
+    },
+    {
+     "tool": "explain_sql_statement",
+     "rating": "watch",
+     "why": "runs EXPLAIN on a statement",
+     "source": "https://github.com/neondatabase/mcp-server-neon/blob/main/mcp/tools/definitions.ts"
+    },
+    {
+     "tool": "send_feedback",
+     "rating": "watch",
+     "why": "sends feedback to Neon",
+     "source": "https://github.com/neondatabase/mcp-server-neon/blob/main/mcp/tools/definitions.ts"
+    },
+    {
+     "tool": "create_project",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_project",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "recover_project",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "create_branch",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_branch",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "set_default_branch",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "create_postgres_role",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "create_postgres_database",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_postgres_database",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "create_postgres_endpoint",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_postgres_endpoint",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "start_postgres_endpoint",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "restart_postgres_endpoint",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "set_snapshot_schedule",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "create_snapshot",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_snapshot",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "provision_neon_auth",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_auth_config",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "add_auth_oauth_provider",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_auth_oauth_provider",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "delete_auth_oauth_provider",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "add_auth_trusted_domain",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "delete_auth_trusted_domain",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "create_auth_user",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_auth_user_role",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_auth_oauth_server",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "create_auth_oauth_client",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_auth_oauth_client",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "provision_neon_data_api",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_data_api",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_function",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "deploy_function",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "register_functions_custom_domain",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "delete_functions_custom_domain",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "create_trigger",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "update_trigger",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "delete_trigger",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "create_credential",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "create_storage_bucket",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "presign_storage_object",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "enable_realtime",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    },
+    {
+     "tool": "disable_realtime",
+     "rating": "watch",
+     "why": "changes a Neon project, branch, compute or setting"
+    }
+   ]
+  },
+  {
+   "server": "mongodb",
+   "service": "MongoDB",
+   "package": [
+    "mongodb-mcp-server",
+    "mongodb-js/mongodb-mcp-server"
+   ],
+   "names": [
+    "mongo*",
+    "*mongodb*"
+   ],
+   "source": "https://github.com/mongodb-js/mongodb-mcp-server/blob/main/README.md",
+   "tools": [
+    {
+     "tool": "delete-many",
+     "rating": "ask",
+     "why": "deletes every document that matches the filter"
+    },
+    {
+     "tool": "drop-collection",
+     "rating": "ask",
+     "why": "drops a collection with its indexes"
+    },
+    {
+     "tool": "drop-database",
+     "rating": "ask",
+     "why": "drops a database and its data files"
+    },
+    {
+     "tool": "atlas-pause-resume-cluster",
+     "rating": "ask",
+     "why": "pauses or resumes an Atlas cluster"
+    },
+    {
+     "tool": "atlas-streams-teardown",
+     "rating": "ask",
+     "why": "deletes Atlas Stream Processing workspaces, connections or processors"
+    },
+    {
+     "tool": "atlas-local-delete-deployment",
+     "rating": "ask",
+     "why": "deletes a local Atlas deployment and its data"
+    },
+    {
+     "tool": "update-many",
+     "rating": "watch",
+     "why": "changes every document that matches the filter"
+    },
+    {
+     "tool": "insert-many",
+     "rating": "watch",
+     "why": "inserts documents"
+    },
+    {
+     "tool": "create-collection",
+     "rating": "watch",
+     "why": "creates a collection"
+    },
+    {
+     "tool": "create-index",
+     "rating": "watch",
+     "why": "creates an index"
+    },
+    {
+     "tool": "drop-index",
+     "rating": "watch",
+     "why": "drops an index, which can be rebuilt"
+    },
+    {
+     "tool": "rename-collection",
+     "rating": "watch",
+     "why": "renames a collection"
+    },
+    {
+     "tool": "atlas-create-access-list",
+     "rating": "watch",
+     "why": "lets new IP ranges reach your clusters"
+    },
+    {
+     "tool": "atlas-create-cluster",
+     "rating": "watch",
+     "why": "creates a paid Atlas cluster"
+    },
+    {
+     "tool": "atlas-create-free-cluster",
+     "rating": "watch",
+     "why": "creates a free Atlas cluster"
+    },
+    {
+     "tool": "atlas-create-db-user",
+     "rating": "watch",
+     "why": "creates a database user"
+    },
+    {
+     "tool": "atlas-create-project",
+     "rating": "watch",
+     "why": "creates an Atlas project"
+    },
+    {
+     "tool": "atlas-upgrade-cluster",
+     "rating": "watch",
+     "why": "upgrades or scales a cluster, which can change the bill"
+    },
+    {
+     "tool": "atlas-load-sample-dataset",
+     "rating": "watch",
+     "why": "loads a sample dataset"
+    },
+    {
+     "tool": "atlas-streams-build",
+     "rating": "watch",
+     "why": "creates stream processing resources"
+    },
+    {
+     "tool": "atlas-streams-manage",
+     "rating": "watch",
+     "why": "starts, stops or changes stream processors"
+    },
+    {
+     "tool": "atlas-local-create-deployment",
+     "rating": "watch",
+     "why": "creates a local Atlas deployment"
+    }
+   ]
+  },
+  {
+   "server": "railway",
+   "service": "Railway",
+   "package": [
+    "railway mcp (Railway CLI)",
+    "@railway/mcp-server"
+   ],
+   "names": [
+    "railway",
+    "*railway*"
+   ],
+   "source": "https://github.com/railwayapp/cli/blob/master/src/commands/mcp/handler.rs",
+   "tools": [
+    {
+     "tool": "remove_service",
+     "rating": "ask",
+     "why": "removes a service from a project; Railway says this is irreversible"
+    },
+    {
+     "tool": "remove_volume",
+     "rating": "ask",
+     "why": "removes a volume and its data; Railway says this is irreversible"
+    },
+    {
+     "tool": "remove_bucket",
+     "rating": "ask",
+     "why": "removes a storage bucket; Railway says this is irreversible"
+    },
+    {
+     "tool": "delete_domain",
+     "rating": "ask",
+     "why": "deletes a domain; Railway says this is irreversible"
+    },
+    {
+     "tool": "remove_tcp_proxy",
+     "rating": "ask",
+     "why": "removes a public TCP proxy; Railway says this is irreversible"
+    },
+    {
+     "tool": "deploy",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "deploy_template",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "create_project",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "create_environment",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "create_service",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "update_service",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "scale_service",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "connect_service_source",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "disconnect_service_source",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "set_variables",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "add_reference_variable",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "generate_domain",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "update_domain",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "retry_domain_certificate",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "create_tcp_proxy",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "private_network_update",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "create_bucket",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "create_volume",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "update_volume",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "link_service",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    },
+    {
+     "tool": "link_environment",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Railway project, service or setting"
+    }
+   ]
+  },
+  {
+   "server": "heroku",
+   "service": "Heroku",
+   "package": [
+    "@heroku/mcp-server",
+    "heroku mcp:start"
+   ],
+   "names": [
+    "heroku",
+    "*heroku*"
+   ],
+   "source": "https://github.com/heroku/heroku-mcp-server/blob/main/README.md",
+   "tools": [
+    {
+     "tool": "transfer_app",
+     "rating": "ask",
+     "why": "gives ownership of an app to another user or team"
+    },
+    {
+     "tool": "maintenance_on",
+     "rating": "ask",
+     "why": "puts an app in maintenance mode, taking it offline"
+    },
+    {
+     "tool": "pg_upgrade",
+     "rating": "ask",
+     "why": "upgrades Postgres to a newer version, which cannot be rolled back"
+    },
+    {
+     "tool": "pg_psql",
+     "rating": "watch",
+     "why": "runs SQL; the shell SQL rules still catch drops"
+    },
+    {
+     "tool": "pg_kill",
+     "rating": "watch",
+     "why": "stops a running database query"
+    },
+    {
+     "tool": "pg_credentials",
+     "rating": "watch",
+     "why": "manages database credentials"
+    },
+    {
+     "tool": "pg_backups",
+     "rating": "watch",
+     "why": "manages database backups and schedules"
+    },
+    {
+     "tool": "create_app",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Heroku app"
+    },
+    {
+     "tool": "rename_app",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Heroku app"
+    },
+    {
+     "tool": "deploy_to_heroku",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Heroku app"
+    },
+    {
+     "tool": "deploy_one_off_dyno",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Heroku app"
+    },
+    {
+     "tool": "ps_scale",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Heroku app"
+    },
+    {
+     "tool": "ps_restart",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Heroku app"
+    },
+    {
+     "tool": "create_addon",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Heroku app"
+    },
+    {
+     "tool": "maintenance_off",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Heroku app"
+    },
+    {
+     "tool": "pipelines_create",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Heroku app"
+    },
+    {
+     "tool": "pipelines_promote",
+     "rating": "watch",
+     "why": "deploys, creates or changes a Heroku app"
+    }
+   ]
+  },
+  {
+   "server": "netlify",
+   "service": "Netlify",
+   "package": [
+    "@netlify/mcp",
+    "netlify/netlify-mcp"
+   ],
+   "names": [
+    "netlify",
+    "*netlify*"
+   ],
+   "source": "https://github.com/netlify/netlify-mcp/blob/main/src/tools/index.ts",
+   "tools": [
+    {
+     "tool": "netlify-project-services-updater",
+     "rating": "ask",
+     "why": "deletes a form submission or an environment variable",
+     "input": "\"(delete-submission|deleteenvvar\":true)"
+    },
+    {
+     "tool": "netlify-project-manage-form-submissions",
+     "rating": "ask",
+     "why": "deletes a form submission",
+     "input": "\"delete-submission\"",
+     "source": "https://github.com/netlify/netlify-mcp/blob/main/src/tools/project-tools/manage-form-submissions.ts"
+    },
+    {
+     "tool": "netlify-project-manage-env-vars",
+     "rating": "ask",
+     "why": "deletes an environment variable",
+     "input": "\"deleteenvvar\":true",
+     "source": "https://github.com/netlify/netlify-mcp/blob/main/src/tools/project-tools/manage-project-env-vars.ts"
+    },
+    {
+     "tool": "netlify-deploy-services-updater",
+     "rating": "watch",
+     "why": "deploys a site"
+    },
+    {
+     "tool": "netlify-deploy-site",
+     "rating": "watch",
+     "why": "deploys a site"
+    },
+    {
+     "tool": "netlify-extension-services-updater",
+     "rating": "watch",
+     "why": "installs or removes an extension"
+    },
+    {
+     "tool": "netlify-extension-change-extension-installation",
+     "rating": "watch",
+     "why": "installs or removes an extension"
+    },
+    {
+     "tool": "netlify-project-create-new-project",
+     "rating": "watch",
+     "why": "creates a project"
+    },
+    {
+     "tool": "netlify-project-update-forms",
+     "rating": "watch",
+     "why": "changes form settings"
+    },
+    {
+     "tool": "netlify-project-update-project-name",
+     "rating": "watch",
+     "why": "renames a project, which changes its default address"
+    },
+    {
+     "tool": "netlify-project-update-visitor-access-controls",
+     "rating": "watch",
+     "why": "changes who can see a site"
+    },
+    {
+     "tool": "netlify-feedback-services-updater",
+     "rating": "watch",
+     "why": "sends feedback to Netlify"
+    },
+    {
+     "tool": "netlify-submit-feedback",
+     "rating": "watch",
+     "why": "sends feedback to Netlify"
+    }
+   ]
+  },
+  {
+   "server": "vercel",
+   "service": "Vercel",
+   "package": [
+    "https://mcp.vercel.com"
+   ],
+   "names": [
+    "vercel",
+    "*vercel*"
+   ],
+   "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools",
+   "tools": [
+    {
+     "tool": "buy_domain",
+     "rating": "ask",
+     "why": "buys a domain with the team's payment method",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/billing"
+    },
+    {
+     "tool": "replace_domain_dns_records",
+     "rating": "ask",
+     "why": "replaces a domain's DNS records",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains"
+    },
+    {
+     "tool": "revoke_kms_signing_key",
+     "rating": "ask",
+     "why": "revokes a signing key",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management"
+    },
+    {
+     "tool": "pause_project",
+     "rating": "ask",
+     "why": "pauses a project, taking its deployments offline",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects"
+    },
+    {
+     "tool": "cancel_deployment",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments"
+    },
+    {
+     "tool": "create_deployment",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments"
+    },
+    {
+     "tool": "deploy_to_vercel",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments"
+    },
+    {
+     "tool": "upload_file",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/deployments"
+    },
+    {
+     "tool": "unpause_project",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects"
+    },
+    {
+     "tool": "update_project",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects"
+    },
+    {
+     "tool": "create_project",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects"
+    },
+    {
+     "tool": "create_git_project",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects"
+    },
+    {
+     "tool": "add_project_domain",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects"
+    },
+    {
+     "tool": "verify_project_domain",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects"
+    },
+    {
+     "tool": "update_project_deployment_protection",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects"
+    },
+    {
+     "tool": "update_project_protection_bypass",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects"
+    },
+    {
+     "tool": "accept_project_transfer_request",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/projects"
+    },
+    {
+     "tool": "request_promote",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases"
+    },
+    {
+     "tool": "request_rollback",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases"
+    },
+    {
+     "tool": "start_rolling_release",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases"
+    },
+    {
+     "tool": "approve_rolling_release_stage",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases"
+    },
+    {
+     "tool": "complete_rolling_release",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases"
+    },
+    {
+     "tool": "update_rolling_release_config",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/rolling-releases"
+    },
+    {
+     "tool": "create_or_transfer_domain",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains"
+    },
+    {
+     "tool": "create_record",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains"
+    },
+    {
+     "tool": "update_record",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains"
+    },
+    {
+     "tool": "issue_cert",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/domains"
+    },
+    {
+     "tool": "create_project_env",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/environment-variables"
+    },
+    {
+     "tool": "edit_project_env",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/environment-variables"
+    },
+    {
+     "tool": "put_firewall_config",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/firewall"
+    },
+    {
+     "tool": "update_firewall_config",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/firewall"
+    },
+    {
+     "tool": "update_attack_challenge_mode",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/firewall"
+    },
+    {
+     "tool": "invalidate_by_tags",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/caching"
+    },
+    {
+     "tool": "invalidate_by_src_images",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/caching"
+    },
+    {
+     "tool": "create_edge_config",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config"
+    },
+    {
+     "tool": "update_edge_config",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config"
+    },
+    {
+     "tool": "patch_edge_config_items",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config"
+    },
+    {
+     "tool": "restore_edge_config_backup",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config"
+    },
+    {
+     "tool": "create_edge_config_token",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/global-config"
+    },
+    {
+     "tool": "create_kms_signing_key",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management"
+    },
+    {
+     "tool": "activate_kms_signing_key",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management"
+    },
+    {
+     "tool": "create_kms_issuer",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management"
+    },
+    {
+     "tool": "update_kms_issuer",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management"
+    },
+    {
+     "tool": "create_kms_issuer_policy",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management"
+    },
+    {
+     "tool": "update_kms_issuer_policy",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/key-management"
+    },
+    {
+     "tool": "add_route",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing"
+    },
+    {
+     "tool": "edit_route",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing"
+    },
+    {
+     "tool": "assign_alias",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing"
+    },
+    {
+     "tool": "stage_routes",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing"
+    },
+    {
+     "tool": "stage_redirects",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing"
+    },
+    {
+     "tool": "restore_redirects",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing"
+    },
+    {
+     "tool": "update_route_versions",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing"
+    },
+    {
+     "tool": "update_bulk_redirect_version",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/routing"
+    },
+    {
+     "tool": "run_session_command",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes"
+    },
+    {
+     "tool": "write_session_files",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes"
+    },
+    {
+     "tool": "stop_session",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes"
+    },
+    {
+     "tool": "kill_session_command",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes"
+    },
+    {
+     "tool": "update_sandbox",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes"
+    },
+    {
+     "tool": "update_session_network_policy",
+     "rating": "watch",
+     "why": "changes a Vercel deployment, project or setting",
+     "source": "https://vercel.com/docs/agent-resources/vercel-mcp/tools/sandboxes"
+    }
+   ]
+  },
+  {
+   "server": "planetscale",
+   "service": "PlanetScale",
+   "package": [
+    "https://mcp.pscale.dev/mcp/planetscale"
+   ],
+   "names": [
+    "planetscale",
+    "*planetscale*",
+    "pscale"
+   ],
+   "source": "https://planetscale.com/docs/connect/mcp#available-tools",
+   "tools": [
+    {
+     "tool": "planetscale_execute_write_query",
+     "rating": "watch",
+     "why": "runs a write query; PlanetScale blocks unfiltered deletes and the shell SQL rules catch drops"
+    },
+    {
+     "tool": "planetscale_update_payment_method",
+     "rating": "watch",
+     "why": "starts a checkout to replace the card on file"
+    }
+   ]
+  },
+  {
+   "server": "atlassian",
+   "service": "Atlassian (Jira, Confluence, Bitbucket)",
+   "package": [
+    "https://mcp.atlassian.com/v2/mcp"
+   ],
+   "names": [
+    "atlassian",
+    "*atlassian*",
+    "*jira*",
+    "*confluence*"
+   ],
+   "source": "https://support.atlassian.com/atlassian-rovo-mcp-server/docs/supported-tools/",
+   "tools": [
+    {
+     "tool": "executeDestructive",
+     "rating": "ask",
+     "why": "runs an Atlassian tool its server marks destructive, such as deleting a Jira issue"
+    },
+    {
+     "tool": "executeWrite",
+     "rating": "ask",
+     "why": "deletes Jira content or makes a Confluence page public",
+     "input": "\\b(deletejira\\w*|enableconfluencepubliclink)\\b"
+    },
+    {
+     "tool": "deleteJiraIssue",
+     "rating": "ask",
+     "why": "deletes a Jira issue for good"
+    },
+    {
+     "tool": "deleteJiraComment",
+     "rating": "ask",
+     "why": "deletes a Jira comment for good"
+    },
+    {
+     "tool": "deleteJiraIssueAttachment",
+     "rating": "ask",
+     "why": "deletes a Jira attachment for good"
+    },
+    {
+     "tool": "enableConfluencePublicLink",
+     "rating": "ask",
+     "why": "makes a Confluence page readable by anyone with the link"
+    },
+    {
+     "tool": "mergeBitbucketRepoPullRequest",
+     "rating": "watch",
+     "why": "merges a Bitbucket pull request"
+    },
+    {
+     "tool": "archiveConfluenceContent",
+     "rating": "watch",
+     "why": "archives a Confluence page"
+    },
+    {
+     "tool": "removeConfluenceContentPermissions",
+     "rating": "watch",
+     "why": "removes access to a page"
+    },
+    {
+     "tool": "replaceConfluenceContentPermissions",
+     "rating": "watch",
+     "why": "replaces who can see a page"
+    },
+    {
+     "tool": "shareLoomObject",
+     "rating": "watch",
+     "why": "shares a Loom video and notifies the people it is shared with"
+    },
+    {
+     "tool": "updateLoomObjectVisibility",
+     "rating": "watch",
+     "why": "changes who can see a Loom video"
+    },
+    {
+     "tool": "decideJsmRequestApproval",
+     "rating": "watch",
+     "why": "approves or declines a service request"
+    },
+    {
+     "tool": "runBitbucketRepoPipeline",
+     "rating": "watch",
+     "why": "runs a pipeline"
+    },
+    {
+     "tool": "createJiraIssue",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "editJiraIssue",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "transitionJiraIssue",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "addOrEditJiraIssueComment",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "createConfluenceContent",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "updateConfluenceContent",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "moveConfluenceContent",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "createBitbucketRepoPullRequest",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "createBitbucketRepoCommit",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "createBitbucketRepoBranch",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "createJiraProject",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "updateJiraProject",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "createJsmRequest",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    },
+    {
+     "tool": "transitionJsmRequest",
+     "rating": "watch",
+     "why": "creates or changes Jira, Confluence or Bitbucket content"
+    }
+   ]
+  },
+  {
+   "server": "slack",
+   "service": "Slack",
+   "package": [
+    "https://mcp.slack.com/mcp",
+    "@modelcontextprotocol/server-slack (archived)"
+   ],
+   "names": [
+    "slack",
+    "*slack*"
+   ],
+   "source": "https://docs.slack.dev/ai/slack-mcp-server",
+   "tools": [
+    {
+     "tool": "slack_send_message",
+     "rating": "watch",
+     "why": "sends a message; it can be edited or deleted, but people may have read it",
+     "source": "https://github.com/slackapi/slack-skills-plugin/blob/main/tests/eval/test_tool_selection.py"
+    },
+    {
+     "tool": "slack_schedule_message",
+     "rating": "watch",
+     "why": "schedules a message",
+     "source": "https://github.com/slackapi/slack-skills-plugin/blob/main/tests/eval/test_tool_selection.py"
+    },
+    {
+     "tool": "slack_add_reaction",
+     "rating": "watch",
+     "why": "adds a reaction",
+     "source": "https://github.com/slackapi/slack-skills-plugin/blob/main/tests/eval/test_tool_selection.py"
+    },
+    {
+     "tool": "slack_complete_file_upload",
+     "rating": "watch",
+     "why": "finishes a file upload, and can share it to a channel"
+    },
+    {
+     "tool": "slack_post_message",
+     "rating": "watch",
+     "why": "posts a message (archived reference server)",
+     "source": "https://github.com/modelcontextprotocol/servers-archived/blob/main/src/slack/README.md"
+    },
+    {
+     "tool": "slack_reply_to_thread",
+     "rating": "watch",
+     "why": "replies in a thread (archived reference server)",
+     "source": "https://github.com/modelcontextprotocol/servers-archived/blob/main/src/slack/README.md"
+    }
+   ]
+  },
+  {
+   "server": "resend",
+   "service": "Resend",
+   "package": [
+    "resend-mcp",
+    "resend/mcp-send-email"
+   ],
+   "names": [
+    "resend",
+    "*resend*"
+   ],
+   "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/emails.ts",
+   "tools": [
+    {
+     "tool": "send-email",
+     "rating": "ask",
+     "why": "sends an email, which cannot be unsent"
+    },
+    {
+     "tool": "send-batch-emails",
+     "rating": "ask",
+     "why": "sends a batch of emails, which cannot be unsent"
+    },
+    {
+     "tool": "send-broadcast",
+     "rating": "ask",
+     "why": "sends a broadcast to a whole audience",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/broadcasts.ts"
+    },
+    {
+     "tool": "send-new-inbox-email",
+     "rating": "ask",
+     "why": "sends an email from an inbox",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/inboxes.ts"
+    },
+    {
+     "tool": "send-inbox-draft",
+     "rating": "ask",
+     "why": "sends a draft",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/inboxes.ts"
+    },
+    {
+     "tool": "reply-to-inbox-thread-email",
+     "rating": "ask",
+     "why": "sends a reply",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/inboxes.ts"
+    },
+    {
+     "tool": "forward-inbox-thread-email",
+     "rating": "ask",
+     "why": "forwards an email",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/inboxes.ts"
+    },
+    {
+     "tool": "send-event",
+     "rating": "ask",
+     "why": "sends an event that can start automations which email a contact",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/events.ts"
+    },
+    {
+     "tool": "remove-api-key",
+     "rating": "ask",
+     "why": "deletes an API key, which breaks apps using it",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/apiKeys.ts"
+    },
+    {
+     "tool": "remove-domain",
+     "rating": "ask",
+     "why": "deletes a sending domain",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/domains.ts"
+    },
+    {
+     "tool": "remove-contact",
+     "rating": "ask",
+     "why": "deletes a contact",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/contacts.ts"
+    },
+    {
+     "tool": "remove-segment",
+     "rating": "ask",
+     "why": "deletes a segment",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/segments.ts"
+    },
+    {
+     "tool": "remove-inbox",
+     "rating": "ask",
+     "why": "deletes an inbox",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/inboxes.ts"
+    },
+    {
+     "tool": "remove-inbox-thread",
+     "rating": "ask",
+     "why": "deletes an email thread",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/inboxes.ts"
+    },
+    {
+     "tool": "remove-broadcast",
+     "rating": "ask",
+     "why": "deletes a broadcast",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/broadcasts.ts"
+    },
+    {
+     "tool": "remove-template",
+     "rating": "ask",
+     "why": "deletes a template",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/templates.ts"
+    },
+    {
+     "tool": "remove-automation",
+     "rating": "ask",
+     "why": "deletes an automation",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/automations.ts"
+    },
+    {
+     "tool": "remove-webhook",
+     "rating": "ask",
+     "why": "deletes a webhook",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/webhooks.ts"
+    },
+    {
+     "tool": "rotate-webhook-signing-secret",
+     "rating": "ask",
+     "why": "rotates a webhook secret, which breaks receivers using the old one",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/webhooks.ts"
+    },
+    {
+     "tool": "revoke-oauth-grant",
+     "rating": "ask",
+     "why": "revokes an app's access",
+     "source": "https://github.com/resend/mcp-send-email/blob/main/src/tools/oauthGrants.ts"
+    },
+    {
+     "tool": "cancel-email",
+     "rating": "watch",
+     "why": "cancels a scheduled email"
+    },
+    {
+     "tool": "update-email",
+     "rating": "watch",
+     "why": "changes a scheduled email"
+    },
+    {
+     "tool": "share-email",
+     "rating": "watch",
+     "why": "makes a link to an email"
+    },
+    {
+     "tool": "create-broadcast",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-broadcast",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "cancel-broadcast",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "duplicate-broadcast",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "compose-broadcast",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "create-contact",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-contact",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "add-contact-to-segment",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "remove-contact-from-segment",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-contact-topics",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "create-contact-import",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "create-segment",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-segment",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "create-template",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-template",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "publish-template",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "duplicate-template",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "compose-template",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "create-automation",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-automation",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "duplicate-automation",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "manage-events",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "create-domain",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-domain",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "verify-domain",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "create-api-key",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-api-key",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "create-webhook",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-webhook",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "replay-webhook-event",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "add-suppression",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "remove-suppression",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "batch-add-suppressions",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "batch-remove-suppressions",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "create-topic",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-topic",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "remove-topic",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "create-contact-property",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-contact-property",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "remove-contact-property",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "create-inbox",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-inbox",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "create-inbox-draft",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-inbox-draft",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "remove-inbox-draft",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    },
+    {
+     "tool": "update-inbox-agent",
+     "rating": "watch",
+     "why": "creates or changes Resend contacts, templates, domains or settings"
+    }
+   ]
+  },
+  {
+   "server": "paypal",
+   "service": "PayPal",
+   "package": [
+    "paypal/agent-toolkit (its MCP toolkit)"
+   ],
+   "names": [
+    "paypal",
+    "*paypal*"
+   ],
+   "source": "https://github.com/paypal/agent-toolkit/blob/main/README.md",
+   "tools": [
+    {
+     "tool": "pay_order",
+     "rating": "ask",
+     "why": "takes payment for an order"
+    },
+    {
+     "tool": "create_refund",
+     "rating": "ask",
+     "why": "refunds a captured payment"
+    },
+    {
+     "tool": "accept_dispute_claim",
+     "rating": "ask",
+     "why": "accepts a dispute, refunding the buyer"
+    },
+    {
+     "tool": "send_invoice",
+     "rating": "ask",
+     "why": "sends an invoice to a customer"
+    },
+    {
+     "tool": "send_invoice_reminder",
+     "rating": "ask",
+     "why": "sends a reminder to a customer"
+    },
+    {
+     "tool": "activate_recurring_series",
+     "rating": "ask",
+     "why": "starts sending invoices on a schedule"
+    },
+    {
+     "tool": "cancel_sent_invoice",
+     "rating": "ask",
+     "why": "cancels an invoice a customer already has"
+    },
+    {
+     "tool": "delete_invoice",
+     "rating": "ask",
+     "why": "deletes a draft or scheduled invoice for good"
+    },
+    {
+     "tool": "cancel_subscription",
+     "rating": "ask",
+     "why": "cancels a customer's subscription"
+    },
+    {
+     "tool": "cancel_recurring_series",
+     "rating": "ask",
+     "why": "cancels a recurring invoice series"
+    },
+    {
+     "tool": "delete_recurring_series",
+     "rating": "ask",
+     "why": "deletes a draft recurring invoice series"
+    },
+    {
+     "tool": "create_invoice",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "update_invoicing",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "cancel_invoice_auto_reminder",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "record_payment_for_invoice",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "record_refund_for_invoice",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "create_conditional_rules_for_invoice",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "create_recurring_series",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "create_order",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "create_shipment_tracking",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "update_shipment_tracking",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "create_product",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "create_subscription_plan",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "create_subscription",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "update_subscription",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "generate_invoice_qr_code",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    },
+    {
+     "tool": "generate_invoice_number",
+     "rating": "watch",
+     "why": "creates or changes a PayPal invoice, order, product or subscription"
+    }
+   ]
+  },
+  {
+   "server": "square",
+   "service": "Square",
+   "package": [
+    "square-mcp-server",
+    "https://mcp.squareup.com/mcp"
+   ],
+   "names": [
+    "square",
+    "*square*"
+   ],
+   "source": "https://github.com/square/square-mcp-server/blob/main/README.md",
+   "tools": [
+    {
+     "tool": "make_api_request",
+     "rating": "ask",
+     "why": "charges, refunds, cancels, publishes an invoice to a customer, or deletes in Square",
+     "input": "\"method\":\"(delete|deleteobject|batchdeleteobjects|bulkdelete|deleteaction|cancel|accept|payment|publish|disable)\"|^(?=.*\"service\":\"payments\").*\"method\":\"(create|complete)\""
+    }
+   ]
+  },
+  {
+   "server": "hubspot",
+   "service": "HubSpot",
+   "package": [
+    "https://mcp.hubspot.com"
+   ],
+   "names": [
+    "hubspot",
+    "*hubspot*"
+   ],
+   "source": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/integrate-with-the-remote-hubspot-mcp-server",
+   "tools": [
+    {
+     "tool": "manage_crm_objects",
+     "rating": "watch",
+     "why": "creates or updates CRM records; HubSpot asks you to confirm first"
+    },
+    {
+     "tool": "manage_segment",
+     "rating": "watch",
+     "why": "creates segments or changes who is in them"
+    },
+    {
+     "tool": "manage_custom_properties",
+     "rating": "watch",
+     "why": "creates custom properties"
+    },
+    {
+     "tool": "manage_custom_pipelines",
+     "rating": "watch",
+     "why": "creates or changes pipelines"
+    },
+    {
+     "tool": "manage_campaign_objects",
+     "rating": "watch",
+     "why": "creates or changes campaigns"
+    },
+    {
+     "tool": "manage_marketing_email",
+     "rating": "watch",
+     "why": "creates or edits email drafts; it does not send them"
+    },
+    {
+     "tool": "manage_landing_page",
+     "rating": "watch",
+     "why": "edits or publishes a landing page"
+    },
+    {
+     "tool": "manage_website_page",
+     "rating": "watch",
+     "why": "edits or publishes a website page, or changes site navigation"
+    },
+    {
+     "tool": "manage_blog_post",
+     "rating": "watch",
+     "why": "edits or publishes a blog post"
+    },
+    {
+     "tool": "manage_aeo_prompts",
+     "rating": "watch",
+     "why": "creates tracked prompts"
+    },
+    {
+     "tool": "manage_aeo_recommendations",
+     "rating": "watch",
+     "why": "starts content generation from a recommendation"
+    },
+    {
+     "tool": "manage_onboarding",
+     "rating": "watch",
+     "why": "moves onboarding steps along"
+    },
+    {
+     "tool": "submit_feedback",
+     "rating": "watch",
+     "why": "sends feedback to HubSpot"
+    }
+   ]
+  },
+  {
+   "server": "aws-api",
+   "service": "AWS API (awslabs)",
+   "package": [
+    "awslabs.aws-api-mcp-server"
+   ],
+   "names": [
+    "*aws-api*",
+    "*aws_api*",
+    "awslabs*aws-api*",
+    "aws"
+   ],
+   "source": "https://github.com/awslabs/mcp/blob/main/src/aws-api-mcp-server/README.md",
+   "tools": [
+    {
+     "tool": "call_aws",
+     "rating": "ask",
+     "why": "runs an AWS CLI command that deletes, terminates, revokes or turns something off",
+     "input": "\\baws\\s+\\S+\\s+(delete|terminate|remove|deregister|revoke|purge|disable|cancel|schedule-key-deletion|deactivate)-|\\baws\\s+s3\\s+(rm|rb)\\b|\\baws\\s+s3\\s+sync\\b.*\\s--delete\\b"
+    }
+   ]
+  },
+  {
+   "server": "terraform",
+   "service": "HCP Terraform and Terraform Enterprise",
+   "package": [
+    "hashicorp/terraform-mcp-server"
+   ],
+   "names": [
+    "terraform",
+    "*terraform*"
+   ],
+   "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/action_run.go",
+   "tools": [
+    {
+     "tool": "action_run",
+     "rating": "ask",
+     "why": "approves and applies a Terraform run",
+     "input": "\"run_action\":\"apply\""
+    },
+    {
+     "tool": "create_run",
+     "rating": "ask",
+     "why": "starts a destroy run, or a run that applies without review",
+     "input": "\"run_type\":\"(is_destroy|auto_approve)\"",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/create_run.go"
+    },
+    {
+     "tool": "delete_workspace_safely",
+     "rating": "ask",
+     "why": "deletes a workspace",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/delete_workspace_safely.go"
+    },
+    {
+     "tool": "delete_project",
+     "rating": "ask",
+     "why": "deletes a project",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/delete_project.go"
+    },
+    {
+     "tool": "delete_team",
+     "rating": "ask",
+     "why": "deletes a team with its memberships and access",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/delete_team.go"
+    },
+    {
+     "tool": "force_unlock_workspace",
+     "rating": "watch",
+     "why": "unlocks a workspace another run may be using",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/force_unlock_workspace.go"
+    },
+    {
+     "tool": "create_workspace",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/create_workspace.go"
+    },
+    {
+     "tool": "create_no_code_workspace",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/create_no_code_workspace.go"
+    },
+    {
+     "tool": "update_workspace",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/update_workspace.go"
+    },
+    {
+     "tool": "create_project",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/create_project.go"
+    },
+    {
+     "tool": "create_team",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/create_team.go"
+    },
+    {
+     "tool": "add_team_member",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/add_team_member.go"
+    },
+    {
+     "tool": "grant_team_access",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/grant_team_access.go"
+    },
+    {
+     "tool": "attach_policy_set_to_workspaces",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/policy_sets.go"
+    },
+    {
+     "tool": "create_variable_set",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/variable_sets.go"
+    },
+    {
+     "tool": "create_variable_in_variable_set",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/variable_sets.go"
+    },
+    {
+     "tool": "delete_variable_in_variable_set",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/variable_sets.go"
+    },
+    {
+     "tool": "attach_variable_set_to_workspaces",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/variable_sets.go"
+    },
+    {
+     "tool": "detach_variable_set_from_workspaces",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/variable_sets.go"
+    },
+    {
+     "tool": "create_workspace_variable",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/workspace_variables.go"
+    },
+    {
+     "tool": "update_workspace_variable",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/workspace_variables.go"
+    },
+    {
+     "tool": "create_workspace_tags",
+     "rating": "watch",
+     "why": "creates or changes a workspace, project, team or variable",
+     "source": "https://github.com/hashicorp/terraform-mcp-server/blob/main/pkg/tools/tfe/workspace_tags.go"
+    }
+   ]
+  },
+  {
+   "server": "redis",
+   "service": "Redis",
+   "package": [
+    "redis/mcp-redis",
+    "redis-mcp-server"
+   ],
+   "names": [
+    "redis",
+    "*redis*"
+   ],
+   "source": "https://github.com/redis/mcp-redis/blob/main/src/tools/misc.py",
+   "tools": [
+    {
+     "tool": "delete",
+     "rating": "ask",
+     "why": "deletes a key"
+    },
+    {
+     "tool": "json_del",
+     "rating": "ask",
+     "why": "deletes a JSON value, the whole document by default",
+     "source": "https://github.com/redis/mcp-redis/blob/main/src/tools/json.py"
+    },
+    {
+     "tool": "xgroup_destroy",
+     "rating": "ask",
+     "why": "destroys a stream consumer group",
+     "source": "https://github.com/redis/mcp-redis/blob/main/src/tools/stream.py"
+    },
+    {
+     "tool": "expire",
+     "rating": "watch",
+     "why": "sets a key to expire"
+    },
+    {
+     "tool": "rename",
+     "rating": "watch",
+     "why": "renames a key, replacing any key with the new name"
+    },
+    {
+     "tool": "set",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "hset",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "hdel",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "json_set",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "lpush",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "rpush",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "lpop",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "rpop",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "lrem",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "sadd",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "srem",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "zadd",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "zrem",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "xadd",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "xdel",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "xgroup_create",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "xack",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "set_vector_in_hash",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "create_vector_index_hash",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    },
+    {
+     "tool": "publish",
+     "rating": "watch",
+     "why": "writes or removes a value"
+    }
+   ]
+  },
+  {
+   "server": "grafana",
+   "service": "Grafana",
+   "package": [
+    "grafana/mcp-grafana"
+   ],
+   "names": [
+    "grafana",
+    "*grafana*"
+   ],
+   "source": "https://github.com/grafana/mcp-grafana/blob/main/README.md",
+   "tools": [
+    {
+     "tool": "delete_snapshot",
+     "rating": "ask",
+     "why": "deletes a dashboard snapshot, so its shared link stops working"
+    },
+    {
+     "tool": "delete_annotation",
+     "rating": "watch",
+     "why": "deletes an annotation"
+    },
+    {
+     "tool": "alerting_rules_write",
+     "rating": "watch",
+     "why": "creates, updates or deletes alert rules"
+    },
+    {
+     "tool": "alerting_silences_write",
+     "rating": "watch",
+     "why": "creates, updates or expires silences, which mute alerts"
+    },
+    {
+     "tool": "alerting_manage_routing",
+     "rating": "watch",
+     "why": "changes notification policies and contact points"
+    },
+    {
+     "tool": "alerting_routing_write",
+     "rating": "watch",
+     "why": "creates contact points"
+    },
+    {
+     "tool": "update_alert_group",
+     "rating": "watch",
+     "why": "acknowledges or resolves an alert group"
+    },
+    {
+     "tool": "grafana_api_request",
+     "rating": "watch",
+     "why": "calls any Grafana API endpoint"
+    },
+    {
+     "tool": "update_dashboard",
+     "rating": "watch",
+     "why": "creates or changes a dashboard, data source, incident or plugin"
+    },
+    {
+     "tool": "create_folder",
+     "rating": "watch",
+     "why": "creates or changes a dashboard, data source, incident or plugin"
+    },
+    {
+     "tool": "create_datasource",
+     "rating": "watch",
+     "why": "creates or changes a dashboard, data source, incident or plugin"
+    },
+    {
+     "tool": "update_datasource",
+     "rating": "watch",
+     "why": "creates or changes a dashboard, data source, incident or plugin"
+    },
+    {
+     "tool": "create_incident",
+     "rating": "watch",
+     "why": "creates or changes a dashboard, data source, incident or plugin"
+    },
+    {
+     "tool": "update_incident",
+     "rating": "watch",
+     "why": "creates or changes a dashboard, data source, incident or plugin"
+    },
+    {
+     "tool": "add_activity_to_incident",
+     "rating": "watch",
+     "why": "creates or changes a dashboard, data source, incident or plugin"
+    },
+    {
+     "tool": "create_annotation",
+     "rating": "watch",
+     "why": "creates or changes a dashboard, data source, incident or plugin"
+    },
+    {
+     "tool": "update_annotation",
+     "rating": "watch",
+     "why": "creates or changes a dashboard, data source, incident or plugin"
+    },
+    {
+     "tool": "create_snapshot",
+     "rating": "watch",
+     "why": "creates or changes a dashboard, data source, incident or plugin"
+    },
+    {
+     "tool": "install_plugin",
+     "rating": "watch",
+     "why": "creates or changes a dashboard, data source, incident or plugin"
+    }
+   ]
   }
  ]
 }

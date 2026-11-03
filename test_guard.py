@@ -43,6 +43,7 @@ class Guard(unittest.TestCase):
         strip = [{k: r[k] for k in ("tool", "command", "why")} for r in BODY["rules"]]
         self.assertEqual(strip, guard.BUILT_IN["rules"])
         self.assertEqual(body_http(), guard.BUILT_IN["http"])
+        self.assertEqual(body_mcp(), guard.BUILT_IN["mcp"])
         self.assertEqual(BODY["version"], guard.BUILT_IN["version"])
 
     def test_rfc8032_signature_verifies(self):
@@ -66,6 +67,16 @@ class Guard(unittest.TestCase):
         self.assertEqual(decision["permissionDecision"], "ask")
         self.assertIn("git history", decision["permissionDecisionReason"])
         self.assertEqual(run(stdin="not json").stdout, "")
+
+
+def body_mcp():
+    """The feed's MCP ask ratings, as guard.py carries them: it acts on no other rating."""
+    servers = []
+    for s in BODY["mcp"]:
+        tools = [{k: r[k] for k in ("tool", "rating", "why", "input") if k in r} for r in s["tools"] if r["rating"] == "ask"]
+        if tools:
+            servers.append({"server": s["server"], "names": s["names"], "tools": tools})
+    return servers
 
 
 def body_http():
@@ -282,6 +293,63 @@ class Mcp(unittest.TestCase):
             self.assertIsNone(guard.check(tool, given), (tool, given))
 
 
+class McpRatings(unittest.TestCase):
+    def test_server_names_are_the_users_own(self):
+        for tool in ("mcp__github__delete_repository", "mcp__GitHub__delete_repository",
+                     "mcp__claude_ai_GitHub__delete_repository", "mcp__plugin_github_github__delete_repository",
+                     "mcp__my-github__delete_repository"):
+            self.assertEqual(guard.check(tool, {"owner": "a", "repo": "b"}),
+                             "Quarter rating: deletes a GitHub repository with its issues, pull requests and wiki", tool)
+
+    def test_conservative(self):
+        for tool, given in (("mcp__work__delete_repository", {"owner": "a", "repo": "b"}),  # server not known
+                            ("mcp__github__delete_repositories", {}),
+                            ("mcp__github__get_file_contents", {"path": "a"}),
+                            ("mcp__github", {}), ("mcp____delete_repository", {}),
+                            ("delete_repository", {}), ("mcp__stripe__send_stripe_feedback", {"text": "hi"}),
+                            ("mcp__terraform__action_run", {"run_action": "cancel"})):
+            self.assertIsNone(guard.check(tool, given), tool)
+
+    def test_input_patterns_read_the_whole_input(self):
+        self.assertTrue(guard.check("mcp__netlify__netlify-project-manage-env-vars",
+                                    {"siteId": "s", "deleteEnvVar": True}))  # a boolean, not a string
+        self.assertIsNone(guard.check("mcp__netlify__netlify-project-manage-env-vars",
+                                      {"siteId": "s", "deleteEnvVar": False}))
+        self.assertTrue(guard.check("mcp__square__make_api_request",
+                                    {"service": "invoices", "method": "publish", "request": {}}))
+        self.assertIsNone(guard.check("mcp__square__make_api_request",
+                                      {"service": "invoices", "method": "create", "request": {}}))
+
+    def test_feeds_without_ratings_and_ratings_the_guard_cannot_use(self):
+        v2 = {k: v for k, v in guard.BUILT_IN.items() if k != "mcp"}
+        with mock.patch.object(guard, "feed_rules", return_value=v2):
+            self.assertIsNone(guard.check("mcp__github__delete_repository", {}))
+        good = {"tool": "drop_all", "rating": "ask", "why": "w"}
+        server = {"server": "t", "names": ["t"], "tools": [good]}
+        for bad in ({**server, "region": "eu"}, {**server, "tools": [{**good, "when": "x"}]},
+                    {**server, "tools": [{**good, "rating": "deny"}]}, {**server, "tools": [{**good, "input": "("}]},
+                    {**server, "names": None}, "nonsense"):
+            with mock.patch.object(guard, "feed_rules", return_value={"version": 4, "rules": [], "mcp": [bad, server]}):
+                self.assertEqual(guard.check("mcp__t__drop_all", {}), "Quarter rating: w", bad)
+        with mock.patch.object(guard, "feed_rules", return_value={"version": 4, "rules": [], "mcp": "nonsense"}):
+            self.assertIsNone(guard.check("mcp__t__drop_all", {}))
+
+    def test_cursor_mcp_rating(self):
+        call = {"hook_event_name": "beforeMCPExecution", "tool_name": "delete_repository", "mcp_server_name": "GitHub",
+                "tool_input": json.dumps({"owner": "a", "repo": "b"}), "workspace_roots": ["/tmp"]}
+        out = json.loads(run("--host", "cursor", stdin=json.dumps(call)).stdout)
+        self.assertEqual(out["permission"], "ask")
+        self.assertTrue(out["user_message"].startswith("Quarter rating: deletes a GitHub repository"))
+        self.assertEqual(run("--host", "cursor", stdin=json.dumps({**call, "tool_name": "fork_repository"})).stdout, "")
+
+    def test_claude_code_mcp_rating(self):
+        call = {"hook_event_name": "PreToolUse", "tool_name": "mcp__supabase__delete_branch",
+                "tool_input": {"branch_id": "b"}, "cwd": "/"}
+        out = json.loads(run(stdin=json.dumps(call)).stdout)["hookSpecificOutput"]
+        self.assertEqual(out["permissionDecision"], "ask")
+        self.assertEqual(out["permissionDecisionReason"], "Quarter rating: deletes a development branch and its data")
+
+
 class NeverInTheWay(unittest.TestCase):
     def test_parse_errors_say_nothing(self):
         for command in ("curl -X DELETE 'https://api.heroku.com/apps/a", "curl -X", "curl --url", "gh api",
@@ -367,8 +435,13 @@ class PublishedKey(unittest.TestCase):
         source = (HERE / "guard.py").read_text()
         key = source.split('os.environ.get("QUARTER_FEED_KEY", "', 1)[1].split('"', 1)[0]
         self.assertEqual(key, (HERE / "verify-key.txt").read_text().strip())
-        signed = json.loads((HERE / "feed.json").read_text())
-        self.assertEqual(guard.verified(signed, key), BODY)
+        signed = guard.verified(json.loads((HERE / "feed.json").read_text()), key)
+        self.assertTrue(signed)
+        if signed["version"] == BODY["version"]:
+            self.assertEqual(signed, BODY)
+        else:  # body.json is the next version, written but not yet signed with sign.sh
+            self.assertEqual(signed["version"] + 1, BODY["version"])
+            self.assertEqual((signed["rules"], signed["http"]), (BODY["rules"], BODY["http"]))
 
 
 if __name__ == "__main__":

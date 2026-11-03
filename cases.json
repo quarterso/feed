@@ -1719,5 +1719,1693 @@
    "host": "es.internal",
    "path": "/_snapshot/backups/nightly-1"
   }
+ },
+ "mcp.github.delete_repository": {
+  "match": {
+   "tool": "mcp__github__delete_repository",
+   "input": {
+    "owner": "acme",
+    "repo": "app"
+   }
+  },
+  "miss": {
+   "tool": "mcp__github__delete_file",
+   "input": {
+    "owner": "acme",
+    "repo": "app",
+    "path": "a.txt",
+    "branch": "main",
+    "message": "m"
+   }
+  }
+ },
+ "mcp.stripe.send_money": {
+  "match": {
+   "tool": "mcp__stripe__send_money",
+   "input": {
+    "amount": 100
+   }
+  },
+  "miss": {
+   "tool": "mcp__stripe__get_balance_summary",
+   "input": {}
+  }
+ },
+ "mcp.stripe.transfer_money": {
+  "match": {
+   "tool": "mcp__stripe__transfer_money",
+   "input": {
+    "amount": 100
+   }
+  },
+  "miss": {
+   "tool": "mcp__stripe__get_balance_summary",
+   "input": {}
+  }
+ },
+ "mcp.stripe.convert_currency": {
+  "match": {
+   "tool": "mcp__stripe__convert_currency",
+   "input": {
+    "amount": 100
+   }
+  },
+  "miss": {
+   "tool": "mcp__stripe__get_balance_summary",
+   "input": {}
+  }
+ },
+ "mcp.stripe.stripe_api_write": {
+  "match": {
+   "tool": "mcp__claude_ai_Stripe__stripe_api_write",
+   "input": {
+    "method": "POST /v1/refunds",
+    "params": {
+     "charge": "ch_1"
+    }
+   }
+  },
+  "miss": {
+   "tool": "mcp__claude_ai_Stripe__stripe_api_read",
+   "input": {
+    "method": "GET /v1/refunds"
+   }
+  }
+ },
+ "mcp.supabase.delete_branch": {
+  "match": {
+   "tool": "mcp__supabase__delete_branch",
+   "input": {
+    "branch_id": "b1"
+   }
+  },
+  "miss": {
+   "tool": "mcp__supabase__list_branches",
+   "input": {
+    "project_id": "p"
+   }
+  }
+ },
+ "mcp.supabase.reset_branch": {
+  "match": {
+   "tool": "mcp__supabase__reset_branch",
+   "input": {
+    "branch_id": "b1"
+   }
+  },
+  "miss": {
+   "tool": "mcp__supabase__rebase_branch",
+   "input": {
+    "branch_id": "b1"
+   }
+  }
+ },
+ "mcp.supabase.merge_branch": {
+  "match": {
+   "tool": "mcp__supabase__merge_branch",
+   "input": {
+    "branch_id": "b1"
+   }
+  },
+  "miss": {
+   "tool": "mcp__supabase__create_branch",
+   "input": {
+    "project_id": "p",
+    "name": "dev"
+   }
+  }
+ },
+ "mcp.supabase.pause_project": {
+  "match": {
+   "tool": "mcp__supabase__pause_project",
+   "input": {
+    "project_id": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__supabase__restore_project",
+   "input": {
+    "project_id": "p"
+   }
+  }
+ },
+ "mcp.cloudflare-api.execute": {
+  "match": {
+   "tool": "mcp__cloudflare-api__execute",
+   "input": {
+    "code": "async () => cloudflare.request({ method: \"DELETE\", path: `/accounts/${accountId}/workers/scripts/app` })"
+   }
+  },
+  "miss": {
+   "tool": "mcp__cloudflare-api__execute",
+   "input": {
+    "code": "async () => cloudflare.request({ method: \"GET\", path: `/accounts/${accountId}/workers/scripts` })"
+   }
+  }
+ },
+ "mcp.cloudflare-bindings.d1_database_delete": {
+  "match": {
+   "tool": "mcp__cloudflare-bindings__d1_database_delete",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__cloudflare-bindings__d1_database_create",
+   "input": {
+    "name": "x"
+   }
+  }
+ },
+ "mcp.cloudflare-bindings.r2_bucket_delete": {
+  "match": {
+   "tool": "mcp__cloudflare-bindings__r2_bucket_delete",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__cloudflare-bindings__r2_bucket_create",
+   "input": {
+    "name": "x"
+   }
+  }
+ },
+ "mcp.cloudflare-bindings.kv_namespace_delete": {
+  "match": {
+   "tool": "mcp__cloudflare-bindings__kv_namespace_delete",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__cloudflare-bindings__kv_namespace_create",
+   "input": {
+    "name": "x"
+   }
+  }
+ },
+ "mcp.cloudflare-bindings.hyperdrive_config_delete": {
+  "match": {
+   "tool": "mcp__cloudflare-bindings__hyperdrive_config_delete",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__cloudflare-bindings__hyperdrive_config_edit",
+   "input": {
+    "name": "x"
+   }
+  }
+ },
+ "mcp.notion.notion-calendar-cancel-events": {
+  "match": {
+   "tool": "mcp__notion__notion-calendar-cancel-events",
+   "input": {
+    "events": [
+     {
+      "calendar": "c",
+      "eventId": "e"
+     }
+    ]
+   }
+  },
+  "miss": {
+   "tool": "mcp__notion__notion-calendar-update-events",
+   "input": {
+    "events": [
+     {
+      "calendar": "c",
+      "eventId": "e"
+     }
+    ],
+    "updateType": "RSVP"
+   }
+  }
+ },
+ "mcp.sentry.delete_alert_rule": {
+  "match": {
+   "tool": "mcp__sentry__delete_alert_rule",
+   "input": {
+    "organizationSlug": "acme",
+    "id": "1"
+   }
+  },
+  "miss": {
+   "tool": "mcp__sentry__update_alert_rule",
+   "input": {
+    "organizationSlug": "acme",
+    "id": "1"
+   }
+  }
+ },
+ "mcp.sentry.delete_metric_monitor": {
+  "match": {
+   "tool": "mcp__sentry__delete_metric_monitor",
+   "input": {
+    "organizationSlug": "acme",
+    "id": "1"
+   }
+  },
+  "miss": {
+   "tool": "mcp__sentry__update_metric_monitor",
+   "input": {
+    "organizationSlug": "acme",
+    "id": "1"
+   }
+  }
+ },
+ "mcp.sentry.delete_uptime_monitor": {
+  "match": {
+   "tool": "mcp__sentry__delete_uptime_monitor",
+   "input": {
+    "organizationSlug": "acme",
+    "id": "1"
+   }
+  },
+  "miss": {
+   "tool": "mcp__sentry__update_uptime_monitor",
+   "input": {
+    "organizationSlug": "acme",
+    "id": "1"
+   }
+  }
+ },
+ "mcp.sentry.delete_monitor_environment": {
+  "match": {
+   "tool": "mcp__sentry__delete_monitor_environment",
+   "input": {
+    "organizationSlug": "acme",
+    "id": "1"
+   }
+  },
+  "miss": {
+   "tool": "mcp__sentry__get_monitor_details",
+   "input": {
+    "organizationSlug": "acme",
+    "id": "1"
+   }
+  }
+ },
+ "mcp.sentry.execute_sentry_tool": {
+  "match": {
+   "tool": "mcp__sentry__execute_sentry_tool",
+   "input": {
+    "name": "delete_alert_rule",
+    "arguments": {
+     "id": "1"
+    }
+   }
+  },
+  "miss": {
+   "tool": "mcp__sentry__execute_sentry_tool",
+   "input": {
+    "name": "update_alert_rule",
+    "arguments": {
+     "id": "1"
+    }
+   }
+  }
+ },
+ "mcp.neon.delete_project": {
+  "match": {
+   "tool": "mcp__Neon__delete_project",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__update_project",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.delete_branch": {
+  "match": {
+   "tool": "mcp__Neon__delete_branch",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__create_branch",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.reset_from_parent": {
+  "match": {
+   "tool": "mcp__Neon__reset_from_parent",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__get_branch",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.delete_postgres_database": {
+  "match": {
+   "tool": "mcp__Neon__delete_postgres_database",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__create_postgres_database",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.delete_postgres_role": {
+  "match": {
+   "tool": "mcp__Neon__delete_postgres_role",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__create_postgres_role",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.reset_postgres_role_password": {
+  "match": {
+   "tool": "mcp__Neon__reset_postgres_role_password",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__get_postgres_role",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.delete_postgres_endpoint": {
+  "match": {
+   "tool": "mcp__Neon__delete_postgres_endpoint",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__update_postgres_endpoint",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.suspend_postgres_endpoint": {
+  "match": {
+   "tool": "mcp__Neon__suspend_postgres_endpoint",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__start_postgres_endpoint",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.delete_snapshot": {
+  "match": {
+   "tool": "mcp__Neon__delete_snapshot",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__create_snapshot",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.restore_snapshot": {
+  "match": {
+   "tool": "mcp__Neon__restore_snapshot",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__list_snapshots",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.finalize_branch_restore": {
+  "match": {
+   "tool": "mcp__Neon__finalize_branch_restore",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__describe_branch",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.disable_auth": {
+  "match": {
+   "tool": "mcp__Neon__disable_auth",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__get_auth",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.delete_auth_user": {
+  "match": {
+   "tool": "mcp__Neon__delete_auth_user",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__create_auth_user",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.delete_auth_oauth_client": {
+  "match": {
+   "tool": "mcp__Neon__delete_auth_oauth_client",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__update_auth_oauth_client",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.rotate_auth_oauth_client_secret": {
+  "match": {
+   "tool": "mcp__Neon__rotate_auth_oauth_client_secret",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__get_auth_oauth_client",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.delete_data_api": {
+  "match": {
+   "tool": "mcp__Neon__delete_data_api",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__update_data_api",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.delete_function": {
+  "match": {
+   "tool": "mcp__Neon__delete_function",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__deploy_function",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.revoke_credential": {
+  "match": {
+   "tool": "mcp__Neon__revoke_credential",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__create_credential",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.rotate_credential": {
+  "match": {
+   "tool": "mcp__Neon__rotate_credential",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__list_credentials",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.delete_storage_bucket": {
+  "match": {
+   "tool": "mcp__Neon__delete_storage_bucket",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__create_storage_bucket",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.delete_storage_object": {
+  "match": {
+   "tool": "mcp__Neon__delete_storage_object",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__list_storage_objects",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.delete_storage_objects_by_prefix": {
+  "match": {
+   "tool": "mcp__Neon__delete_storage_objects_by_prefix",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__presign_storage_object",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.neon.rotate_realtime_secret": {
+  "match": {
+   "tool": "mcp__Neon__rotate_realtime_secret",
+   "input": {
+    "projectId": "p"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Neon__get_realtime",
+   "input": {
+    "projectId": "p"
+   }
+  }
+ },
+ "mcp.mongodb.delete-many": {
+  "match": {
+   "tool": "mcp__mongodb__delete-many",
+   "input": {
+    "database": "shop",
+    "collection": "orders",
+    "filter": {
+     "status": "old"
+    }
+   }
+  },
+  "miss": {
+   "tool": "mcp__mongodb__update-many",
+   "input": {
+    "database": "shop",
+    "collection": "orders"
+   }
+  }
+ },
+ "mcp.mongodb.drop-collection": {
+  "match": {
+   "tool": "mcp__mongodb__drop-collection",
+   "input": {
+    "database": "shop",
+    "collection": "orders",
+    "filter": {
+     "status": "old"
+    }
+   }
+  },
+  "miss": {
+   "tool": "mcp__mongodb__create-collection",
+   "input": {
+    "database": "shop",
+    "collection": "orders"
+   }
+  }
+ },
+ "mcp.mongodb.drop-database": {
+  "match": {
+   "tool": "mcp__mongodb__drop-database",
+   "input": {
+    "database": "shop",
+    "collection": "orders",
+    "filter": {
+     "status": "old"
+    }
+   }
+  },
+  "miss": {
+   "tool": "mcp__mongodb__list-databases",
+   "input": {
+    "database": "shop",
+    "collection": "orders"
+   }
+  }
+ },
+ "mcp.mongodb.atlas-pause-resume-cluster": {
+  "match": {
+   "tool": "mcp__mongodb__atlas-pause-resume-cluster",
+   "input": {
+    "database": "shop",
+    "collection": "orders",
+    "filter": {
+     "status": "old"
+    }
+   }
+  },
+  "miss": {
+   "tool": "mcp__mongodb__atlas-inspect-cluster",
+   "input": {
+    "database": "shop",
+    "collection": "orders"
+   }
+  }
+ },
+ "mcp.mongodb.atlas-streams-teardown": {
+  "match": {
+   "tool": "mcp__mongodb__atlas-streams-teardown",
+   "input": {
+    "database": "shop",
+    "collection": "orders",
+    "filter": {
+     "status": "old"
+    }
+   }
+  },
+  "miss": {
+   "tool": "mcp__mongodb__atlas-streams-discover",
+   "input": {
+    "database": "shop",
+    "collection": "orders"
+   }
+  }
+ },
+ "mcp.mongodb.atlas-local-delete-deployment": {
+  "match": {
+   "tool": "mcp__mongodb__atlas-local-delete-deployment",
+   "input": {
+    "database": "shop",
+    "collection": "orders",
+    "filter": {
+     "status": "old"
+    }
+   }
+  },
+  "miss": {
+   "tool": "mcp__mongodb__atlas-local-create-deployment",
+   "input": {
+    "database": "shop",
+    "collection": "orders"
+   }
+  }
+ },
+ "mcp.railway.remove_service": {
+  "match": {
+   "tool": "mcp__railway__remove_service",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__railway__update_service",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.railway.remove_volume": {
+  "match": {
+   "tool": "mcp__railway__remove_volume",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__railway__update_volume",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.railway.remove_bucket": {
+  "match": {
+   "tool": "mcp__railway__remove_bucket",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__railway__create_bucket",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.railway.delete_domain": {
+  "match": {
+   "tool": "mcp__railway__delete_domain",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__railway__update_domain",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.railway.remove_tcp_proxy": {
+  "match": {
+   "tool": "mcp__railway__remove_tcp_proxy",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__railway__create_tcp_proxy",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.heroku.transfer_app": {
+  "match": {
+   "tool": "mcp__heroku__transfer_app",
+   "input": {
+    "app": "shop"
+   }
+  },
+  "miss": {
+   "tool": "mcp__heroku__rename_app",
+   "input": {
+    "app": "shop"
+   }
+  }
+ },
+ "mcp.heroku.maintenance_on": {
+  "match": {
+   "tool": "mcp__heroku__maintenance_on",
+   "input": {
+    "app": "shop"
+   }
+  },
+  "miss": {
+   "tool": "mcp__heroku__maintenance_off",
+   "input": {
+    "app": "shop"
+   }
+  }
+ },
+ "mcp.heroku.pg_upgrade": {
+  "match": {
+   "tool": "mcp__heroku__pg_upgrade",
+   "input": {
+    "app": "shop"
+   }
+  },
+  "miss": {
+   "tool": "mcp__heroku__pg_info",
+   "input": {
+    "app": "shop"
+   }
+  }
+ },
+ "mcp.netlify.netlify-project-services-updater": {
+  "match": {
+   "tool": "mcp__netlify__netlify-project-services-updater",
+   "input": {
+    "selectSchema": {
+     "operation": "manage-form-submissions",
+     "params": {
+      "action": "delete-submission",
+      "submissionId": "s"
+     }
+    }
+   }
+  },
+  "miss": {
+   "tool": "mcp__netlify__netlify-project-services-updater",
+   "input": {
+    "selectSchema": {
+     "operation": "manage-form-submissions",
+     "params": {
+      "action": "get-submissions"
+     }
+    }
+   }
+  }
+ },
+ "mcp.netlify.netlify-project-manage-form-submissions": {
+  "match": {
+   "tool": "mcp__netlify__netlify-project-manage-form-submissions",
+   "input": {
+    "action": "delete-submission",
+    "submissionId": "s"
+   }
+  },
+  "miss": {
+   "tool": "mcp__netlify__netlify-project-manage-form-submissions",
+   "input": {
+    "action": "get-submissions",
+    "siteId": "s"
+   }
+  }
+ },
+ "mcp.netlify.netlify-project-manage-env-vars": {
+  "match": {
+   "tool": "mcp__netlify__netlify-project-manage-env-vars",
+   "input": {
+    "siteId": "s",
+    "deleteEnvVar": true,
+    "envVarKey": "K"
+   }
+  },
+  "miss": {
+   "tool": "mcp__netlify__netlify-project-manage-env-vars",
+   "input": {
+    "siteId": "s",
+    "upsertEnvVar": true,
+    "envVarKey": "K",
+    "envVarValue": "v"
+   }
+  }
+ },
+ "mcp.vercel.buy_domain": {
+  "match": {
+   "tool": "mcp__vercel__buy_domain",
+   "input": {
+    "teamId": "t"
+   }
+  },
+  "miss": {
+   "tool": "mcp__vercel__get_purchase_quote",
+   "input": {
+    "teamId": "t"
+   }
+  }
+ },
+ "mcp.vercel.replace_domain_dns_records": {
+  "match": {
+   "tool": "mcp__vercel__replace_domain_dns_records",
+   "input": {
+    "teamId": "t"
+   }
+  },
+  "miss": {
+   "tool": "mcp__vercel__create_record",
+   "input": {
+    "teamId": "t"
+   }
+  }
+ },
+ "mcp.vercel.revoke_kms_signing_key": {
+  "match": {
+   "tool": "mcp__vercel__revoke_kms_signing_key",
+   "input": {
+    "teamId": "t"
+   }
+  },
+  "miss": {
+   "tool": "mcp__vercel__activate_kms_signing_key",
+   "input": {
+    "teamId": "t"
+   }
+  }
+ },
+ "mcp.vercel.pause_project": {
+  "match": {
+   "tool": "mcp__vercel__pause_project",
+   "input": {
+    "teamId": "t"
+   }
+  },
+  "miss": {
+   "tool": "mcp__vercel__unpause_project",
+   "input": {
+    "teamId": "t"
+   }
+  }
+ },
+ "mcp.atlassian.executeDestructive": {
+  "match": {
+   "tool": "mcp__atlassian__executeDestructive",
+   "input": {
+    "tool": "deleteJiraIssue",
+    "args": {
+     "issueIdOrKey": "EN-1"
+    }
+   }
+  },
+  "miss": {
+   "tool": "mcp__atlassian__executeRead",
+   "input": {
+    "tool": "getJiraIssue",
+    "args": {
+     "issueIdOrKey": "EN-1"
+    }
+   }
+  }
+ },
+ "mcp.atlassian.executeWrite": {
+  "match": {
+   "tool": "mcp__plugin_atlassian_atlassian__executeWrite",
+   "input": {
+    "tool": "enableConfluencePublicLink",
+    "args": {
+     "pageId": "1"
+    }
+   }
+  },
+  "miss": {
+   "tool": "mcp__plugin_atlassian_atlassian__executeWrite",
+   "input": {
+    "tool": "editJiraIssue",
+    "args": {
+     "issueIdOrKey": "EN-1"
+    }
+   }
+  }
+ },
+ "mcp.atlassian.deleteJiraIssue": {
+  "match": {
+   "tool": "mcp__Atlassian__deleteJiraIssue",
+   "input": {
+    "cloudId": "c",
+    "id": "1"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Atlassian__editJiraIssue",
+   "input": {
+    "cloudId": "c",
+    "id": "1"
+   }
+  }
+ },
+ "mcp.atlassian.deleteJiraComment": {
+  "match": {
+   "tool": "mcp__Atlassian__deleteJiraComment",
+   "input": {
+    "cloudId": "c",
+    "id": "1"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Atlassian__addOrEditJiraIssueComment",
+   "input": {
+    "cloudId": "c",
+    "id": "1"
+   }
+  }
+ },
+ "mcp.atlassian.deleteJiraIssueAttachment": {
+  "match": {
+   "tool": "mcp__Atlassian__deleteJiraIssueAttachment",
+   "input": {
+    "cloudId": "c",
+    "id": "1"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Atlassian__downloadJiraIssueAttachment",
+   "input": {
+    "cloudId": "c",
+    "id": "1"
+   }
+  }
+ },
+ "mcp.atlassian.enableConfluencePublicLink": {
+  "match": {
+   "tool": "mcp__Atlassian__enableConfluencePublicLink",
+   "input": {
+    "cloudId": "c",
+    "id": "1"
+   }
+  },
+  "miss": {
+   "tool": "mcp__Atlassian__disableConfluencePublicLink",
+   "input": {
+    "cloudId": "c",
+    "id": "1"
+   }
+  }
+ },
+ "mcp.resend.send-email": {
+  "match": {
+   "tool": "mcp__resend__send-email",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__list-emails",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.send-batch-emails": {
+  "match": {
+   "tool": "mcp__resend__send-batch-emails",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__get-email",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.send-broadcast": {
+  "match": {
+   "tool": "mcp__resend__send-broadcast",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__create-broadcast",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.send-new-inbox-email": {
+  "match": {
+   "tool": "mcp__resend__send-new-inbox-email",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__create-inbox-draft",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.send-inbox-draft": {
+  "match": {
+   "tool": "mcp__resend__send-inbox-draft",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__update-inbox-draft",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.reply-to-inbox-thread-email": {
+  "match": {
+   "tool": "mcp__resend__reply-to-inbox-thread-email",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__update-inbox-thread",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.forward-inbox-thread-email": {
+  "match": {
+   "tool": "mcp__resend__forward-inbox-thread-email",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__add-inbox-thread-labels",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.send-event": {
+  "match": {
+   "tool": "mcp__resend__send-event",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__manage-events",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.remove-api-key": {
+  "match": {
+   "tool": "mcp__resend__remove-api-key",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__create-api-key",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.remove-domain": {
+  "match": {
+   "tool": "mcp__resend__remove-domain",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__verify-domain",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.remove-contact": {
+  "match": {
+   "tool": "mcp__resend__remove-contact",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__update-contact",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.remove-segment": {
+  "match": {
+   "tool": "mcp__resend__remove-segment",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__update-segment",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.remove-inbox": {
+  "match": {
+   "tool": "mcp__resend__remove-inbox",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__update-inbox",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.remove-inbox-thread": {
+  "match": {
+   "tool": "mcp__resend__remove-inbox-thread",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__set-inbox-thread-labels",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.remove-broadcast": {
+  "match": {
+   "tool": "mcp__resend__remove-broadcast",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__duplicate-broadcast",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.remove-template": {
+  "match": {
+   "tool": "mcp__resend__remove-template",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__duplicate-template",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.remove-automation": {
+  "match": {
+   "tool": "mcp__resend__remove-automation",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__duplicate-automation",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.remove-webhook": {
+  "match": {
+   "tool": "mcp__resend__remove-webhook",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__update-webhook",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.rotate-webhook-signing-secret": {
+  "match": {
+   "tool": "mcp__resend__rotate-webhook-signing-secret",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__replay-webhook-event",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.resend.revoke-oauth-grant": {
+  "match": {
+   "tool": "mcp__resend__revoke-oauth-grant",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__resend__list-oauth-grants",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.paypal.pay_order": {
+  "match": {
+   "tool": "mcp__paypal__pay_order",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__paypal__create_order",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.paypal.create_refund": {
+  "match": {
+   "tool": "mcp__paypal__create_refund",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__paypal__get_refund",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.paypal.accept_dispute_claim": {
+  "match": {
+   "tool": "mcp__paypal__accept_dispute_claim",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__paypal__get_dispute",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.paypal.send_invoice": {
+  "match": {
+   "tool": "mcp__paypal__send_invoice",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__paypal__create_invoice",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.paypal.send_invoice_reminder": {
+  "match": {
+   "tool": "mcp__paypal__send_invoice_reminder",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__paypal__cancel_invoice_auto_reminder",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.paypal.activate_recurring_series": {
+  "match": {
+   "tool": "mcp__paypal__activate_recurring_series",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__paypal__create_recurring_series",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.paypal.cancel_sent_invoice": {
+  "match": {
+   "tool": "mcp__paypal__cancel_sent_invoice",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__paypal__get_invoice",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.paypal.delete_invoice": {
+  "match": {
+   "tool": "mcp__paypal__delete_invoice",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__paypal__update_invoicing",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.paypal.cancel_subscription": {
+  "match": {
+   "tool": "mcp__paypal__cancel_subscription",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__paypal__update_subscription",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.paypal.cancel_recurring_series": {
+  "match": {
+   "tool": "mcp__paypal__cancel_recurring_series",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__paypal__get_recurring_series",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.paypal.delete_recurring_series": {
+  "match": {
+   "tool": "mcp__paypal__delete_recurring_series",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__paypal__search_invoicing",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.square.make_api_request": {
+  "match": {
+   "tool": "mcp__square__make_api_request",
+   "input": {
+    "service": "payments",
+    "method": "create",
+    "request": {
+     "amount_money": {}
+    }
+   }
+  },
+  "miss": {
+   "tool": "mcp__square__make_api_request",
+   "input": {
+    "service": "customers",
+    "method": "create",
+    "request": {
+     "given_name": "Ann"
+    }
+   }
+  }
+ },
+ "mcp.aws-api.call_aws": {
+  "match": {
+   "tool": "mcp__aws-api__call_aws",
+   "input": {
+    "cli_command": "aws lambda delete-function --function-name app"
+   }
+  },
+  "miss": {
+   "tool": "mcp__aws-api__call_aws",
+   "input": {
+    "cli_command": "aws lambda get-function --function-name app"
+   }
+  }
+ },
+ "mcp.terraform.action_run": {
+  "match": {
+   "tool": "mcp__terraform__action_run",
+   "input": {
+    "run_id": "run-1",
+    "run_action": "apply"
+   }
+  },
+  "miss": {
+   "tool": "mcp__terraform__action_run",
+   "input": {
+    "run_id": "run-1",
+    "run_action": "discard"
+   }
+  }
+ },
+ "mcp.terraform.create_run": {
+  "match": {
+   "tool": "mcp__terraform__create_run",
+   "input": {
+    "workspace_name": "prod",
+    "run_type": "is_destroy"
+   }
+  },
+  "miss": {
+   "tool": "mcp__terraform__create_run",
+   "input": {
+    "workspace_name": "prod",
+    "run_type": "plan_only"
+   }
+  }
+ },
+ "mcp.terraform.delete_workspace_safely": {
+  "match": {
+   "tool": "mcp__terraform__delete_workspace_safely",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__terraform__update_workspace",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.terraform.delete_project": {
+  "match": {
+   "tool": "mcp__terraform__delete_project",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__terraform__create_project",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.terraform.delete_team": {
+  "match": {
+   "tool": "mcp__terraform__delete_team",
+   "input": {
+    "id": "x"
+   }
+  },
+  "miss": {
+   "tool": "mcp__terraform__create_team",
+   "input": {
+    "id": "x"
+   }
+  }
+ },
+ "mcp.redis.delete": {
+  "match": {
+   "tool": "mcp__redis__delete",
+   "input": {
+    "key": "session:1",
+    "group_name": "g",
+    "name": "doc"
+   }
+  },
+  "miss": {
+   "tool": "mcp__redis__get",
+   "input": {
+    "key": "session:1",
+    "group_name": "g",
+    "name": "doc"
+   }
+  }
+ },
+ "mcp.redis.json_del": {
+  "match": {
+   "tool": "mcp__redis__json_del",
+   "input": {
+    "key": "session:1",
+    "group_name": "g",
+    "name": "doc"
+   }
+  },
+  "miss": {
+   "tool": "mcp__redis__json_get",
+   "input": {
+    "key": "session:1",
+    "group_name": "g",
+    "name": "doc"
+   }
+  }
+ },
+ "mcp.redis.xgroup_destroy": {
+  "match": {
+   "tool": "mcp__redis__xgroup_destroy",
+   "input": {
+    "key": "session:1",
+    "group_name": "g",
+    "name": "doc"
+   }
+  },
+  "miss": {
+   "tool": "mcp__redis__xgroup_create",
+   "input": {
+    "key": "session:1",
+    "group_name": "g",
+    "name": "doc"
+   }
+  }
+ },
+ "mcp.grafana.delete_snapshot": {
+  "match": {
+   "tool": "mcp__grafana__delete_snapshot",
+   "input": {
+    "key": "abc"
+   }
+  },
+  "miss": {
+   "tool": "mcp__grafana__delete_annotation",
+   "input": {
+    "id": 3
+   }
+  }
  }
 }

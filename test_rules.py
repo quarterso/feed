@@ -6,9 +6,10 @@ import json
 import re
 import unittest
 from pathlib import Path
+from unittest import mock
 
 import guard
-from guard import HTTP_FIELDS, globs, http_matches
+from guard import HTTP_FIELDS, MCP_SERVER_FIELDS, MCP_TOOL_FIELDS, globs, http_matches
 
 HERE = Path(__file__).parent
 BODY = json.loads((HERE / "body.json").read_text())
@@ -21,7 +22,7 @@ class Rulebook(unittest.TestCase):
         self.assertEqual(sorted(about), list(range(1, len(BODY["rules"]) + 1)))
         ids = [a["id"] for a in BODY["about"]] + [h["id"] for h in BODY["http"]]
         self.assertEqual(len(ids), len(set(ids)), "ids are unique")
-        self.assertEqual(set(ids), set(CASES))
+        self.assertEqual(set(ids) | set(ask_ids()), set(CASES))
         for rule in BODY["http"]:
             self.assertLessEqual(set(rule), HTTP_FIELDS, rule["id"])
             self.assertEqual(rule["action"], "approve", rule["id"])
@@ -71,6 +72,50 @@ class Rulebook(unittest.TestCase):
                 "graphql": ["volumeDelete"]}
         held = [r["id"] for r in BODY["http"] if http_matches(r, call)]
         self.assertEqual(held, ["railway.volume"])
+
+
+def ask_ids():
+    return [f"mcp.{s['server']}.{t['tool']}" for s in BODY["mcp"] for t in s["tools"] if t["rating"] == "ask"]
+
+
+class McpRatings(unittest.TestCase):
+    def test_every_rating_has_a_source_and_every_ask_two_cases(self):
+        self.assertEqual(BODY["version"], 3)
+        servers = [s["server"] for s in BODY["mcp"]]
+        self.assertEqual(len(servers), len(set(servers)), "server ids are unique")
+        for s in BODY["mcp"]:
+            self.assertEqual(set(s), MCP_SERVER_FIELDS, s["server"])
+            self.assertTrue(s["names"] and s["package"] and s["source"].startswith("https://"), s["server"])
+            tools = [t["tool"] for t in s["tools"]]
+            self.assertEqual(len(tools), len(set(tools)), s["server"])
+            for t in s["tools"]:
+                with self.subTest(f"{s['server']}.{t['tool']}"):
+                    self.assertLessEqual(set(t), MCP_TOOL_FIELDS)
+                    self.assertIn(t["rating"], ("ask", "watch"))
+                    self.assertTrue(t["why"] and "\u2014" not in t["why"])
+                    self.assertTrue(t.get("source", s["source"]).startswith("https://"))
+                    if "input" in t:
+                        re.compile(t["input"])
+        self.assertEqual(len(ask_ids()), len(set(ask_ids())))
+
+    def test_each_ask_rating_asks_on_its_case_and_stays_silent_on_the_near_miss(self):
+        """The near miss is a call to the same server that must not ask: another tool, or the same
+        tool with an input the rating does not cover."""
+        why = {f"mcp.{s['server']}.{t['tool']}": t["why"] for s in BODY["mcp"] for t in s["tools"]}
+        with mock.patch.object(guard, "feed_rules", return_value=BODY):
+            for rid in ask_ids():
+                case = CASES[rid]
+                with self.subTest(rid):
+                    self.assertEqual(guard.check(case["match"]["tool"], case["match"]["input"]),
+                                     f"Quarter rating: {why[rid]}")
+                    self.assertIsNone(guard.check(case["miss"]["tool"], case["miss"]["input"]), case["miss"])
+
+    def test_watch_ratings_never_ask(self):
+        with mock.patch.object(guard, "feed_rules", return_value=BODY):
+            for s in BODY["mcp"]:
+                for t in s["tools"]:
+                    if t["rating"] == "watch":
+                        self.assertIsNone(guard.check(f"mcp__{s['names'][0].strip('*')}__{t['tool']}", {}), t["tool"])
 
 
 if __name__ == "__main__":
