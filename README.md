@@ -4,6 +4,7 @@ Prices and tool rules that Quarter signs and every Quarter gateway can pull once
 
 - `body.json` is the feed as written. `feed.json` is the same body, signed. Gateways read only `feed.json`.
 - A feed rule can only ask a person before a tool call runs. It never refuses one, and the customer's own rules and prices always come first.
+- `FORMAT.md` is the open format, for anyone to implement.
 - A gateway takes a feed only if it verifies against the key it was given and is newer than the one it holds.
 
 ## Quarter guard, for Claude Code
