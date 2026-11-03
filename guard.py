@@ -5,7 +5,7 @@ A hook for Claude Code (PreToolUse) and Cursor (beforeShellExecution, beforeMCPE
 each shell command and MCP tool call against the Quarter feed's rules and, on a match, makes the
 agent ask you first. It never refuses anything on its own. Shell rules match the command text.
 HTTP rules match the web calls a command makes with curl, wget, HTTPie or gh api, and MCP tools
-that name a URL and a method. The rules are built in, so it works offline; a newer signed feed
+that name a URL and a method. MCP ratings match the tools of known MCP servers. The rules are built in, so it works offline; a newer signed feed
 replaces them once a day. Standard library only. Print the settings to add with:
 python3 guard.py --settings [--host claude|cursor]
 """
@@ -27,7 +27,7 @@ FEED_KEY = os.environ.get("QUARTER_FEED_KEY", "ed25519-pub:37115bdfec3099c6a0391
 CACHE = Path(os.environ.get("XDG_CACHE_HOME", Path.home() / ".cache")) / "quarter-guard" / "feed.json"
 DAY = 86_400
 
-BUILT_IN = {"version": 2, "rules": [
+BUILT_IN = {"version": 3, "rules": [
     {"tool": "*", "why": "deletes a root, home or working directory",
      "command": r"\brm\s+-\w*(rf|fr)\w*\s+(/\*?|~/?|\$HOME/?|\*|\.\.?/?)(\s|;|&|$)"},
     {"tool": "*", "why": "formats or overwrites a disk",
@@ -517,6 +517,164 @@ BUILT_IN["http"] = [
     {"id": "elasticsearch.bulk", "host": ["*"], "method": ["DELETE", "POST"],
      "path": "^/[^/]+/_delete_by_query$|^/_snapshot/[^/]+/[^/]+$|^/_data_stream/[^/]+$",
      "why": "deletes documents by query, a snapshot or a data stream"},
+]
+
+# MCP ratings: FORMAT.md, "MCP rating". Only the ask ratings, since the guard acts on no other.
+BUILT_IN["mcp"] = [
+    {"server": "github", "names": ["github", "*github*"], "tools": [
+        {"tool": "delete_repository", "rating": "ask", "why": "deletes a GitHub repository with its issues, pull requests and wiki"},
+    ]},
+    {"server": "stripe", "names": ["stripe", "*stripe*"], "tools": [
+        {"tool": "send_money", "rating": "ask", "why": "sends money from a Treasury account to a recipient"},
+        {"tool": "transfer_money", "rating": "ask", "why": "moves money between Stripe balances"},
+        {"tool": "convert_currency", "rating": "ask", "why": "converts funds between currencies"},
+        {"tool": "stripe_api_write", "rating": "ask", "why": "runs any Stripe write, including refunds, cancellations and deletes"},
+    ]},
+    {"server": "supabase", "names": ["supabase", "*supabase*"], "tools": [
+        {"tool": "delete_branch", "rating": "ask", "why": "deletes a development branch and its data"},
+        {"tool": "reset_branch", "rating": "ask", "why": "resets a branch's migrations; untracked data and schema changes are lost"},
+        {"tool": "merge_branch", "rating": "ask", "why": "applies a branch's migrations and Edge Functions to production"},
+        {"tool": "pause_project", "rating": "ask", "why": "pauses a project, taking its database and APIs offline"},
+    ]},
+    {"server": "cloudflare-api", "names": ["cloudflare*", "*cloudflare*"], "tools": [
+        {"tool": "execute", "rating": "ask", "why": "runs code that sends a DELETE to the Cloudflare API", "input": r'method\W{0,8}delete\b'},
+    ]},
+    {"server": "cloudflare-bindings", "names": ["cloudflare*", "*cloudflare*", "*bindings*"], "tools": [
+        {"tool": "d1_database_delete", "rating": "ask", "why": "deletes a D1 database and its data"},
+        {"tool": "r2_bucket_delete", "rating": "ask", "why": "deletes an R2 bucket"},
+        {"tool": "kv_namespace_delete", "rating": "ask", "why": "deletes a KV namespace and its keys"},
+        {"tool": "hyperdrive_config_delete", "rating": "ask", "why": "deletes a Hyperdrive configuration"},
+    ]},
+    {"server": "notion", "names": ["notion", "*notion*"], "tools": [
+        {"tool": "notion-calendar-cancel-events", "rating": "ask", "why": "cancels calendar events, which may notify every guest"},
+    ]},
+    {"server": "sentry", "names": ["sentry", "*sentry*"], "tools": [
+        {"tool": "delete_alert_rule", "rating": "ask", "why": "deletes an alert for good, with its notifications for every connected project"},
+        {"tool": "delete_metric_monitor", "rating": "ask", "why": "deletes a metric monitor for good, with its incident history"},
+        {"tool": "delete_uptime_monitor", "rating": "ask", "why": "deletes an uptime monitor for good"},
+        {"tool": "delete_monitor_environment", "rating": "ask", "why": "deletes a cron monitor's environment"},
+        {"tool": "execute_sentry_tool", "rating": "ask", "why": "runs one of Sentry's delete tools", "input": r'\bdelete_(alert_rule|metric_monitor|uptime_monitor|monitor_environment)\b'},
+    ]},
+    {"server": "neon", "names": ["neon", "*neon*"], "tools": [
+        {"tool": "delete_project", "rating": "ask", "why": "deletes a Neon project with all its branches and data"},
+        {"tool": "delete_branch", "rating": "ask", "why": "deletes a branch and its data"},
+        {"tool": "reset_from_parent", "rating": "ask", "why": "resets a branch to its parent, discarding its changes"},
+        {"tool": "delete_postgres_database", "rating": "ask", "why": "deletes a database"},
+        {"tool": "delete_postgres_role", "rating": "ask", "why": "deletes a database role"},
+        {"tool": "reset_postgres_role_password", "rating": "ask", "why": "resets a role's password, which breaks apps using the old one"},
+        {"tool": "delete_postgres_endpoint", "rating": "ask", "why": "deletes a compute endpoint"},
+        {"tool": "suspend_postgres_endpoint", "rating": "ask", "why": "suspends a compute endpoint, taking it offline"},
+        {"tool": "delete_snapshot", "rating": "ask", "why": "deletes a snapshot"},
+        {"tool": "restore_snapshot", "rating": "ask", "why": "restores a snapshot onto a branch"},
+        {"tool": "finalize_branch_restore", "rating": "ask", "why": "finishes a branch restore"},
+        {"tool": "disable_auth", "rating": "ask", "why": "turns Neon Auth off for a branch"},
+        {"tool": "delete_auth_user", "rating": "ask", "why": "deletes a Neon Auth user"},
+        {"tool": "delete_auth_oauth_client", "rating": "ask", "why": "deletes an OAuth client"},
+        {"tool": "rotate_auth_oauth_client_secret", "rating": "ask", "why": "rotates an OAuth client secret, which breaks apps using the old one"},
+        {"tool": "delete_data_api", "rating": "ask", "why": "deletes the Data API for a database"},
+        {"tool": "delete_function", "rating": "ask", "why": "deletes a function"},
+        {"tool": "revoke_credential", "rating": "ask", "why": "revokes a credential"},
+        {"tool": "rotate_credential", "rating": "ask", "why": "rotates a credential, which breaks apps using the old one"},
+        {"tool": "delete_storage_bucket", "rating": "ask", "why": "deletes a storage bucket"},
+        {"tool": "delete_storage_object", "rating": "ask", "why": "deletes a stored object"},
+        {"tool": "delete_storage_objects_by_prefix", "rating": "ask", "why": "deletes every stored object under a prefix"},
+        {"tool": "rotate_realtime_secret", "rating": "ask", "why": "rotates the realtime secret, which breaks clients using the old one"},
+    ]},
+    {"server": "mongodb", "names": ["mongo*", "*mongodb*"], "tools": [
+        {"tool": "delete-many", "rating": "ask", "why": "deletes every document that matches the filter"},
+        {"tool": "drop-collection", "rating": "ask", "why": "drops a collection with its indexes"},
+        {"tool": "drop-database", "rating": "ask", "why": "drops a database and its data files"},
+        {"tool": "atlas-pause-resume-cluster", "rating": "ask", "why": "pauses or resumes an Atlas cluster"},
+        {"tool": "atlas-streams-teardown", "rating": "ask", "why": "deletes Atlas Stream Processing workspaces, connections or processors"},
+        {"tool": "atlas-local-delete-deployment", "rating": "ask", "why": "deletes a local Atlas deployment and its data"},
+    ]},
+    {"server": "railway", "names": ["railway", "*railway*"], "tools": [
+        {"tool": "remove_service", "rating": "ask", "why": "removes a service from a project; Railway says this is irreversible"},
+        {"tool": "remove_volume", "rating": "ask", "why": "removes a volume and its data; Railway says this is irreversible"},
+        {"tool": "remove_bucket", "rating": "ask", "why": "removes a storage bucket; Railway says this is irreversible"},
+        {"tool": "delete_domain", "rating": "ask", "why": "deletes a domain; Railway says this is irreversible"},
+        {"tool": "remove_tcp_proxy", "rating": "ask", "why": "removes a public TCP proxy; Railway says this is irreversible"},
+    ]},
+    {"server": "heroku", "names": ["heroku", "*heroku*"], "tools": [
+        {"tool": "transfer_app", "rating": "ask", "why": "gives ownership of an app to another user or team"},
+        {"tool": "maintenance_on", "rating": "ask", "why": "puts an app in maintenance mode, taking it offline"},
+        {"tool": "pg_upgrade", "rating": "ask", "why": "upgrades Postgres to a newer version, which cannot be rolled back"},
+    ]},
+    {"server": "netlify", "names": ["netlify", "*netlify*"], "tools": [
+        {"tool": "netlify-project-services-updater", "rating": "ask", "why": "deletes a form submission or an environment variable", "input": "\"(delete-submission|deleteenvvar\":true)"},
+        {"tool": "netlify-project-manage-form-submissions", "rating": "ask", "why": "deletes a form submission", "input": "\"delete-submission\""},
+        {"tool": "netlify-project-manage-env-vars", "rating": "ask", "why": "deletes an environment variable", "input": "\"deleteenvvar\":true"},
+    ]},
+    {"server": "vercel", "names": ["vercel", "*vercel*"], "tools": [
+        {"tool": "buy_domain", "rating": "ask", "why": "buys a domain with the team's payment method"},
+        {"tool": "replace_domain_dns_records", "rating": "ask", "why": "replaces a domain's DNS records"},
+        {"tool": "revoke_kms_signing_key", "rating": "ask", "why": "revokes a signing key"},
+        {"tool": "pause_project", "rating": "ask", "why": "pauses a project, taking its deployments offline"},
+    ]},
+    {"server": "atlassian", "names": ["atlassian", "*atlassian*", "*jira*", "*confluence*"], "tools": [
+        {"tool": "executeDestructive", "rating": "ask", "why": "runs an Atlassian tool its server marks destructive, such as deleting a Jira issue"},
+        {"tool": "executeWrite", "rating": "ask", "why": "deletes Jira content or makes a Confluence page public", "input": r'\b(deletejira\w*|enableconfluencepubliclink)\b'},
+        {"tool": "deleteJiraIssue", "rating": "ask", "why": "deletes a Jira issue for good"},
+        {"tool": "deleteJiraComment", "rating": "ask", "why": "deletes a Jira comment for good"},
+        {"tool": "deleteJiraIssueAttachment", "rating": "ask", "why": "deletes a Jira attachment for good"},
+        {"tool": "enableConfluencePublicLink", "rating": "ask", "why": "makes a Confluence page readable by anyone with the link"},
+    ]},
+    {"server": "resend", "names": ["resend", "*resend*"], "tools": [
+        {"tool": "send-email", "rating": "ask", "why": "sends an email, which cannot be unsent"},
+        {"tool": "send-batch-emails", "rating": "ask", "why": "sends a batch of emails, which cannot be unsent"},
+        {"tool": "send-broadcast", "rating": "ask", "why": "sends a broadcast to a whole audience"},
+        {"tool": "send-new-inbox-email", "rating": "ask", "why": "sends an email from an inbox"},
+        {"tool": "send-inbox-draft", "rating": "ask", "why": "sends a draft"},
+        {"tool": "reply-to-inbox-thread-email", "rating": "ask", "why": "sends a reply"},
+        {"tool": "forward-inbox-thread-email", "rating": "ask", "why": "forwards an email"},
+        {"tool": "send-event", "rating": "ask", "why": "sends an event that can start automations which email a contact"},
+        {"tool": "remove-api-key", "rating": "ask", "why": "deletes an API key, which breaks apps using it"},
+        {"tool": "remove-domain", "rating": "ask", "why": "deletes a sending domain"},
+        {"tool": "remove-contact", "rating": "ask", "why": "deletes a contact"},
+        {"tool": "remove-segment", "rating": "ask", "why": "deletes a segment"},
+        {"tool": "remove-inbox", "rating": "ask", "why": "deletes an inbox"},
+        {"tool": "remove-inbox-thread", "rating": "ask", "why": "deletes an email thread"},
+        {"tool": "remove-broadcast", "rating": "ask", "why": "deletes a broadcast"},
+        {"tool": "remove-template", "rating": "ask", "why": "deletes a template"},
+        {"tool": "remove-automation", "rating": "ask", "why": "deletes an automation"},
+        {"tool": "remove-webhook", "rating": "ask", "why": "deletes a webhook"},
+        {"tool": "rotate-webhook-signing-secret", "rating": "ask", "why": "rotates a webhook secret, which breaks receivers using the old one"},
+        {"tool": "revoke-oauth-grant", "rating": "ask", "why": "revokes an app's access"},
+    ]},
+    {"server": "paypal", "names": ["paypal", "*paypal*"], "tools": [
+        {"tool": "pay_order", "rating": "ask", "why": "takes payment for an order"},
+        {"tool": "create_refund", "rating": "ask", "why": "refunds a captured payment"},
+        {"tool": "accept_dispute_claim", "rating": "ask", "why": "accepts a dispute, refunding the buyer"},
+        {"tool": "send_invoice", "rating": "ask", "why": "sends an invoice to a customer"},
+        {"tool": "send_invoice_reminder", "rating": "ask", "why": "sends a reminder to a customer"},
+        {"tool": "activate_recurring_series", "rating": "ask", "why": "starts sending invoices on a schedule"},
+        {"tool": "cancel_sent_invoice", "rating": "ask", "why": "cancels an invoice a customer already has"},
+        {"tool": "delete_invoice", "rating": "ask", "why": "deletes a draft or scheduled invoice for good"},
+        {"tool": "cancel_subscription", "rating": "ask", "why": "cancels a customer's subscription"},
+        {"tool": "cancel_recurring_series", "rating": "ask", "why": "cancels a recurring invoice series"},
+        {"tool": "delete_recurring_series", "rating": "ask", "why": "deletes a draft recurring invoice series"},
+    ]},
+    {"server": "square", "names": ["square", "*square*"], "tools": [
+        {"tool": "make_api_request", "rating": "ask", "why": "charges, refunds, cancels, publishes an invoice to a customer, or deletes in Square", "input": "\"method\":\"(delete|deleteobject|batchdeleteobjects|bulkdelete|deleteaction|cancel|accept|payment|publish|disable)\"|^(?=.*\"service\":\"payments\").*\"method\":\"(create|complete)\""},
+    ]},
+    {"server": "aws-api", "names": ["*aws-api*", "*aws_api*", "awslabs*aws-api*", "aws"], "tools": [
+        {"tool": "call_aws", "rating": "ask", "why": "runs an AWS CLI command that deletes, terminates, revokes or turns something off", "input": r'\baws\s+\S+\s+(delete|terminate|remove|deregister|revoke|purge|disable|cancel|schedule-key-deletion|deactivate)-|\baws\s+s3\s+(rm|rb)\b|\baws\s+s3\s+sync\b.*\s--delete\b'},
+    ]},
+    {"server": "terraform", "names": ["terraform", "*terraform*"], "tools": [
+        {"tool": "action_run", "rating": "ask", "why": "approves and applies a Terraform run", "input": "\"run_action\":\"apply\""},
+        {"tool": "create_run", "rating": "ask", "why": "starts a destroy run, or a run that applies without review", "input": "\"run_type\":\"(is_destroy|auto_approve)\""},
+        {"tool": "delete_workspace_safely", "rating": "ask", "why": "deletes a workspace"},
+        {"tool": "delete_project", "rating": "ask", "why": "deletes a project"},
+        {"tool": "delete_team", "rating": "ask", "why": "deletes a team with its memberships and access"},
+    ]},
+    {"server": "redis", "names": ["redis", "*redis*"], "tools": [
+        {"tool": "delete", "rating": "ask", "why": "deletes a key"},
+        {"tool": "json_del", "rating": "ask", "why": "deletes a JSON value, the whole document by default"},
+        {"tool": "xgroup_destroy", "rating": "ask", "why": "destroys a stream consumer group"},
+    ]},
+    {"server": "grafana", "names": ["grafana", "*grafana*"], "tools": [
+        {"tool": "delete_snapshot", "rating": "ask", "why": "deletes a dashboard snapshot, so its shared link stops working"},
+    ]},
 ]
 
 
@@ -1326,9 +1484,53 @@ def mcp_calls(tool_input) -> list[dict]:
     return [call] if call else []
 
 
+# MCP ratings: FORMAT.md, "MCP rating". Quarter's own rating of a tool on a known MCP server,
+# since a server's own readOnlyHint and destructiveHint cannot be trusted.
+
+MCP_SERVER_FIELDS = {"server", "service", "package", "names", "source", "tools"}
+MCP_TOOL_FIELDS = {"tool", "rating", "why", "input", "source"}
+
+
+def mcp_name(name: str) -> str:
+    """A name as Claude Code writes it into mcp__<server>__<tool>, lower case. Keeps glob characters."""
+    return re.sub(r"[^A-Za-z0-9_*?-]", "_", name).lower()
+
+
+def mcp_check(tool: str, tool_input, feed: dict) -> str | None:
+    """Why an ask rating holds this MCP tool call, or None. The server's name is the user's own, so a
+    rating applies only when the tool name matches and the server name matches one of its globs."""
+    if not tool.lower().startswith("mcp__"):
+        return None
+    rest = mcp_name(tool[5:])
+    splits = [(rest[:i], rest[i + 2:]) for i in range(1, len(rest) - 2) if rest.startswith("__", i)]
+    said = None
+    for entry in feed.get("mcp") or []:
+        try:
+            if not isinstance(entry, dict) or not set(entry) <= MCP_SERVER_FIELDS:
+                continue  # a field we do not know may narrow the entry, so skip it (FORMAT.md)
+            names = [mcp_name(n) for n in globs(entry["names"])]
+            for rating in entry["tools"]:
+                if (not isinstance(rating, dict) or not set(rating) <= MCP_TOOL_FIELDS
+                        or rating.get("rating") != "ask"):
+                    continue
+                name = mcp_name(rating["tool"])
+                if not any(t == name and any(fnmatchcase(s, n) for n in names) for s, t in splits):
+                    continue
+                if "input" in rating:
+                    said = said if said is not None else json.dumps(tool_input, sort_keys=True, separators=(",", ":"))
+                    if not re.search(rating["input"], said, re.IGNORECASE):
+                        continue
+                return f"Quarter rating: {rating['why']}"
+        except (KeyError, TypeError, AttributeError, ValueError, re.error):
+            continue
+    return None
+
+
 def check(tool: str, tool_input, cwd: str | None = None) -> str | None:
-    """Why a rule asks about this call, or None."""
+    """Why a rating or rule asks about this call, or None."""
     feed, said = feed_rules(), text(tool_input)
+    if why := mcp_check(tool, tool_input, feed):
+        return why
     for n, rule in enumerate(feed["rules"], 1):
         if rule.get("action", "approve") != "approve" or not isinstance(rule.get("tool"), str):
             continue  # the guard only ever asks

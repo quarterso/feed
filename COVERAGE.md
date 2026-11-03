@@ -1,6 +1,6 @@
 # What the Quarter rulebook covers
 
-Feed version 2, issued 2026-11-03. 121 rules for HTTP APIs across 40 services, and 35 rules for shell commands.
+Feed version 3, issued 2026-11-03. 121 rules for HTTP APIs across 40 services, and 35 rules for shell commands. The ratings of MCP server tools are in `RATINGS.md`.
 
 Each rule asks a person before the call runs. No rule refuses a call, and your own rules always come first. Each rule names the public API documentation it is drawn from (`source` in `body.json`), and has a test with one call it must catch and one close call it must let through (`cases.json`).
 
