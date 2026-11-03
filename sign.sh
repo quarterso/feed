@@ -18,6 +18,9 @@ else
 fi
 
 QUARTER_FEED_SIGNING_KEY=$key uv run --project "$here/../ledger" \
-  quarter-ledger --db :memory: feed-sign "$here/body.json" > "$here/feed.json.tmp"
+  quarter-ledger --db :memory: feed-sign "$here/body.json" > "$here/feed.json.tmp" 2> "$here/verify-key.tmp" \
+  || { cat "$here/verify-key.tmp" >&2; rm -f "$here/verify-key.tmp"; exit 1; }
 mv "$here/feed.json.tmp" "$here/feed.json"
-echo "Signed feed.json. The verify key above is public: send it to Claude." >&2
+sed -n 's/^verify key: //p' "$here/verify-key.tmp" > "$here/verify-key.txt"
+rm -f "$here/verify-key.tmp"
+echo "Signed feed.json. The public verify key is in verify-key.txt." >&2
