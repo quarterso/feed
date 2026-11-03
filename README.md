@@ -31,5 +31,5 @@ Verify key: not published yet.
 ## To publish a new version
 
 1. Edit `body.json` and raise `version` by one, and copy the tool rules into `BUILT_IN` in `guard.py` (`test_guard.py` checks they match). Give each new rule an `id` and a `source`, and its two calls in `cases.json`. Update `COVERAGE.md`.
-2. Run `./sign.sh`. It asks for the feed signing key and never stores it.
+2. Run `./sign.sh`. On a Mac it keeps the key in the Keychain and makes it on the first run; elsewhere it asks for the key. It never prints or stores the key in a file.
 3. Commit `body.json` and `feed.json` together, and push.
