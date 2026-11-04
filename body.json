@@ -1,5 +1,5 @@
 {
- "version": 3,
+ "version": 4,
  "issued": "2026-11-03",
  "prices": {},
  "rules": [
@@ -5485,6 +5485,1533 @@
      "why": "creates or changes a dashboard, data source, incident or plugin"
     }
    ]
+  }
+ ],
+ "payees": [
+  {
+   "id": "x402.402rates-com",
+   "service": "402rates.com",
+   "pay_to": [
+    {
+     "address": "0xf567Cfe0FDb87A1D6Ca330e3f30f0D3DA0F7cb98",
+     "network": "eip155:137"
+    },
+    {
+     "address": "0xf567Cfe0FDb87A1D6Ca330e3f30f0D3DA0F7cb98",
+     "network": "eip155:42161"
+    },
+    {
+     "address": "0xf567Cfe0FDb87A1D6Ca330e3f30f0D3DA0F7cb98",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://api.402rates.com/v1/ping",
+     "max_usd": "0.001"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.agentbit-app",
+   "service": "agentbit.app",
+   "pay_to": [
+    {
+     "address": "0x4395C7e383b7e05665aad7f36ed77c01923Dd965",
+     "network": "eip155:137"
+    },
+    {
+     "address": "0x4395C7e383b7e05665aad7f36ed77c01923Dd965",
+     "network": "eip155:42161"
+    },
+    {
+     "address": "0x4395C7e383b7e05665aad7f36ed77c01923Dd965",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "566SN4N4q1dAjSXTf6Ru9FGY7iD1Sj6n3QmGCEigBfYd",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://agentbit.app/v1/web/search",
+     "max_usd": "0.015"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.api-loyalspark-online",
+   "service": "api.loyalspark.online",
+   "pay_to": [
+    {
+     "address": "0x40a8CdD6a10EC1a8cB3dFb2834675e7a2CF4ad8b",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://api.loyalspark.online/x402-gateway/recipient-api/balance",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://api.loyalspark.online/x402-gateway/recipient-api/balances",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://api.loyalspark.online/x402-gateway/recipient-api/offers",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://api.loyalspark.online/x402-gateway/recipient-api/prepare-transfer",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.loyalspark.online/x402-gateway/recipient-api/rewards",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://api.loyalspark.online/x402-gateway/recipient-api/vouchers",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://api.loyalspark.online/x402-gateway/recipient-api/workflow/reward-status",
+     "max_usd": "0.001"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.api-onesource-io",
+   "service": "api.onesource.io",
+   "pay_to": [
+    {
+     "address": "0x52E29e0d2Aa49bfBfC548C0A9F2196F4aa51f3ea",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://api.onesource.io/api/chain/allowance",
+     "max_usd": "0.003"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/block-number",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/block/:number",
+     "max_usd": "0.003"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/call",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/chain-id",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/code/:address",
+     "max_usd": "0.003"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/contract/:address",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/ens/:input",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/erc1155-balance",
+     "max_usd": "0.003"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/erc20-balance",
+     "max_usd": "0.003"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/erc20-transfers",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/erc721-tokens",
+     "max_usd": "0.008"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/estimate-gas",
+     "max_usd": "0.004"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/events",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/live-balance",
+     "max_usd": "0.003"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/network-info",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/nft-metadata",
+     "max_usd": "0.008"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/nft-owner",
+     "max_usd": "0.003"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/nonce/:address",
+     "max_usd": "0.003"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/pending",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/proxy/:address",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/receipt/:hash",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/storage",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/total-supply",
+     "max_usd": "0.003"
+    },
+    {
+     "resource": "https://api.onesource.io/api/chain/tx/:hash",
+     "max_usd": "0.008"
+    },
+    {
+     "resource": "https://api.onesource.io/deepstate/v1/analytics/cost-to-quote",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/deepstate/v1/analytics/depth-history",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/deepstate/v1/analytics/makers",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/deepstate/v1/book/:book",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/deepstate/v1/candles/:book",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/deepstate/v1/markets",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/deepstate/v1/stats/:book",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/deepstate/v1/trades/:book",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/auctions/current",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/auctions/days",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/auctions/sales",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/backing/current",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/backing/history",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/branches/auction/live",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/branches/doi",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/branches/license-cost",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/branches/summary",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/buybacks/readiness",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/candles",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/charters",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/constants",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/dormancy/bounties",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/events",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/exit-pressure/current",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/exit-pressure/history",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/exit/fee-curve",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/exit/fee-forecast",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/flow/hourly",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/governance/changes",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/issuance/runway",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/policy/current",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/policy/epochs",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/policy/outlook",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/pool",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/supply/current",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/supply/history",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/tax/schedule",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/vaults/current",
+     "max_usd": "0.02"
+    },
+    {
+     "resource": "https://api.onesource.io/standard/v1/vaults/history",
+     "max_usd": "0.02"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.api-printmoneylab-com",
+   "service": "api.printmoneylab.com",
+   "pay_to": [
+    {
+     "address": "0xcF9223eCe895258dEa8D288AEBcf846Ab8E342fB",
+     "network": "eip155:137"
+    },
+    {
+     "address": "0xcF9223eCe895258dEa8D288AEBcf846Ab8E342fB",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "3Ywxk31SvWKwZBdY6bLvjmn5h4mzWcT3HJ5UZbYXoVy9",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://api.printmoneylab.com/api/v1/kr-prices",
+     "max_usd": "0.002"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.api-run402-com",
+   "service": "api.run402.com",
+   "pay_to": [
+    {
+     "address": "0x059D091D51a0f011c9872EaA63Df538F5cE15945",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://api.run402.com/tiers/v1/prototype",
+     "max_usd": "0.1"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.apify",
+   "service": "Apify",
+   "pay_to": [
+    {
+     "address": "0x4aAbE17C239eF71c3A26bA7C2b3e0AeBbfC1DF26",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "ECUPkq6DP8VUSEueL4qNznyNDJLwu6PQhnMQ5cuZsTLH",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://agi.apify.com/protocols/x402/prepaid-tokens",
+     "max_usd": "1"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.apitoll-crypto-prices",
+   "service": "ApiToll Crypto Prices",
+   "pay_to": [
+    {
+     "address": "0x3dA40A9aD36640a2C0F533BAC368490095574664",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "5Wxg3V6gcmFmmP6SXmGZQAUZPFYsSwoeN2Qewt5BotWz",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://crypto.apitoll.cloud/v1/crypto/price",
+     "max_usd": "0.001"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.apitoll-sec-filings",
+   "service": "ApiToll SEC Filings",
+   "pay_to": [
+    {
+     "address": "0x58BdAD5e654691aC5eD4631758f3d8DA00666B6c",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "7kPWiEbDXu33FomKG6mGa7R8HGSfUGFsAoKFZeBERJaH",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://edgar.apitoll.cloud/v1/edgar/filings",
+     "max_usd": "0.003"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.ax1-console",
+   "service": "AX1 Console",
+   "pay_to": [
+    {
+     "address": "0x7284D41b5b852F2bd4c99bDf95043D84452d299C",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://www.ax1.vc/api/dashboard/q-verdict/resource",
+     "max_usd": "0.02"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.bitrefill",
+   "service": "Bitrefill",
+   "pay_to": [
+    {
+     "address": "0x480CD46E6faDe651a0437DeaddA53D5c8e7D846A",
+     "network": "eip155:137"
+    },
+    {
+     "address": "0x480CD46E6faDe651a0437DeaddA53D5c8e7D846A",
+     "network": "eip155:42161"
+    },
+    {
+     "address": "0x480CD46E6faDe651a0437DeaddA53D5c8e7D846A",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "5yASLjtNssGXDv6bR9e71WXKxRymDiUzbgkGPqkQNgRn",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://api.bitrefill.com/x402/gift-cards/search",
+     "max_usd": "0.002"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.blockrun-ai",
+   "service": "BlockRun.AI",
+   "pay_to": [
+    {
+     "address": "0x6E007731870EDe419CfB31889Cd5C4493CEcb04c",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "0xe9030014F5DAe217d0A152f02A043567b16c1aBf",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://blockrun.ai/api/v1/chat/completions",
+     "max_usd": "0.002"
+    },
+    {
+     "resource": "https://blockrun.ai/api/v1/exa/contents",
+     "max_usd": "0.003"
+    },
+    {
+     "resource": "https://blockrun.ai/api/v1/exa/search",
+     "max_usd": "0.011"
+    },
+    {
+     "resource": "https://blockrun.ai/api/v1/images/generations",
+     "max_usd": "0.041"
+    },
+    {
+     "resource": "https://blockrun.ai/api/v1/pm/kalshi/markets",
+     "max_usd": "0.0085"
+    },
+    {
+     "resource": "https://blockrun.ai/api/v1/pm/polymarket/events",
+     "max_usd": "0.0085"
+    },
+    {
+     "resource": "https://blockrun.ai/api/v1/pm/polymarket/events/keyset",
+     "max_usd": "0.0085"
+    },
+    {
+     "resource": "https://blockrun.ai/api/v1/pm/polymarket/leaderboard",
+     "max_usd": "0.0085"
+    },
+    {
+     "resource": "https://blockrun.ai/api/v1/pm/polymarket/markets",
+     "max_usd": "0.0085"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.chit402",
+   "service": "Chit402",
+   "pay_to": [
+    {
+     "address": "0x23f713411c30BBd9A989c9cbC22EB0b55F7f7334",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "ALLdmmAsbUnhHS7x2556449syP5Wz73Gng4gzzLHqsC7",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://api.chit402.com/v1/chat/completions",
+     "max_usd": "0.002"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.cloud-trycorpus-ai",
+   "service": "cloud.trycorpus.ai",
+   "pay_to": [
+    {
+     "address": "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C",
+     "network": "eip155:1"
+    },
+    {
+     "address": "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C",
+     "network": "eip155:137"
+    },
+    {
+     "address": "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C",
+     "network": "eip155:42161"
+    },
+    {
+     "address": "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C",
+     "network": "eip155:43114"
+    },
+    {
+     "address": "0x3f60008Dfd0EfC03F476D9B489D6C5B13B3eBF2C",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "0x4DfBc274fD84b67DfcB4B01A188c37aD28177a95",
+     "network": "eip155:1"
+    },
+    {
+     "address": "0x4DfBc274fD84b67DfcB4B01A188c37aD28177a95",
+     "network": "eip155:137"
+    },
+    {
+     "address": "0x4DfBc274fD84b67DfcB4B01A188c37aD28177a95",
+     "network": "eip155:42161"
+    },
+    {
+     "address": "0x4DfBc274fD84b67DfcB4B01A188c37aD28177a95",
+     "network": "eip155:43114"
+    },
+    {
+     "address": "0x4DfBc274fD84b67DfcB4B01A188c37aD28177a95",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/azure/eviction",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/capacity/board",
+     "max_usd": "0.1"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/capacity/stress",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/index/board",
+     "max_usd": "0.1"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/index/fixing",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/index/history",
+     "max_usd": "0.05"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/ondemand",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/ondemand/snapshot",
+     "max_usd": "0.1"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/reserved",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/spot/export/history",
+     "max_usd": "3"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/spot/hourly",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/spot/latest",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/spot/monthly",
+     "max_usd": "0.05"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/spot/snapshot/all",
+     "max_usd": "1"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/term/instance",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/tokens/fixing",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/tokens/history",
+     "max_usd": "0.05"
+    },
+    {
+     "resource": "https://cloud.trycorpus.ai/v1/tokens/quotes",
+     "max_usd": "0.01"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.coil-crypto-gate",
+   "service": "Coil Crypto Gate",
+   "pay_to": [
+    {
+     "address": "0x7B53524d5c5D29EfB8C1d128C56F62FE38Cd9476",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "5HGarauHaGFynzwNBqLkKcQ4LFR4UCXKZE7bJuP6Ew2N",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://coil.trade/api/crypto/gate",
+     "max_usd": "0.001"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.coingecko",
+   "service": "CoinGecko",
+   "pay_to": [
+    {
+     "address": "0x110cdBba7FE6434Ec4CE3464CC523942ad6Fb784",
+     "network": "eip155:137"
+    },
+    {
+     "address": "0x110cdBba7FE6434Ec4CE3464CC523942ad6Fb784",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "8XhngTRitTcUJMiaDJ6azw8GRSiFPpwhnmV3HYQLHUpL",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://pro-api.coingecko.com/api/v3/x402/onchain/search/pools",
+     "max_usd": "0.005"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.exa",
+   "service": "Exa",
+   "pay_to": [
+    {
+     "address": "0x6d6E695b09861467c7d462f5AAF31cF3540B9192",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "0xB98eF29eb2be19Ae646A8FC0248255B90A332dbC",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "12Ec2cJmfR1C9uwejzxcuMhUgEC7wDrLgm1wBvvR5w9E",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://api.exa.ai/contents",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://api.exa.ai/search",
+     "max_usd": "0.007"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.glim-sh",
+   "service": "glim.sh",
+   "pay_to": [
+    {
+     "address": "0xC751344Ee09B5159160173F77D4a1169bCd386A1",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "9MkM5Ra48KFcSv9HDQ8sb3C3r5HjouEwGQ6sp1cx1vde",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://glim.sh/api/v1/twitter/search",
+     "max_usd": "0.005"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.hyperextend",
+   "service": "hyperextend",
+   "pay_to": [
+    {
+     "address": "0x548fC289526ab2F0391D562a723cdA64Bbf1abc4",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://api.hyperextend.xyz/v1/candles/BTC/1m/latest",
+     "max_usd": "0.002"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.keyring-agent-blockchhub-link",
+   "service": "keyring-agent.blockchhub.link",
+   "pay_to": [
+    {
+     "address": "0x17cd53C04D707eF0Dd615EF56c633f02915a7905",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://keyring-agent.blockchhub.link/api/send-native",
+     "max_usd": "0.05"
+    },
+    {
+     "resource": "https://keyring-agent.blockchhub.link/api/send-token",
+     "max_usd": "0.05"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.laso-finance",
+   "service": "Laso Finance",
+   "pay_to": [
+    {
+     "address": "0x3291e96b3bff7ed56e3ca8364273c5b4654b2b37",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "3MZVk97x9SeRxbYpc3jhzRfU2fyA3emYutnqfn9kNfYX",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://laso.finance/auth",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://laso.finance/get-card",
+     "max_usd": "5"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.minifetch-technical-seo-api",
+   "service": "Minifetch Technical SEO API",
+   "pay_to": [
+    {
+     "address": "0xffA9155A0e4B3d8d42351Da226cC1feEe449686f",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "46vMcwuC4sK11sB3gkLhyA7J7GEwfkhn5rFyDtihBwqe",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://minifetch.com/api/v1/x402/preflight/url-check",
+     "max_usd": "0.001"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.nansen",
+   "service": "Nansen",
+   "pay_to": [
+    {
+     "address": "0x93053f1e7A5eFEDa532Fe69CbbE43cBEc3A0F13f",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "J7ZvJEspvwP1oRxQZ7mYmNmT22NTm3GWq3t7HEbvPZYx",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://api.nansen.ai/api/v1/prediction-market/categories",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://api.nansen.ai/api/v1/profiler/address/current-balance",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://api.nansen.ai/api/v1/profiler/address/historical-balances",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://api.nansen.ai/api/v1/profiler/address/pnl",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://api.nansen.ai/api/v1/profiler/address/pnl-summary",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://api.nansen.ai/api/v1/profiler/address/related-wallets",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://api.nansen.ai/api/v1/profiler/address/transactions",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://api.nansen.ai/api/v1/tgm/token-information",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://api.nansen.ai/api/v1/tgm/token-ohlcv",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://api.nansen.ai/api/v1/tgm/who-bought-sold",
+     "max_usd": "0.01"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.oblique-markets",
+   "service": "Oblique Markets",
+   "pay_to": [
+    {
+     "address": "0x970007590aCC5C938cd51345B17AF51B1B40D3Ab",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "GYyTRmt317JafPHXPnM54Fsvsma5GnS9wm6qGMqaykdS",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://api.oblique.markets/api/v1/paid/base-block-number",
+     "max_usd": "0.002"
+    },
+    {
+     "resource": "https://api.oblique.markets/api/v1/paid/base-gas-price",
+     "max_usd": "0.002"
+    },
+    {
+     "resource": "https://api.oblique.markets/api/v1/paid/bazaar-pulse",
+     "max_usd": "0.002"
+    },
+    {
+     "resource": "https://api.oblique.markets/api/v1/paid/time",
+     "max_usd": "0.01"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.otto-ai",
+   "service": "Otto AI",
+   "pay_to": [
+    {
+     "address": "0x0E84dDEdAaE6A779c462C22a59F301EC31B6b808",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "6XcSfqJHr9vNW2vbiRaMqUYVm7shDgLepca54wUTDPN5",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://x402.ottoai.services/crypto-news",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://x402.ottoai.services/defi-analytics",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://x402.ottoai.services/funding-rates",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://x402.ottoai.services/token-details",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://x402.ottoai.services/tradfi-data",
+     "max_usd": "0.003"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.pocket-network",
+   "service": "Pocket Network",
+   "pay_to": [
+    {
+     "address": "0xF732ea490c5766071785a2310523f7fA2CEbB829",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://agent.pocket.network/v1/agentsearch-web-search-v1",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://agent.pocket.network/v1/dns-whois-rdap",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://agent.pocket.network/v1/federal-register",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://agent.pocket.network/v1/meadow",
+     "max_usd": "0.005"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.quartermaster-gas-prices",
+   "service": "Quartermaster Gas Prices",
+   "pay_to": [
+    {
+     "address": "0x5253666c40432f009ebd99908b9cd2a7fd1019cb",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "FgcKNzsBXSEHGNZNWetPsjXiBZk1WFoU6sF2zVsnzXfa",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://quartermaster.surewhynot.app/v1/gas",
+     "max_usd": "0.001"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.stableenrich",
+   "service": "StableEnrich",
+   "pay_to": [
+    {
+     "address": "0x325bdF6F7efAB24a2210c48c1b64cAb2eAe1d430",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "8EgACpZ16XWEt7YjJPsh1ZheVRZUGmmwQ8nJdmA1o5w4",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://stableenrich.dev/api/exa/contents",
+     "max_usd": "0.002"
+    },
+    {
+     "resource": "https://stableenrich.dev/api/exa/search",
+     "max_usd": "0.01"
+    },
+    {
+     "resource": "https://stableenrich.dev/api/firecrawl/search",
+     "max_usd": "0.0252"
+    },
+    {
+     "resource": "https://stableenrich.dev/api/fullenrich/people-search",
+     "max_usd": "0.15"
+    },
+    {
+     "resource": "https://stableenrich.dev/api/pdl/people-enrich",
+     "max_usd": "0.28"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.stableupload",
+   "service": "StableUpload",
+   "pay_to": [
+    {
+     "address": "0x06dFF3c8380b5D1799874adA903fc3422882FD6f",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "95xcrFtRVn2fkoAKiCUKxPpTc1GN8MTyonVwLFfJfzux",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://stableupload.dev/api/upload",
+     "max_usd": "0.005"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.tenprint",
+   "service": "TenPrint",
+   "pay_to": [
+    {
+     "address": "0xaB6731A0BcDf511c2842C768a03448075aB654ca",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "GBfJMhGiGJeWDcve1G673hEp8DLmMFomvSEHMzRfmcJu",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://rubric-protocol.com/v1/x402/hedera-facts/exchange-rate",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://rubric-protocol.com/v1/x402/hedera-facts/supply",
+     "max_usd": "0.001"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.tick-hugen-tokyo",
+   "service": "tick.hugen.tokyo",
+   "pay_to": [
+    {
+     "address": "0x29322Ea7EcB34aA6164cb2ddeB9CE650902E4f60",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "4du4AfkxFvtqEWaoRWrifoSXCknuMpAGh3BXrFPFvXFh",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://tick.hugen.tokyo/tick/all",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://tick.hugen.tokyo/tick/latest",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://tick.hugen.tokyo/tick/symbols",
+     "max_usd": "0.005"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.twitter-x-api",
+   "service": "Twitter/X API",
+   "pay_to": [
+    {
+     "address": "0x51D577C8CBB8b3fB1BA0CE31c7923cC27a07F78B",
+     "network": "eip155:137"
+    },
+    {
+     "address": "0x51D577C8CBB8b3fB1BA0CE31c7923cC27a07F78B",
+     "network": "eip155:42161"
+    },
+    {
+     "address": "0x51D577C8CBB8b3fB1BA0CE31c7923cC27a07F78B",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "3nXsChcZGke6xebDPmndNMCt8L3yi6xyN4Pd6q5cQrgv",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://twitter.use.x402atlas.com/search",
+     "max_usd": "0.005"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.vibe-springs",
+   "service": "Vibe Springs",
+   "pay_to": [
+    {
+     "address": "0x38C063312719220c676E988f0DEE14B4ec0e44C8",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://vibesprings.net/api/price/btc-usd",
+     "max_usd": "0.002"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.web-search-news-page-reader",
+   "service": "Web Search, News & Page Reader",
+   "pay_to": [
+    {
+     "address": "0xF752eEB75d3Bea24AA867ad93bfd8EF5a2F431B9",
+     "network": "eip155:137"
+    },
+    {
+     "address": "0xF752eEB75d3Bea24AA867ad93bfd8EF5a2F431B9",
+     "network": "eip155:42161"
+    },
+    {
+     "address": "0xF752eEB75d3Bea24AA867ad93bfd8EF5a2F431B9",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "3nXsChcZGke6xebDPmndNMCt8L3yi6xyN4Pd6q5cQrgv",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://websearch.use.x402atlas.com/search",
+     "max_usd": "0.01"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.win-oneshotagent-com",
+   "service": "win.oneshotagent.com",
+   "pay_to": [
+    {
+     "address": "0x9fb365E4E9385E2a39FeBAd70368267e6f571d9A",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://win.oneshotagent.com/v1/tools/search",
+     "max_usd": "0.001"
+    },
+    {
+     "resource": "https://win.oneshotagent.com/v1/tools/web-read",
+     "max_usd": "0.002"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.x-pay",
+   "service": "X Pay",
+   "pay_to": [
+    {
+     "address": "0x589a2314a2E05F45e40C4823Da3Ba58D421dB3d8",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://www.api-xpay.com/x402/classify",
+     "max_usd": "20"
+    },
+    {
+     "resource": "https://www.api-xpay.com/x402/ip",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://www.api-xpay.com/x402/keywords",
+     "max_usd": "10"
+    },
+    {
+     "resource": "https://www.api-xpay.com/x402/network",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://www.api-xpay.com/x402/payment",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://www.api-xpay.com/x402/ping",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://www.api-xpay.com/x402/quote",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://www.api-xpay.com/x402/random",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://www.api-xpay.com/x402/rewrite",
+     "max_usd": "10"
+    },
+    {
+     "resource": "https://www.api-xpay.com/x402/sentiment",
+     "max_usd": "10"
+    },
+    {
+     "resource": "https://www.api-xpay.com/x402/status",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://www.api-xpay.com/x402/time",
+     "max_usd": "0.005"
+    },
+    {
+     "resource": "https://www.api-xpay.com/x402/uuid",
+     "max_usd": "0.005"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.x402-weather-api",
+   "service": "x402 Weather API",
+   "pay_to": [
+    {
+     "address": "0xB810B599bc730Aa85800BABe7f5d160524322C86",
+     "network": "eip155:137"
+    },
+    {
+     "address": "0xB810B599bc730Aa85800BABe7f5d160524322C86",
+     "network": "eip155:42161"
+    },
+    {
+     "address": "0xB810B599bc730Aa85800BABe7f5d160524322C86",
+     "network": "eip155:8453"
+    },
+    {
+     "address": "9fqXniDAn8hNMYC5C9waGv5u126bkwjU6qGgAoQeoWyo",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://x402tap.com/api/weather",
+     "max_usd": "0.01"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.x402-asterpay-io",
+   "service": "x402.asterpay.io",
+   "pay_to": [
+    {
+     "address": "0xd5f8481D8F25d3966d2010DBf9B47fFbdf745A9E",
+     "network": "eip155:1"
+    },
+    {
+     "address": "0xd5f8481D8F25d3966d2010DBf9B47fFbdf745A9E",
+     "network": "eip155:137"
+    },
+    {
+     "address": "0xd5f8481D8F25d3966d2010DBf9B47fFbdf745A9E",
+     "network": "eip155:42161"
+    },
+    {
+     "address": "0xd5f8481D8F25d3966d2010DBf9B47fFbdf745A9E",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://x402.asterpay.io/v1/agent/deep-analysis/batch",
+     "max_usd": "0.075"
+    },
+    {
+     "resource": "https://x402.asterpay.io/v1/ai/sentiment",
+     "max_usd": "0.006"
+    },
+    {
+     "resource": "https://x402.asterpay.io/v1/market/price/bitcoin",
+     "max_usd": "0.0075"
+    },
+    {
+     "resource": "https://x402.asterpay.io/v2/x402/agent-readiness",
+     "max_usd": "0.03"
+    },
+    {
+     "resource": "https://x402.asterpay.io/v2/x402/agent/trust-score/:address",
+     "max_usd": "0.0075"
+    },
+    {
+     "resource": "https://x402.asterpay.io/v2/x402/ai/fact-check",
+     "max_usd": "0.015"
+    },
+    {
+     "resource": "https://x402.asterpay.io/v2/x402/ai/sentiment",
+     "max_usd": "0.015"
+    },
+    {
+     "resource": "https://x402.asterpay.io/v2/x402/crypto/prices",
+     "max_usd": "0.0075"
+    },
+    {
+     "resource": "https://x402.asterpay.io/v2/x402/offramp/quote",
+     "max_usd": "0.0075"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
+  },
+  {
+   "id": "x402.x402-twit-sh",
+   "service": "x402.twit.sh",
+   "pay_to": [
+    {
+     "address": "0x9dBA414637c611a16BEa6f0796BFcbcBdc410df8",
+     "network": "eip155:8453"
+    }
+   ],
+   "status": "known",
+   "prices": [
+    {
+     "resource": "https://x402.twit.sh/tweets/search",
+     "max_usd": "0.006"
+    }
+   ],
+   "why": "listed in the x402 Bazaar and paid by 25 or more payers in 30 days",
+   "source": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources"
   }
  ]
 }
