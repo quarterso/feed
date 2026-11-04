@@ -27,7 +27,7 @@ FEED_KEY = os.environ.get("QUARTER_FEED_KEY", "ed25519-pub:37115bdfec3099c6a0391
 CACHE = Path(os.environ.get("XDG_CACHE_HOME", Path.home() / ".cache")) / "quarter-guard" / "feed.json"
 DAY = 86_400
 
-BUILT_IN = {"version": 3, "rules": [
+BUILT_IN = {"version": 4, "rules": [
     {"tool": "*", "why": "deletes a root, home or working directory",
      "command": r"\brm\s+-\w*(rf|fr)\w*\s+(/\*?|~/?|\$HOME/?|\*|\.\.?/?)(\s|;|&|$)"},
     {"tool": "*", "why": "formats or overwrites a disk",

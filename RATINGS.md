@@ -1,6 +1,6 @@
 # Quarter ratings of MCP server tools
 
-Feed version 3, issued 2026-11-03. 27 servers, 112 tools rated `ask` and 461 rated `watch`.
+Feed version 4, issued 2026-11-03. 27 servers, 112 tools rated `ask` and 461 rated `watch`.
 
 An MCP server labels its own tools as read-only or destructive. The MCP specification says a client must not trust those labels from a server it does not trust. These ratings are Quarter's own, read from each server's published tool list.
 

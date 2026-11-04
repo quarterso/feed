@@ -5,6 +5,7 @@ guard.http_matches, which guard.py also uses on the calls it reads."""
 import json
 import re
 import unittest
+from decimal import Decimal
 from pathlib import Path
 from unittest import mock
 
@@ -80,7 +81,7 @@ def ask_ids():
 
 class McpRatings(unittest.TestCase):
     def test_every_rating_has_a_source_and_every_ask_two_cases(self):
-        self.assertEqual(BODY["version"], 3)
+        self.assertEqual(BODY["version"], 4)
         servers = [s["server"] for s in BODY["mcp"]]
         self.assertEqual(len(servers), len(set(servers)), "server ids are unique")
         for s in BODY["mcp"]:
@@ -116,6 +117,29 @@ class McpRatings(unittest.TestCase):
                 for t in s["tools"]:
                     if t["rating"] == "watch":
                         self.assertIsNone(guard.check(f"mcp__{s['names'][0].strip('*')}__{t['tool']}", {}), t["tool"])
+
+
+PAYEE_FIELDS = {"id", "service", "pay_to", "hosts", "status", "prices", "why", "source"}
+
+
+class Payees(unittest.TestCase):
+    def test_every_payee_is_matched_somehow_and_has_a_source(self):
+        ids = [p["id"] for p in BODY["payees"]]
+        self.assertEqual(len(ids), len(set(ids)), "payee ids are unique")
+        for p in BODY["payees"]:
+            with self.subTest(p["id"]):
+                self.assertLessEqual(set(p), PAYEE_FIELDS)
+                self.assertIn(p["status"], ("known", "caution"))
+                self.assertTrue(p.get("pay_to") or p.get("hosts"))
+                self.assertTrue(p["service"] and p["why"] and "\u2014" not in p["why"])
+                self.assertTrue(p["source"].startswith("https://"))
+                for to in p.get("pay_to", []):
+                    self.assertEqual(set(to), {"address", "network"})
+                    self.assertRegex(to["network"], r"^[a-z0-9-]+:[A-Za-z0-9]+$")
+                for price in p.get("prices", []):
+                    self.assertEqual(set(price), {"resource", "max_usd"})
+                    self.assertTrue(price["resource"].startswith("https://") and "?" not in price["resource"])
+                    self.assertGreater(Decimal(price["max_usd"]), 0)
 
 
 if __name__ == "__main__":

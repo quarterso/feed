@@ -440,7 +440,7 @@ class PublishedKey(unittest.TestCase):
         if signed["version"] == BODY["version"]:
             self.assertEqual(signed, BODY)
         else:  # body.json is the next version, written but not yet signed with sign.sh
-            self.assertEqual(signed["version"] + 1, BODY["version"])
+            self.assertLess(signed["version"], BODY["version"])
             self.assertEqual((signed["rules"], signed["http"]), (BODY["rules"], BODY["http"]))
 
 

@@ -4,6 +4,8 @@ Prices and rules that Quarter signs and every Quarter gateway can pull once a da
 
 The feed also rates the tools of 27 popular MCP servers: 112 tools that delete, pay, send or revoke are rated `ask`, and 461 writes that can be undone are rated `watch`. A server rates its own tools, and the MCP specification says clients must not trust those labels from a server they do not trust. These ratings come from outside. `RATINGS.md` lists them.
 
+Since version 4 the feed lists payees an agent may pay, for gateways that decide payments: 39 x402 sellers from Coinbase's public x402 Bazaar, with the prices they list. A payment of more than ten times a listed price, or to a payee marked `caution`, waits for a person. A payee nobody has listed is not held. `PAYEES.md` lists them.
+
 - `body.json` is the feed as written. `feed.json` is the same body, signed. Gateways read only `feed.json`.
 - A feed rule can only ask a person before a tool call runs. It never refuses one, and the customer's own rules and prices always come first.
 - `FORMAT.md` is the open format, for anyone to implement.
@@ -53,7 +55,7 @@ Verify key: `ed25519-pub:37115bdfec3099c6a0391470c618d5a12466d10a7148b97451ea87d
 
 ## To publish a new version
 
-1. Edit `body.json` and raise `version` by one, and copy the tool rules and the HTTP rules into `BUILT_IN` in `guard.py`, leaving out each HTTP rule's `service`, `source` and `action`. Copy the `ask` ratings into `BUILT_IN["mcp"]` with only `server`, `names`, `tool`, `rating`, `why` and `input` (`test_guard.py` checks they match). Give each new rule an `id` and a `source`, and it and each new `ask` rating its two calls in `cases.json`. Update `COVERAGE.md` and `RATINGS.md`.
+1. Edit `body.json` and raise `version` by one, and copy the tool rules and the HTTP rules into `BUILT_IN` in `guard.py`, leaving out each HTTP rule's `service`, `source` and `action`. Copy the `ask` ratings into `BUILT_IN["mcp"]` with only `server`, `names`, `tool`, `rating`, `why` and `input` (`test_guard.py` checks they match). Payees stay out of `guard.py`, which sees no payments. Give each new rule an `id` and a `source`, and it and each new `ask` rating its two calls in `cases.json`. Give each payee a `source`. Update `COVERAGE.md`, `RATINGS.md` and `PAYEES.md`.
 2. Run `./sign.sh`. On a Mac it keeps the key in the Keychain and makes it on the first run; elsewhere it asks for the key. It never prints or stores the key in a file.
 3. Commit `body.json` and `feed.json` together, and push.
 

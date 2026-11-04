@@ -1,8 +1,8 @@
-# Quarter feed format, version 3
+# Quarter feed format, version 4
 
 Anyone may publish, read or implement this format. Quarter gateways and `guard.py` read it.
 
-Version 2 adds HTTP rules, for agents that act on an API directly rather than through a shell. Version 3 adds MCP ratings, Quarter's own rating of the tools of known MCP servers. An older reader takes a newer feed and ignores what it does not know, so the new fields sit beside the old ones and the old ones keep their meaning.
+Version 2 adds HTTP rules, for agents that act on an API directly rather than through a shell. Version 3 adds MCP ratings, Quarter's own rating of the tools of known MCP servers. Version 4 adds payees: who an agent may be about to pay, and what they usually charge. An older reader takes a newer feed and ignores what it does not know, so the new fields sit beside the old ones and the old ones keep their meaning.
 
 ## Envelope
 
@@ -23,6 +23,7 @@ Version 2 adds HTTP rules, for agents that act on an API directly rather than th
 | `about` | Version 2. Optional. One item per tool rule: `{"rule": n, "id", "service", "source"}`, where `n` counts `rules` from 1. Readers may show it; it never changes a match. |
 | `http` | Version 2. Optional. List of HTTP rules, below. |
 | `mcp` | Version 3. Optional. List of MCP servers and Quarter's ratings of their tools, below. |
+| `payees` | Version 4. Optional. List of payees an agent may pay, below. |
 
 ## Tool rule
 
@@ -82,10 +83,36 @@ Each tool rating:
 
 Tools that only read have no rating. A call matches a rating when its tool name is the rating's `tool` and its server name matches one of `names`. Claude Code shows an MCP tool as `mcp__<server>__<tool>`, with every character other than letters, digits, `_` and `-` written as `_`; readers compare names written the same way. A reader that is not sure which server a call goes to says nothing.
 
+## Payee
+
+A payee entry says what is publicly known about someone an agent may pay, such as the seller behind an x402 endpoint. It is the buyer's side: is it safe for my agent to pay this, and is the price normal.
+
+| Field | Meaning |
+|---|---|
+| `id` | Short name, unique in the feed, such as `x402.exa`. |
+| `service` | Who is paid, in words. Not matched. |
+| `pay_to` | Optional. List of `{"address", "network"}`: an x402 `payTo` address and its CAIP-2 network, such as `eip155:8453` for Base. Addresses that start with `0x` compare case-insensitively, others exactly. |
+| `hosts` | Optional. A glob or a list of globs on the host of the resource paid for, without the port, case-insensitive. |
+| `status` | `known` or `caution`, below. |
+| `prices` | Optional. List of `{"resource", "max_usd"}`: a glob on the resource URL without its query string, and the most it is listed at, in USD as a decimal string. |
+| `why` | What is known about the payee, in plain words, shown to the person asked. |
+| `source` | The public page or list the entry is drawn from. Not matched. |
+
+An entry has `pay_to`, `hosts` or both. A payment matches an entry when its `payTo` and network are one item of `pay_to`, or the host of the resource it pays for matches `hosts`. A reader that does not know a payment's network matches the address alone. One operator may run several listed services from one address, so a payment can match more than one entry; each applies.
+
+- `known`: listed in a public directory, such as the x402 Bazaar. Quarter has not vetted it, and a listing can be faked. Nothing asks because a payee is known; the entry carries its prices.
+- `caution`: a public report, named in `source`, says paying it has gone wrong. A person is asked before the payment, and shown `why`.
+
+There is no status that refuses a payment. A feed can only ask (rule 1). Payees nobody has listed are not suspect: a reader says nothing about them.
+
+A payment of more than ten times the `max_usd` of a price whose `resource` matches asks a person, whatever the status. A listed price is often the least a metered call costs, so ten times keeps false asks rare, while a quote meant to drain a wallet is far beyond it. A payment no price covers is not checked.
+
+Reports from other companies are not in the feed. Until a report can be disputed, a shared fraud flag only warns, so it never makes a payment wait. Every `caution` entry names a public source, and anyone can dispute one in this repository's issues.
+
 ## Rules for readers
 
 1. A feed can only ask. A reader never refuses a call because of a feed.
 2. The reader's own settings come first. Feed prices fill in models the reader has not priced; feed rules come after the reader's own rules, so a reader's own rule that allows a call stands.
 3. Keep the last good feed, so a reader that starts offline still has it.
 4. Record which feed version was in force, so a later review can show it.
-5. Ignore body fields you do not know. Skip an HTTP rule, an MCP server or a tool rating with a field you do not know, since that field may narrow what it matches, and skip a rating you do not know. A reader that sees only tool calls ignores `http`, and one that sees no MCP calls ignores `mcp`.
+5. Ignore body fields you do not know. Skip an HTTP rule, an MCP server, a tool rating or a payee with a field you do not know, since that field may narrow what it matches, and skip a rating or a payee status you do not know. A reader that sees only tool calls ignores `http`, one that sees no MCP calls ignores `mcp`, and one that sees no payments ignores `payees`.
